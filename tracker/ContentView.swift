@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 import MapKit
 
-struct ContentViews: View {
+struct DescriptionList: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var locationManager = LocationManager()
     @FetchRequest(fetchRequest: Record.allRecordsFetchRequest()) var records: FetchedResults<Record>
@@ -190,7 +190,7 @@ struct ContentView: View {
             MapView(manager: $manager, alert: $alert).alert(isPresented: $alert) {
                 Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
             }
-            ContentViews()
+            DescriptionList()
                      .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
         }
     }
