@@ -6,9 +6,9 @@
 //  Copyright © 2019 TechLead. All rights reserved.
 //
 
-import SwiftUI
 import CoreData
 import MapKit
+import SwiftUI
 
 struct DescriptionList: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -16,36 +16,36 @@ struct DescriptionList: View {
     @FetchRequest(fetchRequest: Record.allRecordsFetchRequest()) var records: FetchedResults<Record>
     // ℹ️ Temporary in-memory storage for adding new blog ideas
     @State private var newLocation = ""
-    
+
     var userLatitude: Double {
         return locationManager.lastLocation?.coordinate.latitude ?? 0
     }
-    
+
     var userLongitude: Double {
         return locationManager.lastLocation?.coordinate.longitude ?? 0
     }
-    
+
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy HH:mm"
         return formatter
     }
-    
+
     var body: some View {
-        List{
+        List {
             Section(header: Text("Add Visited Place")) {
                 VStack {
                     VStack {
                         TextField("Name Currrent Visiting Location", text: self.$newLocation)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
-                    
+
                     VStack {
                         Button(action: ({
                             // ❇️ Initializes new BlogIdea and saves using the @Environment's managedObjectContext
                             if self.newLocation != "" {
                                 let record = Record(context: self.managedObjectContext)
-                                
+
                                 record.location = self.newLocation
                                 record.longitude = self.userLongitude
                                 record.latitude = self.userLatitude
@@ -55,7 +55,7 @@ struct DescriptionList: View {
                                 } catch {
                                     print(error)
                                 }
-                                
+
                                 // ℹ️ Reset the temporary in-memory storage variables for the next new blog idea!
                                 self.newLocation = ""
                             }
@@ -72,29 +72,29 @@ struct DescriptionList: View {
                 }
             }
             .font(.headline)
-            
+
             Section(header: Text("Travel Records")) {
                 ForEach(self.records) { record in
                     VStack(alignment: .leading) {
-                        HStack{
+                        HStack {
                             Text(record.location ?? "")
                                 .font(.headline)
                             Spacer()
                             Text(String(format: "%.5f", record.longitude))
                             Text(String(format: "%.5f", record.latitude))
                         }
-                        
-                        HStack{
+
+                        HStack {
                             Spacer()
                             record.date != nil ? Text(self.dateFormatter.string(from: record.date!)) : Text("N/A")
                         }
                         .font(.footnote)
                     }
                 }
-                .onDelete { (indexSet) in // Delete gets triggered by swiping left on a row
+                .onDelete { indexSet in // Delete gets triggered by swiping left on a row
                     let recordToDelete = self.records[indexSet.first!]
                     self.managedObjectContext.delete(recordToDelete)
-                    
+
                     do {
                         try self.managedObjectContext.save()
                     } catch {
@@ -107,20 +107,18 @@ struct DescriptionList: View {
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("Visited Place List"))
         .navigationBarItems(trailing: EditButton())
-        
     }
 }
 
-struct MapView : UIViewRepresentable {
-     
-    @Binding var manager : CLLocationManager
-    @Binding var alert : Bool
+struct MapView: UIViewRepresentable {
+    @Binding var manager: CLLocationManager
+    @Binding var alert: Bool
     let map = MKMapView()
-    
+
     func makeCoordinator() -> MapView.Coordinator {
         return Coordinator(parent1: self)
     }
-    
+
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
         let center = CLLocationCoordinate2D(latitude: 13.086, longitude: 80.2707)
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
@@ -130,48 +128,41 @@ struct MapView : UIViewRepresentable {
         manager.startUpdatingLocation()
         return map
     }
-    func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<MapView>) {
-        
-    }
-    
-    class Coordinator : NSObject,CLLocationManagerDelegate{
-        
-        var parent : MapView
-        
-        init(parent1 : MapView) {
-            
+
+    func updateUIView(_: MKMapView, context _: UIViewRepresentableContext<MapView>) {}
+
+    class Coordinator: NSObject, CLLocationManagerDelegate {
+        var parent: MapView
+
+        init(parent1: MapView) {
             parent = parent1
         }
-        
-        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-            
-            if status == .denied{
-                
+
+        func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            if status == .denied {
                 parent.alert.toggle()
             }
         }
-        
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            
+
+        func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             let location = locations.last
             let point = MKPointAnnotation()
-            
+
             let georeader = CLGeocoder()
-            georeader.reverseGeocodeLocation(location!) { (places, err) in
-                
-                if err != nil{
-                    
+            georeader.reverseGeocodeLocation(location!) { places, err in
+
+                if err != nil {
                     print((err?.localizedDescription)!)
                     return
                 }
-                
+
                 let place = places?.first?.locality
                 point.title = place
                 point.subtitle = "Current"
                 point.coordinate = location!.coordinate
                 self.parent.map.removeAnnotations(self.parent.map.annotations)
                 self.parent.map.addAnnotation(point)
-                
+
                 let region = MKCoordinateRegion(center: location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
                 self.parent.map.region = region
             }
@@ -179,19 +170,18 @@ struct MapView : UIViewRepresentable {
     }
 }
 
-
 struct ContentView: View {
     @State var manager = CLLocationManager()
     @State var alert = false
-    
+
     var body: some View {
-        VStack{
+        VStack {
             // ℹ️ need to restruct later
             MapView(manager: $manager, alert: $alert).alert(isPresented: $alert) {
                 Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
             }
             DescriptionList()
-                     .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+                .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
         }
     }
 }

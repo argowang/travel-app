@@ -6,8 +6,8 @@
 //  Copyright © 2019 TechLead. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 public class Record: NSManagedObject, Identifiable {
     @NSManaged public var location: String?
