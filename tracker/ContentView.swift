@@ -138,6 +138,34 @@ struct MapView: UIViewRepresentable {
             parent = parent1
         }
 
+        func searchInMap() {
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = "restaurant"
+            request.region = parent.map.region
+            let search = MKLocalSearch(request: request)
+            search.start(completionHandler: { response, error in
+                if response != nil {
+                    for item in response!.mapItems {
+                        self.addPinToMapView(title: item.name, latitude: item.placemark.location!.coordinate.latitude, longitude: item.placemark.location!.coordinate.longitude)
+                    }
+                }
+                if error != nil {
+                    print((error?.localizedDescription)!)
+                }
+            })
+        }
+
+        func addPinToMapView(title: String?, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+            if let title = title {
+                let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = location
+                annotation.title = title
+
+                parent.map.addAnnotation(annotation)
+            }
+        }
+
         func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
             if status == .denied {
                 parent.alert.toggle()
@@ -165,6 +193,7 @@ struct MapView: UIViewRepresentable {
 
                 let region = MKCoordinateRegion(center: location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
                 self.parent.map.region = region
+                self.searchInMap()
             }
         }
     }
