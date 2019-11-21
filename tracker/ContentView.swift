@@ -226,7 +226,7 @@ struct ContentView: View {
                     Text("set location here")
                 }
                 .padding()
-                TextField("Location", text: self.$newLocation)
+                Text("Location: \(self.newLocation)")
             }
         }
     }
