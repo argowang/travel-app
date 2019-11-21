@@ -106,7 +106,6 @@ struct DescriptionList: View {
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("Visited Place List"))
-        .navigationBarItems(trailing: EditButton())
     }
 }
 
@@ -199,7 +198,7 @@ struct MapView: UIViewRepresentable {
     }
 }
 
-struct SetCurrentLocationView: View {
+struct CurrentLocationView: View {
     @State var manager = CLLocationManager()
     @State var alert = false
 
@@ -215,19 +214,20 @@ struct SetCurrentLocationView: View {
     }
 }
 
-
 struct ContentView: View {
     @State private var newLocation = ""
-    
+
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: SetCurrentLocationView()) {
+                NavigationLink(destination: CurrentLocationView()) {
                     Text("set location here")
                 }
                 .padding()
                 TextField("Location", text: self.$newLocation)
             }
+            .navigationBarTitle(Text("Your Trip"))
+            .padding()
         }
     }
 }
