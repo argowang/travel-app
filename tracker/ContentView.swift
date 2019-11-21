@@ -199,7 +199,7 @@ struct MapView: UIViewRepresentable {
     }
 }
 
-struct ContentView: View {
+struct SetCurrentLocationView: View {
     @State var manager = CLLocationManager()
     @State var alert = false
 
@@ -211,6 +211,23 @@ struct ContentView: View {
             }
             DescriptionList()
                 .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        }
+    }
+}
+
+
+struct ContentView: View {
+    @State private var newLocation = ""
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                NavigationLink(destination: SetCurrentLocationView()) {
+                    Text("set location here")
+                }
+                .padding()
+                TextField("Location", text: self.$newLocation)
+            }
         }
     }
 }
