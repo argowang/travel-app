@@ -11,11 +11,11 @@ import MapKit
 import SwiftUI
 
 struct DescriptionList: View {
+    @Binding var newLocation: String
     @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var locationManager = LocationManager()
     @FetchRequest(fetchRequest: Record.allRecordsFetchRequest()) var records: FetchedResults<Record>
     // ℹ️ Temporary in-memory storage for adding new blog ideas
-    @State private var newLocation = ""
 
     var userLatitude: Double {
         return locationManager.lastLocation?.coordinate.latitude ?? 0
@@ -200,6 +200,7 @@ struct MapView: UIViewRepresentable {
 }
 
 struct SetCurrentLocationView: View {
+    @Binding var newLocation: String
     @State var manager = CLLocationManager()
     @State var alert = false
 
@@ -209,7 +210,7 @@ struct SetCurrentLocationView: View {
             MapView(manager: $manager, alert: $alert).alert(isPresented: $alert) {
                 Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
             }
-            DescriptionList()
+            DescriptionList(newLocation : self.$newLocation)
                 .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
         }
     }
@@ -218,15 +219,14 @@ struct SetCurrentLocationView: View {
 
 struct ContentView: View {
     @State private var newLocation = ""
-    
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: SetCurrentLocationView()) {
+                NavigationLink(destination: SetCurrentLocationView(newLocation : self.$newLocation)) {
                     Text("set location here")
                 }
                 .padding()
-                TextField("Location", text: self.$newLocation)
+                Text("Location: \(self.newLocation)")
             }
         }
     }
