@@ -106,7 +106,6 @@ struct DescriptionList: View {
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("Visited Place List"))
-        .navigationBarItems(trailing: EditButton())
     }
 }
 
@@ -228,6 +227,7 @@ struct ContentView: View {
                 .padding()
                 Text("Location: \(self.newLocation)")
             }
+            .navigationBarTitle("Your Trip")
         }
     }
 }
