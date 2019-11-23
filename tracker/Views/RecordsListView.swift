@@ -101,6 +101,7 @@ struct RecordsListView: View {
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle(Text("Visited Place List"))
+        .resignKeyboardOnDragGesture()
     }
 }
 
