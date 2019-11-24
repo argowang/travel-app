@@ -32,10 +32,10 @@ struct SetCurrentLocationView: View {
 
             SlideOverCard {
                 VStack {
-                    SearchBarView().padding()
+                    SearchBarView()
                     Spacer()
                 }
-            }
+                }.environmentObject(userViewConfig)
         }.edgesIgnoringSafeArea(.vertical)
 
 //    //            RecordsListView(newLocation: self.$newLocation)

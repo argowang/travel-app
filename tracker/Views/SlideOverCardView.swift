@@ -10,6 +10,7 @@ import SwiftUI
 struct SlideOverCard<Content: View>: View {
     @GestureState private var dragState = DragState.inactive
     @State var position = CardPosition.middle
+    @EnvironmentObject var userViewConfig: UserViewConfig
 
     var content: () -> Content
     var body: some View {
@@ -18,17 +19,17 @@ struct SlideOverCard<Content: View>: View {
                 state = .dragging(translation: drag.translation)
             }
             .onEnded(onDragEnded)
-
-        return Group {
-            HandleView()
+        
+        return VStack() {
+            HandleView().padding(.top, 2)
             self.content()
         }
         .frame(height: UIScreen.main.bounds.height)
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: Alignment.topLeading)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
         .background(Color.white)
         .cornerRadius(10.0)
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.13), radius: 10.0)
-        .offset(y: self.position.rawValue + self.dragState.translation.height)
+        .offset(y: (userViewConfig.inSearchView ? CardPosition.top.rawValue : self.position.rawValue) + self.dragState.translation.height)
         .animation(self.dragState.isDragging ? nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
         .gesture(drag)
     }
