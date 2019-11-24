@@ -9,8 +9,11 @@
 import SwiftUI
 
 struct SearchBarView: View {
-    @State private var searchText = ""
     @State private var showCancelButton: Bool = false
+
+    @ObservedObject var placeFinder: PlaceFinder = PlaceFinder()
+
+    @EnvironmentObject var userViewConfig: UserViewConfig
 
     var body: some View {
         VStack {
@@ -18,16 +21,18 @@ struct SearchBarView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
 
-                    TextField("search", text: $searchText, onEditingChanged: { _ in
+                    TextField("search", text: $placeFinder.searchString, onEditingChanged: { _ in
                         self.showCancelButton = true
+                        self.userViewConfig.showRecommendPlaces = false
                     }, onCommit: {
                         print("onCommit")
                     }).foregroundColor(.primary)
 
                     Button(action: {
-                        self.searchText = ""
+                        self.placeFinder.searchString = ""
+                        self.userViewConfig.showRecommendPlaces = true
                     }) {
-                        Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
+                        Image(systemName: "xmark.circle.fill").opacity(placeFinder.searchString == "" ? 0 : 1)
                     }
                 }
                 .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
@@ -38,7 +43,8 @@ struct SearchBarView: View {
                 if showCancelButton {
                     Button("Cancel") {
                         UIApplication.shared.endEditing(true) // this must be placed before the other commands here
-                        self.searchText = ""
+                        self.placeFinder.searchString = ""
+                        self.userViewConfig.showRecommendPlaces = true
                         self.showCancelButton = false
                     }
                     .foregroundColor(Color(.systemBlue))
@@ -46,12 +52,19 @@ struct SearchBarView: View {
             }
             .padding(.horizontal)
             .navigationBarHidden(showCancelButton)
+
+            if !userViewConfig.showRecommendPlaces {
+                List(self.placeFinder.results, id: \.self) { result in
+                    Text(result)
+                }.resignKeyboardOnDragGesture()
+            }
         }
     }
 }
 
 struct SearchBarView_Previews: PreviewProvider {
+    static var userViewConfig = UserViewConfig()
     static var previews: some View {
-        SearchBarView()
+        SearchBarView().environmentObject(userViewConfig)
     }
 }

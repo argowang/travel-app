@@ -12,6 +12,7 @@ import SwiftUI
 struct MapView: UIViewRepresentable {
     @Binding var manager: CLLocationManager
     @Binding var alert: Bool
+    @Binding var nearByPlaces: [MKMapItem]
     let map = MKMapView()
 
     func makeCoordinator() -> MapView.Coordinator {
@@ -44,9 +45,7 @@ struct MapView: UIViewRepresentable {
             let search = MKLocalSearch(request: request)
             search.start(completionHandler: { response, error in
                 if response != nil {
-                    for item in response!.mapItems {
-                        self.addPinToMapView(title: item.name, latitude: item.placemark.location!.coordinate.latitude, longitude: item.placemark.location!.coordinate.longitude)
-                    }
+                    self.parent.nearByPlaces = response!.mapItems
                 }
                 if error != nil {
                     print((error?.localizedDescription)!)
@@ -101,7 +100,8 @@ struct MapView: UIViewRepresentable {
 struct MapView_Previews: PreviewProvider {
     @State static var locationManager = CLLocationManager()
     @State static var alert = false
+    @State static var nearBy: [MKMapItem] = []
     static var previews: some View {
-        MapView(manager: $locationManager, alert: $alert)
+        MapView(manager: $locationManager, alert: $alert, nearByPlaces: $nearBy)
     }
 }

@@ -10,12 +10,13 @@ import CoreData
 import MapKit
 import SwiftUI
 
+let userViewConfig = UserViewConfig()
 struct ContentView: View {
     @State private var newLocation = ""
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation)) {
+                NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation).environmentObject(userViewConfig)) {
                     Text("set location here")
                 }
                 .padding()
