@@ -11,6 +11,7 @@ import SwiftUI
 
 class UserViewConfig: ObservableObject {
     @Published var showRecommendPlaces = true
+    @Published var inSearchView = false
 }
 
 struct SetCurrentLocationView: View {
@@ -23,26 +24,23 @@ struct SetCurrentLocationView: View {
     @EnvironmentObject var userViewConfig: UserViewConfig
 
     var body: some View {
-        VStack {
+        ZStack(alignment: Alignment.top) {
             MapView(manager: $manager, alert: $alert, nearByPlaces: $nearByPlaces)
                 .alert(isPresented: $alert) {
                     Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
+                }.edgesIgnoringSafeArea(.vertical)
+
+            SlideOverCard {
+                VStack {
+                    SearchBarView().padding()
+                    Spacer()
                 }
-                .edgesIgnoringSafeArea(.top)
-                .resignKeyboardOnDragGesture()
-
-            SearchBarView()
-
-            if userViewConfig.showRecommendPlaces {
-                List(nearByPlaces, id: \.name) { place in
-                    Text(place.name!)
-                }.resignKeyboardOnDragGesture()
             }
+        }.edgesIgnoringSafeArea(.vertical)
 
-//
-//            RecordsListView(newLocation: self.$newLocation)
-//                .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
-        }
+//    //            RecordsListView(newLocation: self.$newLocation)
+//    //                .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+//            }
     }
 }
 
