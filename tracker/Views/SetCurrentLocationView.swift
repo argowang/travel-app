@@ -24,7 +24,6 @@ struct SetCurrentLocationView: View {
 
     var body: some View {
         VStack {
-            SearchBarView()
             MapView(manager: $manager, alert: $alert, nearByPlaces: $nearByPlaces)
                 .alert(isPresented: $alert) {
                     Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
@@ -32,7 +31,7 @@ struct SetCurrentLocationView: View {
                 .edgesIgnoringSafeArea(.top)
                 .resignKeyboardOnDragGesture()
 
-            
+            SearchBarView()
 
             if userViewConfig.showRecommendPlaces {
                 List(nearByPlaces, id: \.name) { place in
