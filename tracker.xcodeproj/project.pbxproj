@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31662389EE6C00B31FE2 /* ViewExtension.swift */; };
+		B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31662389EE6C00B31FE2 /* ViewExtension.swift */; }; 
 		B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */; };
 		B8AEB69E2388F9BF003E100E /* RecordsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69D2388F9BF003E100E /* RecordsListView.swift */; };
 		B8AEB6A02388FA57003E100E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69F2388FA57003E100E /* MapView.swift */; };
@@ -57,7 +57,8 @@
 				B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */,
 				B8AEB69D2388F9BF003E100E /* RecordsListView.swift */,
 				B8AEB69F2388FA57003E100E /* MapView.swift */,
-				B86E31662389EE6C00B31FE2 /* ViewExtension.swift */,
+				B86E31662389EE6C00B31FE2 /* ViewExtension.swift */, 
+				B86E316A2389EFE100B31FE2 /* SearchBarView.swift */, 
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +191,7 @@
 				B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */,
 				B8ED92682380727900025623 /* Record.swift in Sources */,
 				B8DA964F237FC34600BC1801 /* SceneDelegate.swift in Sources */,
+				B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */,
 				B8DA9654237FC34600BC1801 /* ContentView.swift in Sources */,
 				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */,
 				B8AEB69E2388F9BF003E100E /* RecordsListView.swift in Sources */,
