@@ -23,6 +23,7 @@ struct SearchBarView: View {
 
                     TextField("search", text: $placeFinder.searchString, onEditingChanged: { _ in
                         self.showCancelButton = true
+                        self.userViewConfig.inSearchView = true
                         self.userViewConfig.showRecommendPlaces = false
                     }, onCommit: {
                         print("onCommit")
@@ -30,7 +31,7 @@ struct SearchBarView: View {
 
                     Button(action: {
                         self.placeFinder.searchString = ""
-                        self.userViewConfig.showRecommendPlaces = true
+                        self.userViewConfig.showRecommendPlaces = false
                     }) {
                         Image(systemName: "xmark.circle.fill").opacity(placeFinder.searchString == "" ? 0 : 1)
                     }
@@ -45,18 +46,21 @@ struct SearchBarView: View {
                         UIApplication.shared.endEditing(true) // this must be placed before the other commands here
                         self.placeFinder.searchString = ""
                         self.userViewConfig.showRecommendPlaces = true
+                        self.userViewConfig.inSearchView = false
                         self.showCancelButton = false
                     }
                     .foregroundColor(Color(.systemBlue))
                 }
             }
             .padding(.horizontal)
-            .navigationBarHidden(showCancelButton)
 
             if !userViewConfig.showRecommendPlaces {
                 List(self.placeFinder.results, id: \.self) { result in
                     Text(result)
-                }.resignKeyboardOnDragGesture()
+                }
+                .resignKeyboardOnDragGesture()
+            } else {
+                // show recommended places
             }
         }
     }
