@@ -13,15 +13,24 @@ struct SetCurrentLocationView: View {
     @Binding var newLocation: String
     @State var manager = CLLocationManager()
     @State var alert = false
+    @State var nearByPlaces: [MKMapItem] = []
 
     var body: some View {
         VStack {
-            // ℹ️ need to restruct later
-            MapView(manager: $manager, alert: $alert).alert(isPresented: $alert) {
+            MapView(manager: $manager, alert: $alert, nearByPlaces: $nearByPlaces).alert(isPresented: $alert) {
                 Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
             }
-            RecordsListView(newLocation: self.$newLocation)
-                .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+            .edgesIgnoringSafeArea(.top)
+            .resignKeyboardOnDragGesture()
+
+            SearchBarView()
+
+            List(nearByPlaces, id: \.name) { place in
+                Text(place.name!)
+            }.resignKeyboardOnDragGesture()
+//
+//            RecordsListView(newLocation: self.$newLocation)
+//                .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
         }
     }
 }
