@@ -9,10 +9,11 @@
 import SwiftUI
 
 struct SearchBarView: View {
-//    @State private var searchText = ""
     @State private var showCancelButton: Bool = false
 
     @ObservedObject var placeFinder: PlaceFinder = PlaceFinder()
+
+    @EnvironmentObject var userViewConfig: UserViewConfig
 
     var body: some View {
         VStack {
@@ -22,12 +23,14 @@ struct SearchBarView: View {
 
                     TextField("search", text: $placeFinder.searchString, onEditingChanged: { _ in
                         self.showCancelButton = true
+                        self.userViewConfig.showRecommendPlaces = false
                     }, onCommit: {
                         print("onCommit")
                     }).foregroundColor(.primary)
 
                     Button(action: {
                         self.placeFinder.searchString = ""
+                        self.userViewConfig.showRecommendPlaces = true
                     }) {
                         Image(systemName: "xmark.circle.fill").opacity(placeFinder.searchString == "" ? 0 : 1)
                     }
@@ -41,6 +44,7 @@ struct SearchBarView: View {
                     Button("Cancel") {
                         UIApplication.shared.endEditing(true) // this must be placed before the other commands here
                         self.placeFinder.searchString = ""
+                        self.userViewConfig.showRecommendPlaces = true
                         self.showCancelButton = false
                     }
                     .foregroundColor(Color(.systemBlue))
@@ -49,15 +53,18 @@ struct SearchBarView: View {
             .padding(.horizontal)
             .navigationBarHidden(showCancelButton)
 
-            ForEach(self.placeFinder.results, id: \.self) { result in
-                Text(result)
+            if !userViewConfig.showRecommendPlaces {
+                List(self.placeFinder.results, id: \.self) { result in
+                    Text(result)
+                }.resignKeyboardOnDragGesture()
             }
         }
     }
 }
 
 struct SearchBarView_Previews: PreviewProvider {
+    static var userViewConfig = UserViewConfig()
     static var previews: some View {
-        SearchBarView()
+        SearchBarView().environmentObject(userViewConfig)
     }
 }
