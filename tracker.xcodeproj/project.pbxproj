@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1552FAD2238B191000060E05 /* FormListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD1238B191000060E05 /* FormListView.swift */; };
 		B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31662389EE6C00B31FE2 /* ViewExtension.swift */; };
 		B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316A2389EFE100B31FE2 /* SearchBarView.swift */; };
 		B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316C238A262400B31FE2 /* PlaceFinder.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1552FAD1238B191000060E05 /* FormListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListView.swift; sourceTree = "<group>"; };
 		B86E31662389EE6C00B31FE2 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		B86E316A2389EFE100B31FE2 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B86E316C238A262400B31FE2 /* PlaceFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceFinder.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				B8AEB69F2388FA57003E100E /* MapView.swift */,
 				B86E31662389EE6C00B31FE2 /* ViewExtension.swift */,
 				B86E316A2389EFE100B31FE2 /* SearchBarView.swift */,
+				1552FAD1238B191000060E05 /* FormListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				B8ED926D238083C500025623 /* LocationManager.swift in Sources */,
 				B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */,
 				B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */,
+				1552FAD2238B191000060E05 /* FormListView.swift in Sources */,
 				B8ED92682380727900025623 /* Record.swift in Sources */,
 				B8DA964F237FC34600BC1801 /* SceneDelegate.swift in Sources */,
 				B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */,
