@@ -9,7 +9,11 @@
 import SwiftUI
  
 struct CardView: View {
+    @Binding var title: String
+    @Binding var dateString: String
+    
     var body: some View {
+        
         VStack {
             Image("los-angeles")
                 .resizable()
@@ -17,10 +21,10 @@ struct CardView: View {
  
             HStack {
                 VStack(alignment: .leading) {
-                    Text("2018.09.03 - 2018.09.10")
+                    Text(self.dateString)
                         .font(.headline)
                         .foregroundColor(.secondary)
-                    Text("Los Angeles")
+                    Text(self.title)
                         .font(.title)
                         .fontWeight(.black)
                         .foregroundColor(.primary)
@@ -43,7 +47,9 @@ struct CardView: View {
 }
 
 struct CardView_Previews: PreviewProvider {
+    @State static var title = ""
+    @State static var dateString = ""
     static var previews: some View {
-        CardView()
+        CardView(title: $title, dateString: $dateString)
     }
 }

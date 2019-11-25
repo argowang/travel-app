@@ -9,13 +9,18 @@
 import SwiftUI
 
 struct CardListView: View {
+    
+    @State private var title = "LosAngeles"
+    @State private var dateString = "2018.09.03-2018.09.10"
     var body: some View {
             ScrollView {
                 VStack {
-                     CardView()
-                     CardView()
-                     CardView()
-                     CardView()
+                    CardView(title: $title, dateString: $dateString)
+                    CardView(title: $title, dateString: $dateString)
+                    CardView(title: $title, dateString: $dateString)
+                    CardView(title: $title, dateString: $dateString)
+                    CardView(title: $title, dateString: $dateString)
+                    CardView(title: $title, dateString: $dateString)
                 }
             } 
     }
