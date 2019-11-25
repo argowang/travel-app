@@ -11,8 +11,7 @@ import SwiftUI
 struct SearchBarView: View {
     @State private var showCancelButton: Bool = false
 
-    @ObservedObject var placeFinder: PlaceFinder = PlaceFinder()
-
+    @EnvironmentObject var placeFinder: PlaceFinder
     @EnvironmentObject var userViewConfig: UserViewConfig
 
     var body: some View {
@@ -26,6 +25,7 @@ struct SearchBarView: View {
                         self.userViewConfig.inSearchView = true
                         self.userViewConfig.showRecommendPlaces = false
                     }, onCommit: {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         print("onCommit")
                     }).foregroundColor(.primary)
 
@@ -42,14 +42,14 @@ struct SearchBarView: View {
                 .cornerRadius(10.0)
 
                 if showCancelButton {
-                    Button("Cancel") {
-                        UIApplication.shared.endEditing(true) // this must be placed before the other commands here
+                    Button("Cancel", action: {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         self.placeFinder.searchString = ""
                         self.userViewConfig.showRecommendPlaces = true
                         self.userViewConfig.inSearchView = false
                         self.showCancelButton = false
-                    }
-                    .foregroundColor(Color(.systemBlue))
+                    })
+                        .foregroundColor(Color(.systemBlue))
                 }
             }
             .padding(.horizontal)
@@ -58,9 +58,8 @@ struct SearchBarView: View {
                 List(self.placeFinder.results, id: \.self) { result in
                     Text(result)
                 }
-                .resignKeyboardOnDragGesture()
             } else {
-                // show recommended places
+//                 show recommended places
             }
         }
     }
@@ -68,7 +67,8 @@ struct SearchBarView: View {
 
 struct SearchBarView_Previews: PreviewProvider {
     static var userViewConfig = UserViewConfig()
+    static var placeFinder = PlaceFinder()
     static var previews: some View {
-        SearchBarView().environmentObject(userViewConfig)
+        SearchBarView().environmentObject(userViewConfig).environmentObject(placeFinder)
     }
 }

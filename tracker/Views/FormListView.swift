@@ -30,14 +30,12 @@ struct locationRow: View {
         HStack {
             Text("Location:")
             NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation).environmentObject(userViewConfig)) {
-            Text("\(self.newLocation)")
+                Text("\(self.newLocation)")
             }
             .padding()
         }
     }
 }
-
-
 
 struct FormListView_Previews: PreviewProvider {
     static var previews: some View {
