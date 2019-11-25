@@ -10,7 +10,7 @@ import SwiftUI
 struct SlideOverCard<Content: View>: View {
     @GestureState private var dragState = DragState.inactive
     @State var position = CardPosition.middle
-    @EnvironmentObject var userViewConfig: UserViewConfig
+    @Binding var onSearchBar: Bool
 
     var content: () -> Content
     var body: some View {
@@ -29,7 +29,7 @@ struct SlideOverCard<Content: View>: View {
         .background(Color.white)
         .cornerRadius(10.0)
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.13), radius: 10.0)
-        .offset(y: (userViewConfig.inSearchView ? CardPosition.top.rawValue : self.position.rawValue) + self.dragState.translation.height)
+        .offset(y: (onSearchBar ? CardPosition.top.rawValue : self.position.rawValue) + self.dragState.translation.height)
         .animation(self.dragState.isDragging ? nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
         .gesture(drag)
     }
@@ -95,8 +95,9 @@ enum DragState {
 }
 
 struct SlideOverCardView_Previews: PreviewProvider {
+    @State static var show: Bool = true
     static var previews: some View {
-        SlideOverCard {
+        SlideOverCard(onSearchBar: $show) {
             Text("Hello")
         }
     }

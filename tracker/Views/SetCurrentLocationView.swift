@@ -9,19 +9,15 @@
 import MapKit
 import SwiftUI
 
-class UserViewConfig: ObservableObject {
-    @Published var showRecommendPlaces = true
-    @Published var inSearchView = false
-}
-
 struct SetCurrentLocationView: View {
     @Binding var newLocation: String
 
     @State var manager = CLLocationManager()
     @State var alert = false
     @State var nearByPlaces: [MKMapItem] = []
+    @State var onSearchBar = false
 
-    @EnvironmentObject var userViewConfig: UserViewConfig
+    @EnvironmentObject var placeFinder: PlaceFinder
 
     var body: some View {
         ZStack(alignment: Alignment.top) {
@@ -30,19 +26,18 @@ struct SetCurrentLocationView: View {
                     Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
                 }.edgesIgnoringSafeArea(.vertical)
 
-            SlideOverCard {
+            SlideOverCard(onSearchBar: $onSearchBar) {
                 VStack {
-                    SearchBarView().environmentObject(PlaceFinder())
+                    SearchBarView(onSearchBar: self.$onSearchBar).environmentObject(self.placeFinder)
 
-                    if !self.userViewConfig.inSearchView {
+                    if self.placeFinder.searchString == "" {
                         List(self.nearByPlaces, id: \.self) { result in
                             Text(result.name!)
                         }
-                        .resignKeyboardOnDragGesture()
                     }
                     Spacer()
                 }
-            }.environmentObject(userViewConfig)
+            }
         }.edgesIgnoringSafeArea(.vertical)
 
 //    //            RecordsListView(newLocation: self.$newLocation)
@@ -53,8 +48,7 @@ struct SetCurrentLocationView: View {
 
 struct SetCurrentLocationView_Previews: PreviewProvider {
     @State static var newLocation = "Aruba"
-    static var userViewConfig = UserViewConfig()
     static var previews: some View {
-        SetCurrentLocationView(newLocation: $newLocation).environmentObject(userViewConfig)
+        SetCurrentLocationView(newLocation: $newLocation).environmentObject(PlaceFinder())
     }
 }

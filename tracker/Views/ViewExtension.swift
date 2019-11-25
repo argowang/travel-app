@@ -8,9 +8,15 @@
 
 import SwiftUI
 
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 struct ResignKeyboardOnDragGesture: ViewModifier {
     var gesture = DragGesture().onChanged { _ in
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        UIApplication.shared.endEditing()
     }
 
     func body(content: Content) -> some View {

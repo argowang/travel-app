@@ -10,7 +10,6 @@ import CoreData
 import MapKit
 import SwiftUI
 
-let userViewConfig = UserViewConfig()
 struct FormListView: View {
     var body: some View {
         NavigationView {
@@ -29,7 +28,7 @@ struct locationRow: View {
     var body: some View {
         HStack {
             Text("Location:")
-            NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation).environmentObject(userViewConfig)) {
+            NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation).environmentObject(PlaceFinder())) {
                 Text("\(self.newLocation)")
             }
             .padding()
