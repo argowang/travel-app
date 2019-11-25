@@ -10,7 +10,8 @@ import MapKit
 import SwiftUI
 
 class PlaceFinder: NSObject, ObservableObject {
-    @Published var results: [String] = []
+    @Published var results: [String]
+
     private var searcher: MKLocalSearchCompleter
 
     var searchString: String = "" {
@@ -27,7 +28,7 @@ class PlaceFinder: NSObject, ObservableObject {
         results = []
         searcher = MKLocalSearchCompleter()
         super.init()
-        searcher.resultTypes = .address
+        searcher.resultTypes = .query
         searcher.delegate = self
     }
 

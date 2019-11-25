@@ -19,8 +19,8 @@ struct SlideOverCard<Content: View>: View {
                 state = .dragging(translation: drag.translation)
             }
             .onEnded(onDragEnded)
-        
-        return VStack() {
+
+        return VStack {
             HandleView().padding(.top, 2)
             self.content()
         }

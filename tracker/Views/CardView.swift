@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
- 
+
 struct CardView: View {
     @Binding var title: String
     @Binding var dateString: String
@@ -18,7 +18,7 @@ struct CardView: View {
             Image("los-angeles")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
- 
+
             HStack {
                 VStack(alignment: .leading) {
                     Text(self.dateString)
@@ -31,7 +31,7 @@ struct CardView: View {
                         .lineLimit(3)
                 }
                 .layoutPriority(100)
- 
+
                 Spacer()
             }
             .padding()
@@ -39,7 +39,7 @@ struct CardView: View {
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: 0.1), lineWidth: 2.5)
+                .stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 2.5)
         )
         .padding([.top, .horizontal])
         .shadow(radius: 16, y: 16)

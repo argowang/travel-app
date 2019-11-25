@@ -32,10 +32,17 @@ struct SetCurrentLocationView: View {
 
             SlideOverCard {
                 VStack {
-                    SearchBarView()
+                    SearchBarView().environmentObject(PlaceFinder())
+
+                    if !self.userViewConfig.inSearchView {
+                        List(self.nearByPlaces, id: \.self) { result in
+                            Text(result.name!)
+                        }
+                        .resignKeyboardOnDragGesture()
+                    }
                     Spacer()
                 }
-                }.environmentObject(userViewConfig)
+            }.environmentObject(userViewConfig)
         }.edgesIgnoringSafeArea(.vertical)
 
 //    //            RecordsListView(newLocation: self.$newLocation)
