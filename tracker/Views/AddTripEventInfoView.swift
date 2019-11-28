@@ -11,22 +11,22 @@ import SwiftUI
 
 struct AddTripEventInfoView: View {
     @State var title = ""
-    @State var date = ""
+    @State var start = ""
     @Environment(\.managedObjectContext) var managedObjectContext
 
     var body: some View {
         VStack {
             TextField("Name Currrent Visiting Location", text: self.$title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            TextField("Name A Data", text: self.$date)
+            TextField("Enter Start Date", text: self.$start)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
             Button(action: {
                 if self.title != "" {
-                    let card = Card(context: self.managedObjectContext)
+                    let card = TripCard(context: self.managedObjectContext)
 
                     card.title = self.title
-                    card.start = self.date
+//                    card.start = self.start
 
                     do {
                         try self.managedObjectContext.save()
@@ -35,7 +35,7 @@ struct AddTripEventInfoView: View {
                     }
 
                     self.title = ""
-                    self.date = ""
+                    self.start = ""
                 }
             }) {
                 Text("Add event")
