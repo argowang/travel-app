@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		154D6F052390449A00169C25 /* FakeCardEntryPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F042390449A00169C25 /* FakeCardEntryPointView.swift */; };
 		1552FAD2238B191000060E05 /* FormListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD1238B191000060E05 /* FormListView.swift */; };
 		1552FAD6238B344300060E05 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardView.swift */; };
 		1552FAE4238BA94800060E05 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAE3238BA94800060E05 /* CardListView.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		154D6F042390449A00169C25 /* FakeCardEntryPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCardEntryPointView.swift; sourceTree = "<group>"; };
 		1552FAD1238B191000060E05 /* FormListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListView.swift; sourceTree = "<group>"; };
 		1552FAD5238B344300060E05 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1552FAE3238BA94800060E05 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				1552FAE3238BA94800060E05 /* CardListView.swift */,
 				1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */,
 				1571D4FD238FA15D00FC33E9 /* AddTripEventInfoView.swift */,
+				154D6F042390449A00169C25 /* FakeCardEntryPointView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				B8DA964D237FC34600BC1801 /* AppDelegate.swift in Sources */,
 				B8ED926D238083C500025623 /* LocationManager.swift in Sources */,
 				B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */,
+				154D6F052390449A00169C25 /* FakeCardEntryPointView.swift in Sources */,
 				B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */,
 				1552FAD2238B191000060E05 /* FormListView.swift in Sources */,
 				B8ED92682380727900025623 /* Record.swift in Sources */,

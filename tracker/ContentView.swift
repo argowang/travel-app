@@ -12,9 +12,21 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-//        FormListView()
-        CardListView()
-//        AddTripCardView()
+        NavigationView {
+            VStack {
+                Text("Entry point:")
+                NavigationLink(destination: FormListView()) {
+                    Text("FormListView")
+                }
+                .padding()
+                Text("Entry point:")
+                NavigationLink(destination: FakeCardEntryPointView()) {
+                    Text("FakeCardEntryPointView")
+                }
+            }
+        }
+        .navigationBarHidden(true)
+        .edgesIgnoringSafeArea([.top])
     }
 }
 
