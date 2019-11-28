@@ -25,7 +25,7 @@ struct MapView: UIViewRepresentable {
         map.region = region
         manager.requestWhenInUseAuthorization()
         manager.delegate = context.coordinator
-        manager.startUpdatingLocation()
+        manager.requestLocation()
         return map
     }
 
@@ -93,6 +93,10 @@ struct MapView: UIViewRepresentable {
                 self.parent.map.region = region
                 self.searchInMap()
             }
+        }
+
+        func locationManager(_: CLLocationManager, didFailWithError error: Error) {
+            print(error)
         }
     }
 }
