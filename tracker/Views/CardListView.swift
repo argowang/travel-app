@@ -11,17 +11,26 @@ import SwiftUI
 
 struct CardListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: Card.allTripCardsFetchRequest()) var tripCards: FetchedResults<Card>
+    @FetchRequest(fetchRequest: Card.allTripCardsFetchRequest()) var tripCards: FetchedResults<Card> 
+    @State var title = ""
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
-                    ForEach(self.tripCards) { card in
-                        CardView(title: card.title ?? "title place holder", dateString: card.start ?? "date string place holder")
+            VStack {
+                ScrollView {
+                    VStack {
+                        ForEach(self.tripCards) { card in
+                            CardView(title: card.title ?? "title place holder", dateString: card.start ?? "date string place holder")
+                        } 
                     }
-                    AddTripCardView()
                 }
+                Button(action: {
+                    if self.title != "" {
+                    }
+                }) {
+                    NavigationLink(destination: AddTripEventInfoView()) {
+                        Text("Add event")
+                    } 
             }
         }
     }
