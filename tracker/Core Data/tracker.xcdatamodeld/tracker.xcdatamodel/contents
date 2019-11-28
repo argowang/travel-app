@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="18G87" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Card" representedClassName=".Card" syncable="YES">
-        <attribute name="end" optional="YES" attributeType="String"/>
-        <attribute name="start" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-    </entity>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="18G84" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Record" representedClassName=".Record" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="location" optional="YES" attributeType="String"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="TripCard" representedClassName=".TripCard" syncable="YES">
+        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Record" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="Card" positionX="-54" positionY="18" width="128" height="88"/>
+        <element name="TripCard" positionX="-54" positionY="27" width="128" height="88"/>
     </elements>
 </model>
