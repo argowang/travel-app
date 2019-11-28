@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		154D6F052390449A00169C25 /* FakeCardEntryPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F042390449A00169C25 /* FakeCardEntryPointView.swift */; };
 		154D6F072390509700169C25 /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F062390509700169C25 /* TripCard.swift */; };
+		154D6F09239066EA00169C25 /* ViewTripEventInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F08239066EA00169C25 /* ViewTripEventInfo.swift */; };
 		1552FAD2238B191000060E05 /* FormListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD1238B191000060E05 /* FormListView.swift */; };
 		1552FAD6238B344300060E05 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardView.swift */; };
 		1552FAE4238BA94800060E05 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAE3238BA94800060E05 /* CardListView.swift */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		154D6F042390449A00169C25 /* FakeCardEntryPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeCardEntryPointView.swift; sourceTree = "<group>"; };
 		154D6F062390509700169C25 /* TripCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCard.swift; sourceTree = "<group>"; };
+		154D6F08239066EA00169C25 /* ViewTripEventInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTripEventInfo.swift; sourceTree = "<group>"; };
 		1552FAD1238B191000060E05 /* FormListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListView.swift; sourceTree = "<group>"; };
 		1552FAD5238B344300060E05 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1552FAE3238BA94800060E05 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */,
 				1571D4FD238FA15D00FC33E9 /* AddTripEventInfoView.swift */,
 				154D6F042390449A00169C25 /* FakeCardEntryPointView.swift */,
+				154D6F08239066EA00169C25 /* ViewTripEventInfo.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				154D6F072390509700169C25 /* TripCard.swift in Sources */,
 				1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */,
 				B8DA964F237FC34600BC1801 /* SceneDelegate.swift in Sources */,
+				154D6F09239066EA00169C25 /* ViewTripEventInfo.swift in Sources */,
 				1552FAE4238BA94800060E05 /* CardListView.swift in Sources */,
 				1571D4FE238FA15D00FC33E9 /* AddTripEventInfoView.swift in Sources */,
 				B86E316F238B308F00B31FE2 /* SlideOverCardView.swift in Sources */,
