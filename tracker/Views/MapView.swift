@@ -23,6 +23,21 @@ struct MapView: UIViewRepresentable {
         let center = CLLocationCoordinate2D(latitude: 13.086, longitude: 80.2707)
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
         map.region = region
+
+        let Userbutton = MKUserTrackingButton(mapView: map)
+        Userbutton.layer.backgroundColor = UIColor(white: 1, alpha: 0.8).cgColor
+        Userbutton.layer.borderColor = UIColor.white.cgColor
+        Userbutton.layer.borderWidth = 1
+        Userbutton.layer.cornerRadius = 5
+        Userbutton.translatesAutoresizingMaskIntoConstraints = false
+        Userbutton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        Userbutton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        map.addSubview(Userbutton)
+
+        // TODO: Make these constraints work with other phones
+        Userbutton.centerXAnchor.constraint(equalTo: map.trailingAnchor, constant: -30).isActive = true
+        Userbutton.centerYAnchor.constraint(equalTo: map.centerYAnchor, constant: -240).isActive = true
+
         manager.requestWhenInUseAuthorization()
         manager.delegate = context.coordinator
         manager.requestLocation()
