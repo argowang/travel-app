@@ -20,14 +20,13 @@ struct ContentView: View {
                 }
                 .padding()
                 Text("Entry point:")
-                NavigationLink(destination: CardListView()) {
-                    Text("CardListView")
+                NavigationLink(destination: FakeCardEntryPointView()) {
+                    Text("FakeCardEntryPointView")
                 }
-                .padding()
             }
-
-        }.navigationBarHidden(true)
-            .edgesIgnoringSafeArea([.top, .bottom])
+        }
+        .navigationBarHidden(true)
+        .edgesIgnoringSafeArea([.top])
     }
 }
 
