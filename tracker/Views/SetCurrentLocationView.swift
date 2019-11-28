@@ -15,7 +15,7 @@ struct SetCurrentLocationView: View {
     @State var manager = CLLocationManager()
     @State var alert = false
     @State var nearByPlaces: [MKMapItem] = []
-    @State var onSearchBar = false
+    @State var cardPosition = CardPosition.middle
 
     @EnvironmentObject var placeFinder: PlaceFinder
 
@@ -26,18 +26,9 @@ struct SetCurrentLocationView: View {
                     Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
                 }.edgesIgnoringSafeArea(.vertical)
 
-            SlideOverCard(onSearchBar: $onSearchBar) {
-                VStack {
-                    SearchBarView(onSearchBar: self.$onSearchBar).environmentObject(self.placeFinder)
-
-                    if self.placeFinder.searchString == "" {
-                        List(self.nearByPlaces, id: \.self) { result in
-                            Text(result.name!)
-                        }
-                    }
-                    Spacer()
-                }
-            }
+            SlideOverCard(position: $cardPosition) {
+                SearchBarView(cardPosition: self.$cardPosition, nearByPlaces: self.$nearByPlaces).environmentObject(self.placeFinder).padding(.bottom, 5)
+            }.foregroundColor(.primary)
         }.edgesIgnoringSafeArea(.vertical)
 
 //    //            RecordsListView(newLocation: self.$newLocation)

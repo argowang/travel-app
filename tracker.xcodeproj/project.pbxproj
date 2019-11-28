@@ -371,7 +371,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"tracker/Preview Content\"";
-				DEVELOPMENT_TEAM = A3XHH97N3X;
+				DEVELOPMENT_TEAM = 9Q368PTXL6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -379,7 +379,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bingxin.tracker;
+				PRODUCT_BUNDLE_IDENTIFIER = junyi.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -394,7 +394,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"tracker/Preview Content\"";
-				DEVELOPMENT_TEAM = A3XHH97N3X;
+				DEVELOPMENT_TEAM = 9Q368PTXL6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -402,7 +402,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bingxin.tracker;
+				PRODUCT_BUNDLE_IDENTIFIER = junyi.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

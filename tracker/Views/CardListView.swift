@@ -11,7 +11,7 @@ import SwiftUI
 
 struct CardListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: Card.allTripCardsFetchRequest()) var tripCards: FetchedResults<Card>
+    @FetchRequest(fetchRequest: Card.allTripCardsFetchRequest()) var tripCards: FetchedResults<Card> 
     @State var title = ""
 
     var body: some View {
@@ -30,8 +30,7 @@ struct CardListView: View {
                 }) {
                     NavigationLink(destination: AddTripEventInfoView()) {
                         Text("Add event")
-                    }
-                }
+                    } 
             }
         }
     }
