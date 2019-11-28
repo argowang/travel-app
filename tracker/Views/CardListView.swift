@@ -10,18 +10,17 @@ import CoreData
 import SwiftUI
 
 struct CardListView: View {
-    @State private var title = "LosAngeles"
-    @State private var dateString = "2018.09.03-2018.09.10"
-
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: Card.allTripCardsFetchRequest()) var tripCards: FetchedResults<Card>
 
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(self.tripCards) { card in
-
-                    CardView(title: card.title ?? "title place holder", dateString: card.start ?? self.dateString)
+        NavigationView {
+            ScrollView {
+                VStack {
+                    ForEach(self.tripCards) { card in
+                        CardView(title: card.title ?? "title place holder", dateString: card.start ?? "date string place holder")
+                    }
+                    AddTripCardView()
                 }
             }
         }
