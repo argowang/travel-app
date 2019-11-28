@@ -10,23 +10,32 @@ import CoreData
 import SwiftUI
 
 struct AddTripEventInfoView: View {
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }
+
     @State var title = ""
-    @State var start = ""
     @Environment(\.managedObjectContext) var managedObjectContext
+    @State var start = Date()
 
     var body: some View {
         VStack {
             TextField("Name Currrent Visiting Location", text: self.$title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            TextField("Enter Start Date", text: self.$start)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            DatePicker(selection: $start, in: ...Date(), displayedComponents: .date) {
+                Text("Select a date")
+            }
+
+            Text("Date is \(start, formatter: dateFormatter)")
 
             Button(action: {
                 if self.title != "" {
                     let card = TripCard(context: self.managedObjectContext)
 
                     card.title = self.title
-//                    card.start = self.start
+                    card.start = self.start
 
                     do {
                         try self.managedObjectContext.save()
@@ -35,11 +44,11 @@ struct AddTripEventInfoView: View {
                     }
 
                     self.title = ""
-                    self.start = ""
                 }
             }) {
                 Text("Add event")
             }
+            .padding()
             Spacer()
         }
     }
