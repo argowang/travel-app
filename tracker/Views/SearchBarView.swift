@@ -6,11 +6,13 @@
 //  Copyright © 2019 TechLead. All rights reserved.
 //
 
+import MapKit
 import SwiftUI
 
 struct SearchBarView: View {
     @State private var showCancelButton: Bool = false
-    @Binding var onSearchBar: Bool
+    @Binding var cardPosition: CardPosition
+    @Binding var nearByPlaces: [MKMapItem]
     @EnvironmentObject var placeFinder: PlaceFinder
 
     var body: some View {
@@ -21,7 +23,7 @@ struct SearchBarView: View {
 
                     TextField("search", text: $placeFinder.searchString, onEditingChanged: { _ in
                         self.showCancelButton = true
-                        self.onSearchBar = true
+                        self.cardPosition = CardPosition.top
                     }, onCommit: {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         print("onCommit")
@@ -40,10 +42,10 @@ struct SearchBarView: View {
 
                 if showCancelButton {
                     Button("Cancel", action: {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        UIApplication.shared.endEditing()
                         self.placeFinder.searchString = ""
                         self.showCancelButton = false
-                        self.onSearchBar = false
+                        self.cardPosition = CardPosition.bottom
                     })
                         .foregroundColor(Color(.systemBlue))
                 }
@@ -54,6 +56,10 @@ struct SearchBarView: View {
                 List(self.placeFinder.results, id: \.self) { result in
                     Text(result)
                 }.resignKeyboardOnDragGesture()
+            } else {
+                List(self.nearByPlaces, id: \.self) { result in
+                    Text(result.name!)
+                }.resignKeyboardOnDragGesture()
             }
         }
     }
@@ -61,8 +67,9 @@ struct SearchBarView: View {
 
 struct SearchBarView_Previews: PreviewProvider {
     static var placeFinder = PlaceFinder()
-    @State static var show: Bool = true
+    @State static var cardPosition: CardPosition = CardPosition.middle
+    @State static var nearByPlaces: [MKMapItem] = []
     static var previews: some View {
-        SearchBarView(onSearchBar: $show)
+        SearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces)
     }
 }
