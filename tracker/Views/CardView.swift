@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct CardView: View {
-    @Binding var title: String
-    @Binding var dateString: String
+    var title: String
+    var dateString: String
 
     var body: some View {
         VStack {
@@ -46,9 +46,9 @@ struct CardView: View {
 }
 
 struct CardView_Previews: PreviewProvider {
-    @State static var title = ""
-    @State static var dateString = ""
+    static var title = ""
+    static var dateString = ""
     static var previews: some View {
-        CardView(title: $title, dateString: $dateString)
+        CardView(title: title, dateString: dateString)
     }
 }

@@ -10,6 +10,9 @@
 		1552FAD2238B191000060E05 /* FormListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD1238B191000060E05 /* FormListView.swift */; };
 		1552FAD6238B344300060E05 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardView.swift */; };
 		1552FAE4238BA94800060E05 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAE3238BA94800060E05 /* CardListView.swift */; };
+		1571D4FA238F868600FC33E9 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4F9238F868600FC33E9 /* Card.swift */; };
+		1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */; };
+		1571D4FE238FA15D00FC33E9 /* AddTripEventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FD238FA15D00FC33E9 /* AddTripEventInfoView.swift */; };
 		B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31662389EE6C00B31FE2 /* ViewExtension.swift */; };
 		B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316A2389EFE100B31FE2 /* SearchBarView.swift */; };
 		B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316C238A262400B31FE2 /* PlaceFinder.swift */; };
@@ -33,6 +36,9 @@
 		1552FAD1238B191000060E05 /* FormListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListView.swift; sourceTree = "<group>"; };
 		1552FAD5238B344300060E05 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		1552FAE3238BA94800060E05 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
+		1571D4F9238F868600FC33E9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripCardView.swift; sourceTree = "<group>"; };
+		1571D4FD238FA15D00FC33E9 /* AddTripEventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripEventInfoView.swift; sourceTree = "<group>"; };
 		B86E31662389EE6C00B31FE2 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		B86E316A2389EFE100B31FE2 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B86E316C238A262400B31FE2 /* PlaceFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceFinder.swift; sourceTree = "<group>"; };
@@ -44,7 +50,7 @@
 		B8DA9649237FC34600BC1801 /* tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8DA964C237FC34600BC1801 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8DA964E237FC34600BC1801 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B8DA9651237FC34600BC1801 /* tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tracker.xcdatamodel; sourceTree = "<group>"; };
+		B8DA9651237FC34600BC1801 /* tracker.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = tracker.xcdatamodel; sourceTree = "<group>"; };
 		B8DA9653237FC34600BC1801 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B8DA9655237FC34900BC1801 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8DA9658237FC34900BC1801 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -78,6 +84,8 @@
 				1552FAD1238B191000060E05 /* FormListView.swift */,
 				1552FAD5238B344300060E05 /* CardView.swift */,
 				1552FAE3238BA94800060E05 /* CardListView.swift */,
+				1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */,
+				1571D4FD238FA15D00FC33E9 /* AddTripEventInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -129,6 +137,7 @@
 			children = (
 				B8DA9650237FC34600BC1801 /* tracker.xcdatamodeld */,
 				B8ED92672380727900025623 /* Record.swift */,
+				1571D4F9238F868600FC33E9 /* Card.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -205,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1552FAD6238B344300060E05 /* CardView.swift in Sources */,
+				1571D4FA238F868600FC33E9 /* Card.swift in Sources */,
 				B8ED925A23806BDB00025623 /* tracker.xcdatamodeld in Sources */,
 				B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */,
 				B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */,
@@ -214,8 +224,10 @@
 				B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */,
 				1552FAD2238B191000060E05 /* FormListView.swift in Sources */,
 				B8ED92682380727900025623 /* Record.swift in Sources */,
+				1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */,
 				B8DA964F237FC34600BC1801 /* SceneDelegate.swift in Sources */,
 				1552FAE4238BA94800060E05 /* CardListView.swift in Sources */,
+				1571D4FE238FA15D00FC33E9 /* AddTripEventInfoView.swift in Sources */,
 				B86E316F238B308F00B31FE2 /* SlideOverCardView.swift in Sources */,
 				B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */,
 				B8DA9654237FC34600BC1801 /* ContentView.swift in Sources */,
