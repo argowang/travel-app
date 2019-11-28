@@ -11,9 +11,8 @@ import SwiftUI
 struct CardView: View {
     @Binding var title: String
     @Binding var dateString: String
-    
+
     var body: some View {
-        
         VStack {
             Image("los-angeles")
                 .resizable()

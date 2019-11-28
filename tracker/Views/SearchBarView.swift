@@ -10,9 +10,8 @@ import SwiftUI
 
 struct SearchBarView: View {
     @State private var showCancelButton: Bool = false
-
+    @Binding var onSearchBar: Bool
     @EnvironmentObject var placeFinder: PlaceFinder
-    @EnvironmentObject var userViewConfig: UserViewConfig
 
     var body: some View {
         VStack {
@@ -22,8 +21,7 @@ struct SearchBarView: View {
 
                     TextField("search", text: $placeFinder.searchString, onEditingChanged: { _ in
                         self.showCancelButton = true
-                        self.userViewConfig.inSearchView = true
-                        self.userViewConfig.showRecommendPlaces = false
+                        self.onSearchBar = true
                     }, onCommit: {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         print("onCommit")
@@ -31,7 +29,6 @@ struct SearchBarView: View {
 
                     Button(action: {
                         self.placeFinder.searchString = ""
-                        self.userViewConfig.showRecommendPlaces = false
                     }) {
                         Image(systemName: "xmark.circle.fill").opacity(placeFinder.searchString == "" ? 0 : 1)
                     }
@@ -45,30 +42,27 @@ struct SearchBarView: View {
                     Button("Cancel", action: {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         self.placeFinder.searchString = ""
-                        self.userViewConfig.showRecommendPlaces = true
-                        self.userViewConfig.inSearchView = false
                         self.showCancelButton = false
+                        self.onSearchBar = false
                     })
                         .foregroundColor(Color(.systemBlue))
                 }
             }
             .padding(.horizontal)
 
-            if !userViewConfig.showRecommendPlaces {
+            if placeFinder.searchString != "" {
                 List(self.placeFinder.results, id: \.self) { result in
                     Text(result)
-                }
-            } else {
-//                 show recommended places
+                }.resignKeyboardOnDragGesture()
             }
         }
     }
 }
 
 struct SearchBarView_Previews: PreviewProvider {
-    static var userViewConfig = UserViewConfig()
     static var placeFinder = PlaceFinder()
+    @State static var show: Bool = true
     static var previews: some View {
-        SearchBarView().environmentObject(userViewConfig).environmentObject(placeFinder)
+        SearchBarView(onSearchBar: $show)
     }
 }
