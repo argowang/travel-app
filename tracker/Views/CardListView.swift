@@ -25,7 +25,10 @@ struct CardListView: View {
             ScrollView {
                 VStack {
                     ForEach(self.tripCards) { card in
-                        CardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                        NavigationLink(destination: ViewTripEventInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
+                            CardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }
