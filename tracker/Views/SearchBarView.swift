@@ -54,11 +54,20 @@ struct SearchBarView: View {
 
             if placeFinder.searchString != "" {
                 List(self.placeFinder.results, id: \.self) { result in
-                    Text(result)
+                    VStack(alignment: .leading) {
+                        Text(result.title).font(.headline)
+                        Text(result.subtitle).font(.footnote).foregroundColor(Color.gray)
+                    }
                 }.resignKeyboardOnDragGesture()
             } else {
                 List(self.nearByPlaces, id: \.self) { result in
-                    Text(result.name!)
+                    VStack(alignment: .leading) {
+                        Text(result.name!).font(.headline)
+                        HStack {
+                            Text("\(result.placemark.subThoroughfare!) \(result.placemark.thoroughfare!),  \(result.placemark.subAdministrativeArea!), \(result.placemark.administrativeArea!)")
+                        }.font(.footnote).foregroundColor(Color.gray)
+                    }
+
                 }.resignKeyboardOnDragGesture()
             }
         }

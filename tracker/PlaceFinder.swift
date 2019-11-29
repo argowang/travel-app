@@ -10,7 +10,7 @@ import MapKit
 import SwiftUI
 
 class PlaceFinder: NSObject, ObservableObject {
-    @Published var results: [String]
+    @Published var results: [MKLocalSearchCompletion]
 
     private var searcher: MKLocalSearchCompleter
 
@@ -28,7 +28,7 @@ class PlaceFinder: NSObject, ObservableObject {
         results = []
         searcher = MKLocalSearchCompleter()
         super.init()
-        searcher.resultTypes = .query
+        searcher.resultTypes = .pointOfInterest
         searcher.delegate = self
     }
 
@@ -39,6 +39,6 @@ class PlaceFinder: NSObject, ObservableObject {
 
 extension PlaceFinder: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        results = completer.results.map { $0.title }
+        results = completer.results
     }
 }
