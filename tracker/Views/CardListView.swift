@@ -31,12 +31,12 @@ struct CardListView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
-            }
-            Button(action: {
-                if self.title != "" {}
-            }) {
-                NavigationLink(destination: AddTripEventInfoView()) {
-                    Text("Add event")
+                Button(action: {
+                    if self.title != "" {}
+                }) {
+                    NavigationLink(destination: AddTripEventInfoView()) {
+                        Text("Add event")
+                    }
                 }
             }
         }

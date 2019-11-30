@@ -13,13 +13,20 @@ class PlaceFinder: NSObject, ObservableObject {
     @Published var results: [String]
 
     private var searcher: MKLocalSearchCompleter
+    var searchTask: DispatchWorkItem?
 
     var searchString: String = "" {
         didSet {
             if searchString == "" {
+                self.searchTask?.cancel()
                 results = []
             } else {
-                search(searchString)
+                self.searchTask?.cancel()
+                let task = DispatchWorkItem {
+                    self.search(self.searchString)
+                }
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: task)
+                self.searchTask = task
             }
         }
     }
