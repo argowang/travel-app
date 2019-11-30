@@ -11,7 +11,6 @@ import SwiftUI
 
 struct SetCurrentLocationView: View {
     @Binding var newLocation: String
-
     @State var manager = CLLocationManager()
     @State var alert = false
     @State var nearByPlaces: [MKMapItem] = []
@@ -27,7 +26,7 @@ struct SetCurrentLocationView: View {
                 }.edgesIgnoringSafeArea(.vertical)
 
             SlideOverCard(position: $cardPosition) {
-                SearchBarView(cardPosition: self.$cardPosition, nearByPlaces: self.$nearByPlaces).environmentObject(self.placeFinder).padding(.bottom, 5)
+                SearchBarView(cardPosition: self.$cardPosition, nearByPlaces: self.$nearByPlaces, newLocation: self.$newLocation).environmentObject(self.placeFinder).padding(.bottom, 5)
             }.foregroundColor(.primary)
         }.edgesIgnoringSafeArea(.vertical)
 
