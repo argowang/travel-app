@@ -37,7 +37,12 @@ struct MapView: UIViewRepresentable {
 
         // TODO: Make these constraints work with other phones
         trackButton.centerXAnchor.constraint(equalTo: map.trailingAnchor, constant: -30).isActive = true
-        trackButton.centerYAnchor.constraint(equalTo: map.centerYAnchor, constant: -240).isActive = true
+        trackButton.centerYAnchor.constraint(equalTo: map.centerYAnchor, constant: -140).isActive = true
+
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.mapTap(sender:)))
+        tapGesture.numberOfTapsRequired = 1
+        map.isUserInteractionEnabled = true
+        map.addGestureRecognizer(tapGesture)
 
         manager.requestWhenInUseAuthorization()
         manager.delegate = context.coordinator
@@ -49,9 +54,11 @@ struct MapView: UIViewRepresentable {
 
     class Coordinator: NSObject, CLLocationManagerDelegate {
         var parent: MapView
+        let georeader: CLGeocoder
 
         init(parent1: MapView) {
             parent = parent1
+            georeader = CLGeocoder()
         }
 
         func searchInMap() {
@@ -67,6 +74,27 @@ struct MapView: UIViewRepresentable {
                     print((error?.localizedDescription)!)
                 }
             })
+        }
+
+        @objc func mapTap(sender: UITapGestureRecognizer) {
+            let pointOnMap = parent.map.convert(sender.location(in: sender.view), toCoordinateFrom: parent.map)
+            parent.map.removeAnnotations(parent.map.annotations)
+
+            let annotationPoint = MKPointAnnotation()
+            let location = CLLocation(latitude: pointOnMap.latitude, longitude: pointOnMap.longitude)
+            georeader.reverseGeocodeLocation(location) { places, err in
+
+                if err != nil {
+                    print((err?.localizedDescription)!)
+                    return
+                }
+
+                let place = places?.first?.name
+                annotationPoint.title = place
+                annotationPoint.coordinate = location.coordinate
+                self.parent.map.removeAnnotations(self.parent.map.annotations)
+                self.parent.map.addAnnotation(annotationPoint)
+            }
         }
 
         func addPinToMapView(title: String?, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
@@ -90,7 +118,6 @@ struct MapView: UIViewRepresentable {
             let location = locations.last
             let point = MKPointAnnotation()
 
-            let georeader = CLGeocoder()
             georeader.reverseGeocodeLocation(location!) { places, err in
 
                 if err != nil {
