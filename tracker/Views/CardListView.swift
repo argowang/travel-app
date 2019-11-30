@@ -21,7 +21,6 @@ struct CardListView: View {
     @State var title = ""
 
     var body: some View {
-        VStack {
             ScrollView {
                 VStack {
                     ForEach(self.tripCards) { card in
@@ -38,9 +37,7 @@ struct CardListView: View {
                         Text("Add event")
                     }
                 }
-            }
-        }
-        .padding()
+            } 
     }
 }
 
