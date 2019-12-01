@@ -66,8 +66,7 @@ struct CardListView: View {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 60, alignment: .topLeading)
         }
     }
-}
- 
+} 
 struct CardListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
