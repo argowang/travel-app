@@ -33,7 +33,7 @@ struct AddTripEventInfoView: View {
 
             locationRows(newLocation: self.$title)
                 .padding()
-            
+
             Button(action: {
                 if self.title != "" {
                     let card = TripCard(context: self.managedObjectContext)
@@ -48,7 +48,7 @@ struct AddTripEventInfoView: View {
                     }
 
                     self.title = ""
-                }  
+                }
             }) {
                 Text("Add event")
             }
@@ -59,7 +59,7 @@ struct AddTripEventInfoView: View {
 }
 
 struct locationRows: View {
-    @Binding var newLocation : String
+    @Binding var newLocation: String
     @State private var selectedCoordinate: CLLocationCoordinate2D?
     var body: some View {
         List {

@@ -44,29 +44,30 @@ struct CardListView: View {
             }
             
             HStack {
-                Button(action: {
-                    if self.title != "" {}
-                }) {
-                    NavigationLink(destination: AddTripEventInfoView()) {
-                        Text("Add event")
+                if self.mode?.wrappedValue == .inactive {
+                    Button(action: {
+                        if self.title != "" {}
+                    }) {
+                        NavigationLink(destination: AddTripEventInfoView()) {
+                            Text("Add event")
+                        }
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding()
                 }
-                .buttonStyle(PlainButtonStyle())
-                .padding()
-                
+
                 Spacer()
                 Button(self.mode?.wrappedValue == .inactive ? "Delete" : "Cancel") {
                     self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
                 }
                 .buttonStyle(PlainButtonStyle())
                 .padding()
-                
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 60, alignment: .topLeading)
         }
     }
 }
-
+ 
 struct CardListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
