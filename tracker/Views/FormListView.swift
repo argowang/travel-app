@@ -25,10 +25,11 @@ struct FormListView: View {
 
 struct locationRow: View {
     @State private var newLocation = ""
+    @State private var selectedCoordinate: CLLocationCoordinate2D?
     var body: some View {
         HStack {
             Text("Location:")
-            NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation).environmentObject(PlaceFinder())) {
+            NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(PlaceFinder())) {
                 Text("\(self.newLocation)")
             }
             .padding()

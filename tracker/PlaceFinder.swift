@@ -35,7 +35,7 @@ class PlaceFinder: NSObject, ObservableObject {
         results = []
         searcher = MKLocalSearchCompleter()
         super.init()
-        searcher.resultTypes = .pointOfInterest
+        searcher.resultTypes = .query
         searcher.delegate = self
     }
 
