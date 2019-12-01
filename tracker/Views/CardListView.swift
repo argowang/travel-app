@@ -18,7 +18,7 @@ struct CardListView: View {
 
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.editMode) var mode
-    @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard> 
+    @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
     @State var title = ""
 
     var body: some View {
@@ -31,18 +31,18 @@ struct CardListView: View {
                                 self.managedObjectContext.delete(card)
                             }
                             .padding()
-                            
+
                             CardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
-                        }else {
-                             NavigationLink(destination: ViewTripEventInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
+                        } else {
+                            NavigationLink(destination: ViewTripEventInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
                                 CardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
-                              }
-                             .buttonStyle(PlainButtonStyle())
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                 }
             }
-            
+
             HStack {
                 if self.mode?.wrappedValue == .inactive {
                     Button(action: {
@@ -66,7 +66,8 @@ struct CardListView: View {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 60, alignment: .topLeading)
         }
     }
-} 
+}
+
 struct CardListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
