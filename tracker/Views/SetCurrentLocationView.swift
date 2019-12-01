@@ -16,17 +16,19 @@ struct SetCurrentLocationView: View {
     @State var nearByPlaces: [MKMapItem] = []
     @State var cardPosition = CardPosition.middle
 
+    @Binding var selectedCoordinate: CLLocationCoordinate2D?
+
     @EnvironmentObject var placeFinder: PlaceFinder
 
     var body: some View {
         ZStack(alignment: Alignment.top) {
-            MapView(manager: $manager, alert: $alert, nearByPlaces: $nearByPlaces)
+            MapView(manager: $manager, alert: $alert, nearByPlaces: $nearByPlaces, selectedCoordinate: $selectedCoordinate)
                 .alert(isPresented: $alert) {
                     Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
                 }.edgesIgnoringSafeArea(.vertical)
 
             SlideOverCard(position: $cardPosition) {
-                SearchBarView(cardPosition: self.$cardPosition, nearByPlaces: self.$nearByPlaces, newLocation: self.$newLocation).environmentObject(self.placeFinder).padding(.bottom, 5)
+                SearchBarView(cardPosition: self.$cardPosition, nearByPlaces: self.$nearByPlaces, newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(self.placeFinder).padding(.bottom, 5)
             }.foregroundColor(.primary)
         }.edgesIgnoringSafeArea(.vertical)
 
@@ -38,7 +40,8 @@ struct SetCurrentLocationView: View {
 
 struct SetCurrentLocationView_Previews: PreviewProvider {
     @State static var newLocation = "Aruba"
+    @State static var selectedCoordinate: CLLocationCoordinate2D?
     static var previews: some View {
-        SetCurrentLocationView(newLocation: $newLocation).environmentObject(PlaceFinder())
+        SetCurrentLocationView(newLocation: $newLocation, selectedCoordinate: $selectedCoordinate).environmentObject(PlaceFinder())
     }
 }

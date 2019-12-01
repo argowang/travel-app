@@ -13,6 +13,7 @@ struct MapView: UIViewRepresentable {
     @Binding var manager: CLLocationManager
     @Binding var alert: Bool
     @Binding var nearByPlaces: [MKMapItem]
+    @Binding var selectedCoordinate: CLLocationCoordinate2D?
     let map = MKMapView()
 
     func makeCoordinator() -> MapView.Coordinator {
@@ -43,6 +44,8 @@ struct MapView: UIViewRepresentable {
         tapGesture.numberOfTapsRequired = 1
         map.isUserInteractionEnabled = true
         map.addGestureRecognizer(tapGesture)
+        map.setUserTrackingMode(.none, animated: false)
+        map.delegate = context.coordinator
 
         manager.requestWhenInUseAuthorization()
         manager.delegate = context.coordinator
@@ -50,9 +53,19 @@ struct MapView: UIViewRepresentable {
         return map
     }
 
-    func updateUIView(_: MKMapView, context _: UIViewRepresentableContext<MapView>) {}
+    func updateUIView(_ mapView: MKMapView, context _: UIViewRepresentableContext<MapView>) {
+        if selectedCoordinate != nil {
+            let region = MKCoordinateRegion(center: selectedCoordinate!, latitudinalMeters: 1000, longitudinalMeters: 1000)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = selectedCoordinate!
+            annotation.title = "Selected"
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.addAnnotation(annotation)
+            mapView.setRegion(region, animated: true)
+        }
+    }
 
-    class Coordinator: NSObject, CLLocationManagerDelegate {
+    class Coordinator: NSObject, CLLocationManagerDelegate, MKMapViewDelegate {
         var parent: MapView
         let georeader: CLGeocoder
 
@@ -141,6 +154,12 @@ struct MapView: UIViewRepresentable {
         func locationManager(_: CLLocationManager, didFailWithError error: Error) {
             print(error)
         }
+
+        func mapView(_ mapView: MKMapView, didAdd _: [MKAnnotationView]) {
+            if let userLocation = mapView.view(for: mapView.userLocation) {
+                userLocation.isHidden = true
+            }
+        }
     }
 }
 
@@ -148,7 +167,8 @@ struct MapView_Previews: PreviewProvider {
     @State static var locationManager = CLLocationManager()
     @State static var alert = false
     @State static var nearBy: [MKMapItem] = []
+    @State static var selectedCoordinate: CLLocationCoordinate2D?
     static var previews: some View {
-        MapView(manager: $locationManager, alert: $alert, nearByPlaces: $nearBy)
+        MapView(manager: $locationManager, alert: $alert, nearByPlaces: $nearBy, selectedCoordinate: $selectedCoordinate)
     }
 }

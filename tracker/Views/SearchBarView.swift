@@ -14,6 +14,7 @@ struct SearchBarView: View {
     @Binding var cardPosition: CardPosition
     @Binding var nearByPlaces: [MKMapItem]
     @Binding var newLocation: String
+    @Binding var selectedCoordinate: CLLocationCoordinate2D?
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
@@ -29,7 +30,7 @@ struct SearchBarView: View {
                         self.showCancelButton = true
                         self.cardPosition = CardPosition.top
                     }, onCommit: {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        UIApplication.shared.endEditing()
                         print("onCommit")
                     }).foregroundColor(.primary)
 
@@ -57,27 +58,36 @@ struct SearchBarView: View {
             .padding(.horizontal)
 
             if placeFinder.searchString != "" {
-                OnNotEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation)
+                OnNotEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation, selectedCoordinate: $selectedCoordinate)
             } else {
-                OnEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation)
+                OnEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation, selectedCoordinate: $selectedCoordinate)
             }
         }
     }
 }
 
 struct OnNotEmptyStringSearchBarView: View {
-    @State private var showCancelButton: Bool = false
     @Binding var cardPosition: CardPosition
     @Binding var nearByPlaces: [MKMapItem]
     @Binding var newLocation: String
+    @Binding var selectedCoordinate: CLLocationCoordinate2D?
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
         List(self.placeFinder.results, id: \.self) { result in
             Button(action: {
+                let request = MKLocalSearch.Request(completion: result)
+                let search = MKLocalSearch(request: request)
+                search.start(completionHandler: { response, error in
+                    if error == nil {
+                        self.selectedCoordinate = response?.mapItems[0].placemark.coordinate
+                    }
+                })
+
                 self.placeFinder.searchString = ""
-                self.mode.wrappedValue.dismiss()
+                UIApplication.shared.endEditing()
                 self.newLocation = result.title
+                self.cardPosition = CardPosition.bottom
             }) {
                 VStack(alignment: .leading) {
                     Text(result.title).font(.headline)
@@ -89,19 +99,20 @@ struct OnNotEmptyStringSearchBarView: View {
 }
 
 struct OnEmptyStringSearchBarView: View {
-    @State private var showCancelButton: Bool = false
     @Binding var cardPosition: CardPosition
     @Binding var nearByPlaces: [MKMapItem]
     @Binding var newLocation: String
+    @Binding var selectedCoordinate: CLLocationCoordinate2D?
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
         List(self.nearByPlaces, id: \.self) { result in
             Button(action: {
                 self.placeFinder.searchString = ""
-                self.mode.wrappedValue.dismiss()
+                UIApplication.shared.endEditing()
                 self.newLocation = result.name!
-
+                self.selectedCoordinate = result.placemark.coordinate
+                self.cardPosition = CardPosition.bottom
             }) {
                 VStack(alignment: .leading) {
                     Text(result.name!).font(.headline)
@@ -120,7 +131,8 @@ struct SearchBarView_Previews: PreviewProvider {
     @State static var cardPosition: CardPosition = CardPosition.middle
     @State static var nearByPlaces: [MKMapItem] = []
     @State static var newLocation: String = ""
+    @State static var selectedCoordinate: CLLocationCoordinate2D?
     static var previews: some View {
-        SearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation)
+        SearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation, selectedCoordinate: $selectedCoordinate)
     }
 }
