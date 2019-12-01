@@ -34,9 +34,23 @@ struct CardListView: View {
             }
 
             HStack {
-                AddEventButtonView()
+                Button(action: {
+                    if self.title != "" {}
+                }) {
+                    NavigationLink(destination: AddTripEventInfoView()) {
+                        Text("Add event")
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding()
+                
                 Spacer()
-                DeleteEventButtonView()
+                Button(self.mode?.wrappedValue == .inactive ? "Delete" : "Cancel") {
+                    self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding()
+                
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 60, alignment: .topLeading)
         }
@@ -58,48 +72,19 @@ struct DisplayEventCardView: View {
 struct DeleteEventCardView: View {
     @State var card: TripCard
     @State var dateFormatter: DateFormatter
+    @Environment(\.editMode) var mode
 
     var body: some View {
         HStack {
             Button("DELETE") {
                 // todo add delete function
-//                self.mode?.animation().wrappedValue = .active
             }
             .padding()
             CardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
         }
     }
 }
-
-struct AddEventButtonView: View {
-    @State var title = ""
-
-    var body: some View {
-        Button(action: {
-            if self.title != "" {}
-        }) {
-            NavigationLink(destination: AddTripEventInfoView()) {
-                Text("Add event")
-            }
-        }
-        .buttonStyle(PlainButtonStyle())
-        .padding()
-    }
-}
-
-struct DeleteEventButtonView: View {
-    @State var title = ""
-    @Environment(\.editMode) var mode
-
-    var body: some View {
-        Button(self.mode?.wrappedValue == .inactive ? "Delete" : "Cancel") {
-            self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
-        }
-        .buttonStyle(PlainButtonStyle())
-        .padding()
-    }
-}
-
+ 
 struct CardListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
