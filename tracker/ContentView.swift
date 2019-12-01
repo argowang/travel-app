@@ -13,20 +13,9 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Entry point:")
-                NavigationLink(destination: FormListView()) {
-                    Text("FormListView")
-                }
-                .padding()
-                Text("Entry point:")
-                NavigationLink(destination: FakeCardEntryPointView()) {
-                    Text("FakeCardEntryPointView")
-                }
-            }
+            CardListView()
+                .navigationBarTitle("Your Trip")
         }
-        .navigationBarHidden(true)
-        .edgesIgnoringSafeArea([.top])
     }
 }
 

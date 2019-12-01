@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import MapKit
 import SwiftUI
 
 struct AddTripEventInfoView: View {
@@ -22,13 +23,16 @@ struct AddTripEventInfoView: View {
 
     var body: some View {
         VStack {
-            TextField("Name Currrent Visiting Location", text: self.$title)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
             DatePicker(selection: $start, in: ...Date(), displayedComponents: .date) {
                 Text("Select a date")
             }
+            .padding()
 
             Text("Date is \(start, formatter: dateFormatter)")
+                .padding()
+
+            locationRows(newLocation: self.$title)
+                .padding()
 
             Button(action: {
                 if self.title != "" {
@@ -50,6 +54,22 @@ struct AddTripEventInfoView: View {
             }
             .padding()
             Spacer()
+        }
+    }
+}
+
+struct locationRows: View {
+    @Binding var newLocation: String
+    @State private var selectedCoordinate: CLLocationCoordinate2D?
+    var body: some View {
+        List {
+            HStack {
+                Text("Location:")
+                NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(PlaceFinder())) {
+                    Text("\(self.newLocation)")
+                }
+                .padding()
+            }
         }
     }
 }
