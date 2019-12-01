@@ -19,6 +19,7 @@ struct CardListView: View {
     @Environment(\.editMode) var mode
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
+    
     @State var title = ""
 
     var body: some View {
@@ -31,17 +32,25 @@ struct CardListView: View {
                         DeleteEventCardView(card: card, dateFormatter: self.dateFormatter)
                     }
                 }
-            }
-
-            HStack {
-                AddEventButtonView()
-                Spacer()
-                DeleteEventButtonView()
-            }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 60, alignment: .topLeading)
+            } 
+            ButtonContentView(tripCards: self.tripCards)
         }
     }
 }
+
+struct ButtonContentView: View {
+    @State var tripCards: FetchedResults<TripCard>
+
+    var body: some View {
+        HStack {
+            AddEventButtonView()
+            Spacer()
+            DeleteEventButtonView()
+        }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 60, alignment: .topLeading)
+    }
+}
+
 
 struct DisplayEventCardView: View {
     @State var card: TripCard
@@ -58,12 +67,13 @@ struct DisplayEventCardView: View {
 struct DeleteEventCardView: View {
     @State var card: TripCard
     @State var dateFormatter: DateFormatter
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
 
     var body: some View {
         HStack {
             Button("DELETE") {
-                // todo add delete function
-//                self.mode?.animation().wrappedValue = .active
+                self.managedObjectContext.delete(self.card)
             }
             .padding()
             CardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
