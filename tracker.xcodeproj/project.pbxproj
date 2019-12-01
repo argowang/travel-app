@@ -71,16 +71,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B86E319523948A8C00B31FE2 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				B86E31662389EE6C00B31FE2 /* ViewExtension.swift */,
+				B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */,
+				B86E3170238B30AB00B31FE2 /* HandleView.swift */,
+				B86E316A2389EFE100B31FE2 /* SearchBarView.swift */,
+			);
+			path = "UI Components";
+			sourceTree = "<group>";
+		};
 		B8AEB6A12388FAF5003E100E /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */,
-				B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */,
-				B86E3170238B30AB00B31FE2 /* HandleView.swift */,
+				B86E319523948A8C00B31FE2 /* UI Components */,
 				B8AEB69D2388F9BF003E100E /* RecordsListView.swift */,
 				B8AEB69F2388FA57003E100E /* MapView.swift */,
-				B86E31662389EE6C00B31FE2 /* ViewExtension.swift */,
-				B86E316A2389EFE100B31FE2 /* SearchBarView.swift */,
 				1552FAD5238B344300060E05 /* CardView.swift */,
 				1552FAE3238BA94800060E05 /* CardListView.swift */,
 				1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */,
