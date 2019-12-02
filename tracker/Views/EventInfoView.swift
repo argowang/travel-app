@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct ViewTripEventInfoView: View {
+struct EventInfoView: View {
     var title: String
     var dateString: String
 
@@ -36,6 +36,6 @@ struct ViewTripEventInfoView_Previews: PreviewProvider {
     static var title = ""
     static var dateString = ""
     static var previews: some View {
-        ViewTripEventInfoView(title: title, dateString: dateString)
+        EventInfoView(title: title, dateString: dateString)
     }
 }

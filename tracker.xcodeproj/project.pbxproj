@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		154D6F072390509700169C25 /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F062390509700169C25 /* TripCard.swift */; };
-		154D6F09239066EA00169C25 /* ViewTripEventInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F08239066EA00169C25 /* ViewTripEventInfo.swift */; };
-		1552FAD6238B344300060E05 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardView.swift */; };
+		154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F08239066EA00169C25 /* EventInfoView.swift */; };
+		1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardDetailView.swift */; };
 		1552FAE4238BA94800060E05 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAE3238BA94800060E05 /* CardListView.swift */; };
 		1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */; };
-		1571D4FE238FA15D00FC33E9 /* AddTripEventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FD238FA15D00FC33E9 /* AddTripEventInfoView.swift */; };
+		1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FD238FA15D00FC33E9 /* AddEventView.swift */; };
 		B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31662389EE6C00B31FE2 /* ViewExtension.swift */; };
 		B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316A2389EFE100B31FE2 /* SearchBarView.swift */; };
 		B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316C238A262400B31FE2 /* PlaceFinder.swift */; };
@@ -34,11 +34,11 @@
 
 /* Begin PBXFileReference section */
 		154D6F062390509700169C25 /* TripCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCard.swift; sourceTree = "<group>"; };
-		154D6F08239066EA00169C25 /* ViewTripEventInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTripEventInfo.swift; sourceTree = "<group>"; };
-		1552FAD5238B344300060E05 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		154D6F08239066EA00169C25 /* EventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
+		1552FAD5238B344300060E05 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		1552FAE3238BA94800060E05 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripCardView.swift; sourceTree = "<group>"; };
-		1571D4FD238FA15D00FC33E9 /* AddTripEventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripEventInfoView.swift; sourceTree = "<group>"; };
+		1571D4FD238FA15D00FC33E9 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		B86E31662389EE6C00B31FE2 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		B86E316A2389EFE100B31FE2 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B86E316C238A262400B31FE2 /* PlaceFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceFinder.swift; sourceTree = "<group>"; };
@@ -77,7 +77,6 @@
 				B86E31662389EE6C00B31FE2 /* ViewExtension.swift */,
 				B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */,
 				B86E3170238B30AB00B31FE2 /* HandleView.swift */,
-				B86E316A2389EFE100B31FE2 /* SearchBarView.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -88,12 +87,13 @@
 				B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */,
 				B86E319523948A8C00B31FE2 /* UI Components */,
 				B8AEB69D2388F9BF003E100E /* RecordsListView.swift */,
+				B86E316A2389EFE100B31FE2 /* SearchBarView.swift */,
 				B8AEB69F2388FA57003E100E /* MapView.swift */,
-				1552FAD5238B344300060E05 /* CardView.swift */,
+				1552FAD5238B344300060E05 /* CardDetailView.swift */,
 				1552FAE3238BA94800060E05 /* CardListView.swift */,
 				1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */,
-				1571D4FD238FA15D00FC33E9 /* AddTripEventInfoView.swift */,
-				154D6F08239066EA00169C25 /* ViewTripEventInfo.swift */,
+				1571D4FD238FA15D00FC33E9 /* AddEventView.swift */,
+				154D6F08239066EA00169C25 /* EventInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,7 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1552FAD6238B344300060E05 /* CardView.swift in Sources */,
+				1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */,
 				B8ED925A23806BDB00025623 /* tracker.xcdatamodeld in Sources */,
 				B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */,
 				B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */,
@@ -233,9 +233,9 @@
 				154D6F072390509700169C25 /* TripCard.swift in Sources */,
 				1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */,
 				B8DA964F237FC34600BC1801 /* SceneDelegate.swift in Sources */,
-				154D6F09239066EA00169C25 /* ViewTripEventInfo.swift in Sources */,
+				154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */,
 				1552FAE4238BA94800060E05 /* CardListView.swift in Sources */,
-				1571D4FE238FA15D00FC33E9 /* AddTripEventInfoView.swift in Sources */,
+				1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */,
 				B86E316F238B308F00B31FE2 /* SlideOverCardView.swift in Sources */,
 				B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */,
 				B8DA9654237FC34600BC1801 /* ContentView.swift in Sources */,

@@ -10,7 +10,7 @@ import CoreData
 import MapKit
 import SwiftUI
 
-struct AddTripEventInfoView: View {
+struct AddEventView: View {
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -76,6 +76,6 @@ struct locationRows: View {
 
 struct AddTripEventInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTripEventInfoView()
+        AddEventView()
     }
 }

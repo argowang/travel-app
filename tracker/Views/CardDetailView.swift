@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct CardDetailView: View {
     var title: String
     var dateString: String
 
@@ -49,6 +49,6 @@ struct CardView_Previews: PreviewProvider {
     static var title = ""
     static var dateString = ""
     static var previews: some View {
-        CardView(title: title, dateString: dateString)
+        CardDetailView(title: title, dateString: dateString)
     }
 }
