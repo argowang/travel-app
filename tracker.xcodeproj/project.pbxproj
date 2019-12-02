@@ -81,19 +81,52 @@
 			path = "UI Components";
 			sourceTree = "<group>";
 		};
-		B8AEB6A12388FAF5003E100E /* Views */ = {
+		B86E31982394D89E00B31FE2 /* Location Views */ = {
 			isa = PBXGroup;
 			children = (
 				B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */,
-				B86E319523948A8C00B31FE2 /* UI Components */,
-				B8AEB69D2388F9BF003E100E /* RecordsListView.swift */,
 				B86E316A2389EFE100B31FE2 /* SearchBarView.swift */,
 				B8AEB69F2388FA57003E100E /* MapView.swift */,
+			);
+			path = "Location Views";
+			sourceTree = "<group>";
+		};
+		B86E31992394D8D600B31FE2 /* Event Views */ = {
+			isa = PBXGroup;
+			children = (
 				1552FAD5238B344300060E05 /* CardDetailView.swift */,
 				1552FAE3238BA94800060E05 /* CardListView.swift */,
-				1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */,
 				1571D4FD238FA15D00FC33E9 /* AddEventView.swift */,
 				154D6F08239066EA00169C25 /* EventInfoView.swift */,
+			);
+			path = "Event Views";
+			sourceTree = "<group>";
+		};
+		B86E319A2394D8E800B31FE2 /* Legacy (Reference Only) */ = {
+			isa = PBXGroup;
+			children = (
+				B8AEB69D2388F9BF003E100E /* RecordsListView.swift */,
+				1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */,
+			);
+			path = "Legacy (Reference Only)";
+			sourceTree = "<group>";
+		};
+		B86E319B2394D90D00B31FE2 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				B8ED926C238083C400025623 /* LocationManager.swift */,
+				B86E316C238A262400B31FE2 /* PlaceFinder.swift */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
+		B8AEB6A12388FAF5003E100E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B86E31982394D89E00B31FE2 /* Location Views */,
+				B86E319523948A8C00B31FE2 /* UI Components */,
+				B86E319A2394D8E800B31FE2 /* Legacy (Reference Only) */,
+				B86E31992394D8D600B31FE2 /* Event Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -121,13 +154,12 @@
 				B8DA964C237FC34600BC1801 /* AppDelegate.swift */,
 				B8DA964E237FC34600BC1801 /* SceneDelegate.swift */,
 				B8DA9653237FC34600BC1801 /* ContentView.swift */,
-				B8ED926C238083C400025623 /* LocationManager.swift */,
+				B86E319B2394D90D00B31FE2 /* Modals */,
 				B8DA9655237FC34900BC1801 /* Assets.xcassets */,
 				B8DA965A237FC34900BC1801 /* LaunchScreen.storyboard */,
 				B8DA965D237FC34900BC1801 /* Info.plist */,
 				B8DA9657237FC34900BC1801 /* Preview Content */,
 				B8AEB6A12388FAF5003E100E /* Views */,
-				B86E316C238A262400B31FE2 /* PlaceFinder.swift */,
 			);
 			path = tracker;
 			sourceTree = "<group>";
