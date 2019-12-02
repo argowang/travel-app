@@ -22,10 +22,22 @@ struct EventInfoView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
 
     var body: some View {
-        VStack {
-            Text("Location : \(title)")
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            Text("Date is \(dateString)")
+        VStack(alignment: .leading) {
+            HStack {
+                Image("location")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+
+                Text("Location : \(title)")
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+
+            HStack {
+                Image("calendar")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                Text("Date is \(dateString)")
+            }
 
             Spacer()
         }
