@@ -117,6 +117,7 @@ struct OnEmptyStringSearchBarView: View {
                 VStack(alignment: .leading) {
                     Text(result.name!).font(.headline)
                     HStack {
+                        // TODO: Handle optional values here
                         Text("\(result.placemark.subThoroughfare!) \(result.placemark.thoroughfare!),  \(result.placemark.subAdministrativeArea!), \(result.placemark.administrativeArea!)")
                     }.font(.footnote).foregroundColor(Color.gray)
                 }

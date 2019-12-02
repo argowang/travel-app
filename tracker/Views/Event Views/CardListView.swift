@@ -32,10 +32,10 @@ struct CardListView: View {
                             }
                             .padding()
 
-                            CardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            CardDetailView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
-                            NavigationLink(destination: ViewTripEventInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
-                                CardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            NavigationLink(destination: EventInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
+                                CardDetailView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
@@ -48,7 +48,7 @@ struct CardListView: View {
                     Button(action: {
                         if self.title != "" {}
                     }) {
-                        NavigationLink(destination: AddTripEventInfoView()) {
+                        NavigationLink(destination: AddEventView()) {
                             Text("Add event")
                         }
                     }

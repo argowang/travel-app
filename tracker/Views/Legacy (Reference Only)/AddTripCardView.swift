@@ -11,7 +11,7 @@ import SwiftUI
 struct AddTripCardView: View {
     var body: some View {
         VStack {
-            NavigationLink(destination: AddTripEventInfoView()) {
+            NavigationLink(destination: AddEventView()) {
                 VStack {
                     Image("add")
                         .resizable()
