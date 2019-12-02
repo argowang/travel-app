@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15114DDD2395B2F8003863FD /* FakeTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DDC2395B2F8003863FD /* FakeTripView.swift */; };
 		154D6F072390509700169C25 /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F062390509700169C25 /* TripCard.swift */; };
 		154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F08239066EA00169C25 /* EventInfoView.swift */; };
 		1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardDetailView.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15114DDC2395B2F8003863FD /* FakeTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTripView.swift; sourceTree = "<group>"; };
 		154D6F062390509700169C25 /* TripCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCard.swift; sourceTree = "<group>"; };
 		154D6F08239066EA00169C25 /* EventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
 		1552FAD5238B344300060E05 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				B8AEB69D2388F9BF003E100E /* RecordsListView.swift */,
 				1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */,
+				15114DDC2395B2F8003863FD /* FakeTripView.swift */,
 			);
 			path = "Legacy (Reference Only)";
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */,
 				B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */,
 				B8DA964D237FC34600BC1801 /* AppDelegate.swift in Sources */,
+				15114DDD2395B2F8003863FD /* FakeTripView.swift in Sources */,
 				B8ED926D238083C500025623 /* LocationManager.swift in Sources */,
 				B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */,
 				B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */,
