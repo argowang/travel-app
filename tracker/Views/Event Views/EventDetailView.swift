@@ -7,13 +7,13 @@
 //
 
 import SwiftUI
- 
+
 struct EventDetailView: View {
     var title: String
     var dateString: String
 
     var body: some View {
-        VStack { 
+        VStack {
             HStack {
                 VStack(alignment: .leading) {
                     Text(self.dateString)
