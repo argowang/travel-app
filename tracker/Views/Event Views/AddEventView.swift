@@ -37,7 +37,7 @@ struct AddEventView: View {
                 .padding()
 
             Button(action: {
-                let card = TripCard(context: self.managedObjectContext)
+                let card = EventCard(context: self.managedObjectContext)
 
                 if self.title != "" {
                     card.title = self.title

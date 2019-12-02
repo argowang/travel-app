@@ -10,6 +10,7 @@
 		15114DDD2395B2F8003863FD /* FakeTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DDC2395B2F8003863FD /* FakeTripView.swift */; };
 		15114DDF2395B48D003863FD /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DDE2395B48D003863FD /* EventListView.swift */; };
 		15114DE12395B4AC003863FD /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE02395B4AC003863FD /* EventDetailView.swift */; };
+		15114DE32395B727003863FD /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE22395B727003863FD /* EventCard.swift */; };
 		154D6F072390509700169C25 /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F062390509700169C25 /* TripCard.swift */; };
 		154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F08239066EA00169C25 /* EventInfoView.swift */; };
 		1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardDetailView.swift */; };
@@ -39,6 +40,7 @@
 		15114DDC2395B2F8003863FD /* FakeTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTripView.swift; sourceTree = "<group>"; };
 		15114DDE2395B48D003863FD /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		15114DE02395B4AC003863FD /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		15114DE22395B727003863FD /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		154D6F062390509700169C25 /* TripCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCard.swift; sourceTree = "<group>"; };
 		154D6F08239066EA00169C25 /* EventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
 		1552FAD5238B344300060E05 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				B8DA9650237FC34600BC1801 /* tracker.xcdatamodeld */,
 				B8ED92672380727900025623 /* Record.swift */,
 				154D6F062390509700169C25 /* TripCard.swift */,
+				15114DE22395B727003863FD /* EventCard.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */,
 				B8DA9654237FC34600BC1801 /* ContentView.swift in Sources */,
 				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */,
+				15114DE32395B727003863FD /* EventCard.swift in Sources */,
 				B8AEB69E2388F9BF003E100E /* RecordsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

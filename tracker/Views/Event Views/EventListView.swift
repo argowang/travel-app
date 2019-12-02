@@ -18,13 +18,13 @@ struct EventListView: View {
 
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.editMode) var mode
-    @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
+    @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
     @State var title = ""
 
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(self.tripCards) { card in
+                ForEach(self.eventCards) { card in
                     HStack {
                         if self.mode?.wrappedValue == .active {
                             Button("DELETE") {
