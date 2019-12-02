@@ -16,7 +16,7 @@ class LocationManager: NSObject, ObservableObject {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+        locationManager.requestLocation()
     }
 
     @Published var locationStatus: CLAuthorizationStatus? {
@@ -29,6 +29,17 @@ class LocationManager: NSObject, ObservableObject {
         willSet {
             objectWillChange.send()
         }
+    }
+
+    @Published var lastCity: String? {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+
+    func updateOnce() {
+        lastCity = nil
+        locationManager.requestLocation()
     }
 
     var statusString: String {
@@ -61,5 +72,22 @@ extension LocationManager: CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         lastLocation = location
         print(#function, location)
+
+        let georeader = CLGeocoder()
+        if lastLocation != nil {
+            georeader.reverseGeocodeLocation(lastLocation!) { places, err in
+
+                if err != nil {
+                    print((err?.localizedDescription)!)
+                    return
+                }
+
+                self.lastCity = places?.first?.locality
+            }
+        }
+    }
+
+    func locationManager(_: CLLocationManager, didFailWithError error: Error) {
+        debugPrint(error.localizedDescription)
     }
 }

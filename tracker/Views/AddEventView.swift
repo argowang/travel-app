@@ -20,6 +20,8 @@ struct AddEventView: View {
     @State var title = ""
     @Environment(\.managedObjectContext) var managedObjectContext
     @State var start = Date()
+    @ObservedObject var manager = LocationManager()
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
         VStack {
@@ -31,42 +33,52 @@ struct AddEventView: View {
             Text("Date is \(start, formatter: dateFormatter)")
                 .padding()
 
-            locationRows(newLocation: self.$title)
+            locationRows(newLocation: self.$title, autoPopulated: self.$manager.lastCity)
                 .padding()
 
             Button(action: {
+                let card = TripCard(context: self.managedObjectContext)
+
                 if self.title != "" {
-                    let card = TripCard(context: self.managedObjectContext)
-
                     card.title = self.title
-                    card.start = self.start
+                } else {
+                    card.title = self.manager.lastCity
+                }
 
-                    do {
-                        try self.managedObjectContext.save()
-                    } catch {
-                        print(error)
-                    }
+                card.start = self.start
 
-                    self.title = ""
+                do {
+                    try self.managedObjectContext.save()
+                    self.mode.wrappedValue.dismiss()
+                } catch {
+                    print(error)
                 }
             }) {
                 Text("Add event")
             }
             .padding()
             Spacer()
+        }.onAppear {
+            self.manager.updateOnce()
         }
     }
 }
 
 struct locationRows: View {
     @Binding var newLocation: String
+    @Binding var autoPopulated: String?
     @State private var selectedCoordinate: CLLocationCoordinate2D?
+
     var body: some View {
         List {
             HStack {
                 Text("Location:")
                 NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(PlaceFinder())) {
-                    Text("\(self.newLocation)")
+                    if self.newLocation == "" {
+                        Text("\(self.autoPopulated ?? "")")
+                    } else {
+                        Text("\(self.newLocation)")
+                    }
                 }
                 .padding()
             }
