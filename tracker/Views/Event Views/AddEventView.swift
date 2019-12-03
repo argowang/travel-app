@@ -22,7 +22,7 @@ struct AddEventView: View {
             timePicker(selectedTime: self.$selectedTime)
                 .padding()
 
-            locationRows(newLocation: self.$title, autoPopulated: self.$manager.lastCity) 
+            locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle) 
                 .padding()
 
             Button(action: {
