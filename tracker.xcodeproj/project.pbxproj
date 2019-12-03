@@ -21,6 +21,7 @@
 		B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316C238A262400B31FE2 /* PlaceFinder.swift */; };
 		B86E316F238B308F00B31FE2 /* SlideOverCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */; };
 		B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E3170238B30AB00B31FE2 /* HandleView.swift */; };
+		B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE623960905003863FD /* EventCard.swift */; };
 		B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */; };
 		B8AEB69E2388F9BF003E100E /* RecordsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69D2388F9BF003E100E /* RecordsListView.swift */; };
 		B8AEB6A02388FA57003E100E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69F2388FA57003E100E /* MapView.swift */; };
@@ -286,7 +287,7 @@
 				B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */,
 				B8DA9654237FC34600BC1801 /* ContentView.swift in Sources */,
 				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */,
-				15114DE723960905003863FD /* EventCard.swift in Sources */,
+				B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */,
 				B8AEB69E2388F9BF003E100E /* RecordsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

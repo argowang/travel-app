@@ -10,10 +10,13 @@ import MapKit
 import SwiftUI
 
 struct MapView: UIViewRepresentable {
-    @Binding var manager: CLLocationManager
     @Binding var alert: Bool
     @Binding var nearByPlaces: [MKMapItem]
     @Binding var selectedCoordinate: CLLocationCoordinate2D?
+    @Binding var selectedLocation: String
+
+    @EnvironmentObject var manager: LocationManager
+
     let map = MKMapView()
 
     func makeCoordinator() -> MapView.Coordinator {
@@ -47,9 +50,26 @@ struct MapView: UIViewRepresentable {
         map.setUserTrackingMode(.none, animated: false)
         map.delegate = context.coordinator
 
-        manager.requestWhenInUseAuthorization()
-        manager.delegate = context.coordinator
-        manager.requestLocation()
+        if let selected = self.selectedCoordinate {
+            let point = MKPointAnnotation()
+            point.coordinate = selected
+            point.title = selectedLocation
+            let region = MKCoordinateRegion(center: selected, latitudinalMeters: 1000, longitudinalMeters: 1000)
+            map.region = region
+            map.addAnnotation(point)
+            context.coordinator.searchInMap()
+        } else {
+            if let location = self.manager.lastLocation {
+                let point = MKPointAnnotation()
+                point.coordinate = location.coordinate
+                point.title = "Current"
+                let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                map.region = region
+                map.addAnnotation(point)
+                context.coordinator.searchInMap()
+            }
+        }
+
         return map
     }
 
@@ -58,14 +78,14 @@ struct MapView: UIViewRepresentable {
             let region = MKCoordinateRegion(center: selectedCoordinate!, latitudinalMeters: 1000, longitudinalMeters: 1000)
             let annotation = MKPointAnnotation()
             annotation.coordinate = selectedCoordinate!
-            annotation.title = "Selected"
+            annotation.title = selectedLocation
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotation(annotation)
             mapView.setRegion(region, animated: true)
         }
     }
 
-    class Coordinator: NSObject, CLLocationManagerDelegate, MKMapViewDelegate {
+    class Coordinator: NSObject, MKMapViewDelegate {
         var parent: MapView
         let georeader: CLGeocoder
 
@@ -107,6 +127,9 @@ struct MapView: UIViewRepresentable {
                 annotationPoint.coordinate = location.coordinate
                 self.parent.map.removeAnnotations(self.parent.map.annotations)
                 self.parent.map.addAnnotation(annotationPoint)
+
+                self.parent.selectedCoordinate = location.coordinate
+                self.parent.selectedLocation = place ?? ""
             }
         }
 
@@ -119,40 +142,6 @@ struct MapView: UIViewRepresentable {
 
                 parent.map.addAnnotation(annotation)
             }
-        }
-
-        func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-            if status == .denied {
-                parent.alert.toggle()
-            }
-        }
-
-        func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            let location = locations.last
-            let point = MKPointAnnotation()
-
-            georeader.reverseGeocodeLocation(location!) { places, err in
-
-                if err != nil {
-                    print((err?.localizedDescription)!)
-                    return
-                }
-
-                let place = places?.first?.locality
-                point.title = place
-                point.subtitle = "Current"
-                point.coordinate = location!.coordinate
-                self.parent.map.removeAnnotations(self.parent.map.annotations)
-                self.parent.map.addAnnotation(point)
-
-                let region = MKCoordinateRegion(center: location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-                self.parent.map.region = region
-                self.searchInMap()
-            }
-        }
-
-        func locationManager(_: CLLocationManager, didFailWithError error: Error) {
-            print(error)
         }
 
         func mapView(_ mapView: MKMapView, didAdd _: [MKAnnotationView]) {
@@ -168,7 +157,8 @@ struct MapView_Previews: PreviewProvider {
     @State static var alert = false
     @State static var nearBy: [MKMapItem] = []
     @State static var selectedCoordinate: CLLocationCoordinate2D?
+    @State static var newLocation = ""
     static var previews: some View {
-        MapView(manager: $locationManager, alert: $alert, nearByPlaces: $nearBy, selectedCoordinate: $selectedCoordinate)
+        MapView(alert: $alert, nearByPlaces: $nearBy, selectedCoordinate: $selectedCoordinate, selectedLocation: $newLocation)
     }
 }
