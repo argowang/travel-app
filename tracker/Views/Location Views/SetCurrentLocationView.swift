@@ -40,10 +40,10 @@ struct SetCurrentLocationView: View {
                 self.selectedCoordinate = self.draftSelectedCoordinate
                 self.mode.wrappedValue.dismiss()
             }, label: { Text("Save") }))
-
-//    //            RecordsListView(newLocation: self.$newLocation)
-//    //                .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
-//            }
+            .onAppear{
+                self.draftNewLocation = self.newLocation
+                self.draftSelectedCoordinate = self.selectedCoordinate
+            }
     }
 }
 
