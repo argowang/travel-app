@@ -3,38 +3,26 @@ import MapKit
 import SwiftUI
 
 struct AddEventView: View {
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        return formatter
-    }
-
     @State var title = ""
     @State var defaultTitle = ""
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @State var start = Date()
+    @Environment(\.managedObjectContext) var managedObjectContext 
+    @State var selectedDate = Date()
+    @State var selectedTime = Date()
     @State var type = "General"
-    @State var showDatePicker = false
-    @EnvironmentObject var manager: LocationManager
+    @ObservedObject var manager = LocationManager() 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
         VStack {
-            eventTypeRow(type: $type)
-            HStack {
-                Text("Date is ")
-                Button("\(start, formatter: dateFormatter)") {
-                    self.showDatePicker = true
-                }.sheet(
-                    isPresented: self.$showDatePicker
-                ) {
-                    DatePicker(selection: self.$start, in: ...Date(), displayedComponents: .date) {
-                        Text("Select a date")
-                    }
-                }
-            }
-            .padding()
-            locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle)
+            eventTypeRow(type: $type) 
+
+            datePicker(selectedDate: self.$selectedDate)
+                .padding()
+
+            timePicker(selectedTime: self.$selectedTime)
+                .padding()
+
+            locationRows(newLocation: self.$title, autoPopulated: self.$manager.lastCity) 
                 .padding()
 
             Button(action: {
@@ -46,7 +34,7 @@ struct AddEventView: View {
                     card.title = self.defaultTitle
                 }
 
-                card.start = self.start
+                card.start = self.selectedDate
                 card.type = self.type
 
                 do {
@@ -70,6 +58,68 @@ struct AddEventView: View {
                     }
 
                     self.defaultTitle = places?.first?.locality ?? ""
+                }
+            }
+        }
+    }
+}
+
+struct datePicker: View {
+    @Binding var selectedDate: Date
+    @State var showDatePicker = false
+
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }
+
+    var body: some View {
+        HStack {
+            Text("Date is ")
+            Button("\(selectedDate, formatter: dateFormatter)") {
+                self.showDatePicker = true
+            }.sheet(
+                isPresented: self.$showDatePicker
+            ) {
+                DatePicker(selection: self.$selectedDate, in: ...Date(), displayedComponents: .date) {
+                    Text("Select a date")
+                }
+            }
+        }
+    }
+}
+
+struct timePicker: View {
+    @Binding var selectedTime: Date
+    @State var showDatePicker = false
+
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter
+    }
+
+    var dateClosedRange: ClosedRange<Date> {
+        let min = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let max = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        return min ... max
+    }
+
+    var body: some View {
+        HStack {
+            Text("Time is ")
+            Button("\(selectedTime, formatter: dateFormatter)") {
+                self.showDatePicker = true
+            }.sheet(
+                isPresented: self.$showDatePicker
+            ) {
+                DatePicker(
+                    selection: self.$selectedTime,
+                    in: self.dateClosedRange,
+                    displayedComponents: .hourAndMinute
+                ) {
+                    Text("Select a time")
                 }
             }
         }
