@@ -20,18 +20,24 @@ struct AddEventView: View {
     @State var title = ""
     @Environment(\.managedObjectContext) var managedObjectContext
     @State var start = Date()
+    @State var showDatePicker = false
     @ObservedObject var manager = LocationManager()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
         VStack {
-            DatePicker(selection: $start, in: ...Date(), displayedComponents: .date) {
-                Text("Select a date")
+            HStack {
+                Text("Date is ")
+                Button("\(start, formatter: dateFormatter)") {
+                    self.showDatePicker = true
+                }.sheet(
+                    isPresented: self.$showDatePicker
+                ) {
+                    DatePicker(selection: self.$start, in: ...Date(), displayedComponents: .date) {
+                        Text("Select a date")
+                    }
+                }
             }
-            .padding()
-
-            Text("Date is \(start, formatter: dateFormatter)")
-                .padding()
 
             locationRows(newLocation: self.$title, autoPopulated: self.$manager.lastCity)
                 .padding()
