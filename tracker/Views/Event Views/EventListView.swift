@@ -22,7 +22,7 @@ struct EventListView: View {
     @State var title = ""
 
     var body: some View {
-        VStack {
+        ZStack {
             ScrollView {
                 ForEach(self.eventCards) { card in
                     HStack {
@@ -42,36 +42,26 @@ struct EventListView: View {
                     }
                 }
             }
-
-            HStack {
-                if self.mode?.wrappedValue == .inactive {
-                    Button(action: {
-                        if self.title != "" {}
-                    }) {
-                        NavigationLink(destination: AddEventView()) {
-                            Text("Add event")
-                        }
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding()
-                }
-
+            VStack {
                 Spacer()
-                Button(self.mode?.wrappedValue == .inactive ? "Delete" : "Cancel") {
-                    self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
+                if self.mode?.wrappedValue == .inactive {
+                    Button(action: { if self.title != "" {}
+                    }) {
+                        Text("Add Event")
+                            .fontWeight(.bold)
+                    }
+                    .foregroundColor(Color.white)
+                    .padding(8)
+                    .background(Color.blue)
+                    .cornerRadius(20)
                 }
-                .buttonStyle(PlainButtonStyle())
-                .padding()
             }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 60, alignment: .topLeading)
         }
     }
 }
 
 struct EventListView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            EventListView()
-        }
+        EventListView()
     }
 }
