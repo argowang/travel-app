@@ -5,7 +5,7 @@
 //  Created by Bingxin Zhu on 12/2/19.
 //  Copyright © 2019 TechLead. All rights reserved.
 //
- 
+
 import CoreData
 import Foundation
 
