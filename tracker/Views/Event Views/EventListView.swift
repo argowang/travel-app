@@ -47,8 +47,10 @@ struct EventListView: View {
                 if self.mode?.wrappedValue == .inactive {
                     Button(action: { if self.title != "" {}
                     }) {
-                        Text("Add Event")
-                            .fontWeight(.bold)
+                        NavigationLink(destination: AddEventView()) {
+                            Text("Add event")
+                                .fontWeight(.bold)
+                        }
                     }
                     .foregroundColor(Color.white)
                     .padding(8)
