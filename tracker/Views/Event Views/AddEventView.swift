@@ -20,7 +20,7 @@ struct AddEventView: View {
     @State var title = ""
     @Environment(\.managedObjectContext) var managedObjectContext
     @State var start = Date()
-    @State var type = "General"
+    @State var type = "general"
     @ObservedObject var manager = LocationManager()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
@@ -98,9 +98,9 @@ struct eventTypeRow: View {
             Text("Event Type: \(type)")
                 .padding()
             HStack {
-                Button(action: { self.type = "General"
+                Button(action: { self.type = "general"
                 }) {
-                    Text("General")
+                    Text("general")
                         .fontWeight(.bold)
                 }
                 .foregroundColor(Color.white)
@@ -108,9 +108,9 @@ struct eventTypeRow: View {
                 .background(Color.blue)
                 .cornerRadius(20)
 
-                Button(action: { self.type = "Transportation"
+                Button(action: { self.type = "transportation"
                 }) {
-                    Text("Transportation")
+                    Text("transportation")
                         .fontWeight(.bold)
                 }
                 .foregroundColor(Color.white)
@@ -118,9 +118,9 @@ struct eventTypeRow: View {
                 .background(Color.purple)
                 .cornerRadius(20)
 
-                Button(action: { self.type = "Food"
+                Button(action: { self.type = "food"
                 }) {
-                    Text("Food")
+                    Text("food")
                         .fontWeight(.bold)
                 }
                 .foregroundColor(Color.white)

@@ -11,6 +11,7 @@ import SwiftUI
 
 struct EventInfoView: View {
     var title: String
+    var type: String
     var dateString: String
 
     var dateFormatter: DateFormatter {
@@ -23,6 +24,15 @@ struct EventInfoView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            HStack {
+                Image(type == "Food" ? "food" : (type == "Transportation" ? "car" : "general"))
+                    .resizable()
+                    .frame(width: 60, height: 60)
+
+                Text("Event Type : \(type)")
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+
             HStack {
                 Image("location")
                     .resizable()
@@ -47,7 +57,8 @@ struct EventInfoView: View {
 struct ViewTripEventInfoView_Previews: PreviewProvider {
     static var title = ""
     static var dateString = ""
+    static var type = ""
     static var previews: some View {
-        EventInfoView(title: title, dateString: dateString)
+        EventInfoView(title: title, type: type, dateString: dateString)
     }
 }
