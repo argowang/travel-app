@@ -10,4 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build
-      run: xcodebuild build -project tracker.xcodeproj -scheme tracker
+      run: xcodebuild build -project tracker.xcodeproj -scheme tracker -allowProvisioningUpdates
