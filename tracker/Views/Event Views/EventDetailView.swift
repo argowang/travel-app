@@ -16,11 +16,11 @@ struct EventDetailView: View {
     var body: some View {
         VStack {
             HStack {
-                Image(type == "food" ? "food" :(type == "transportation" ? "transportation" : "general") )
+                Image(type == "Food" ? "food" : (type == "Transportation" ? "car" : "general"))
                     .resizable()
                     .frame(width: 60, height: 60)
                     .padding()
-                
+
                 VStack(alignment: .leading) {
                     Text(self.dateString)
                         .font(.headline)
