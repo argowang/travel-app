@@ -34,7 +34,7 @@ struct CardListView: View {
 
                             CardDetailView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
-                            NavigationLink(destination: EventInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
+                            NavigationLink(destination: EventInfoView(title: card.title ?? "title place holder", type : card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
                                 CardDetailView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                             }
                             .buttonStyle(PlainButtonStyle())
