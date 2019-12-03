@@ -20,11 +20,14 @@ struct AddEventView: View {
     @State var title = ""
     @Environment(\.managedObjectContext) var managedObjectContext
     @State var start = Date()
+    @State var type = "General"
     @ObservedObject var manager = LocationManager()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
         VStack {
+            eventTypeRow(type: $type)
+
             DatePicker(selection: $start, in: ...Date(), displayedComponents: .date) {
                 Text("Select a date")
             }
@@ -37,7 +40,7 @@ struct AddEventView: View {
                 .padding()
 
             Button(action: {
-                let card = TripCard(context: self.managedObjectContext)
+                let card = EventCard(context: self.managedObjectContext)
 
                 if self.title != "" {
                     card.title = self.title
@@ -46,6 +49,7 @@ struct AddEventView: View {
                 }
 
                 card.start = self.start
+                card.type = self.type
 
                 do {
                     try self.managedObjectContext.save()
@@ -81,6 +85,48 @@ struct locationRows: View {
                     }
                 }
                 .padding()
+            }
+        }
+    }
+}
+
+struct eventTypeRow: View {
+    @Binding var type: String
+
+    var body: some View {
+        VStack {
+            Text("Event Type: \(type)")
+                .padding()
+            HStack {
+                Button(action: { self.type = "General"
+                }) {
+                    Text("General")
+                        .fontWeight(.bold)
+                }
+                .foregroundColor(Color.white)
+                .padding(8)
+                .background(Color.blue)
+                .cornerRadius(20)
+
+                Button(action: { self.type = "Transportation"
+                }) {
+                    Text("Transportation")
+                        .fontWeight(.bold)
+                }
+                .foregroundColor(Color.white)
+                .padding(8)
+                .background(Color.purple)
+                .cornerRadius(20)
+
+                Button(action: { self.type = "Food"
+                }) {
+                    Text("Food")
+                        .fontWeight(.bold)
+                }
+                .foregroundColor(Color.white)
+                .padding(8)
+                .background(Color.green)
+                .cornerRadius(20)
             }
         }
     }
