@@ -10,7 +10,6 @@
 		15114DDD2395B2F8003863FD /* FakeTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DDC2395B2F8003863FD /* FakeTripView.swift */; };
 		15114DDF2395B48D003863FD /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DDE2395B48D003863FD /* EventListView.swift */; };
 		15114DE12395B4AC003863FD /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE02395B4AC003863FD /* EventDetailView.swift */; };
-		15114DE723960905003863FD /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE623960905003863FD /* EventCard.swift */; };
 		154D6F072390509700169C25 /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F062390509700169C25 /* TripCard.swift */; };
 		154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F08239066EA00169C25 /* EventInfoView.swift */; };
 		1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardDetailView.swift */; };

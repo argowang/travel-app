@@ -11,16 +11,15 @@ struct AddEventView: View {
 
     @State var title = ""
     @Environment(\.managedObjectContext) var managedObjectContext
-    @State var start = Date()
-    @State var type = "General"
+    @State var start = Date() 
+    @State var type = "General" 
     @State var showDatePicker = false
     @ObservedObject var manager = LocationManager()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
-        VStack {
-            eventTypeRow(type: $type)
-
+        VStack { 
+            eventTypeRow(type: $type) 
             HStack {
                 Text("Date is ")
                 Button("\(start, formatter: dateFormatter)") {
@@ -32,8 +31,8 @@ struct AddEventView: View {
                         Text("Select a date")
                     }
                 }
-            }
-            .padding()
+            } 
+            .padding() 
             locationRows(newLocation: self.$title, autoPopulated: self.$manager.lastCity)
                 .padding()
 
