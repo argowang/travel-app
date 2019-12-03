@@ -10,16 +10,17 @@ struct AddEventView: View {
     }
 
     @State var title = ""
+    @State var defaultTitle = ""
     @Environment(\.managedObjectContext) var managedObjectContext
-    @State var start = Date() 
-    @State var type = "General" 
+    @State var start = Date()
+    @State var type = "General"
     @State var showDatePicker = false
-    @ObservedObject var manager = LocationManager()
+    @EnvironmentObject var manager: LocationManager
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
-        VStack { 
-            eventTypeRow(type: $type) 
+        VStack {
+            eventTypeRow(type: $type)
             HStack {
                 Text("Date is ")
                 Button("\(start, formatter: dateFormatter)") {
@@ -31,9 +32,9 @@ struct AddEventView: View {
                         Text("Select a date")
                     }
                 }
-            } 
-            .padding() 
-            locationRows(newLocation: self.$title, autoPopulated: self.$manager.lastCity)
+            }
+            .padding()
+            locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle)
                 .padding()
 
             Button(action: {
@@ -42,7 +43,7 @@ struct AddEventView: View {
                 if self.title != "" {
                     card.title = self.title
                 } else {
-                    card.title = self.manager.lastCity
+                    card.title = self.defaultTitle
                 }
 
                 card.start = self.start
@@ -60,14 +61,24 @@ struct AddEventView: View {
             .padding()
             Spacer()
         }.onAppear {
-            self.manager.updateOnce()
+            let georeader = CLGeocoder()
+            if let lastLocation = self.manager.lastLocation {
+                georeader.reverseGeocodeLocation(lastLocation) { places, err in
+                    if err != nil {
+                        print((err?.localizedDescription)!)
+                        return
+                    }
+
+                    self.defaultTitle = places?.first?.locality ?? ""
+                }
+            }
         }
     }
 }
 
 struct locationRows: View {
     @Binding var newLocation: String
-    @Binding var autoPopulated: String?
+    @Binding var autoPopulated: String
     @State private var selectedCoordinate: CLLocationCoordinate2D?
 
     var body: some View {
@@ -76,7 +87,7 @@ struct locationRows: View {
                 Text("Location:")
                 NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(PlaceFinder())) {
                     if self.newLocation == "" {
-                        Text("\(self.autoPopulated ?? "")")
+                        Text("\(self.autoPopulated)")
                     } else {
                         Text("\(self.newLocation)")
                     }

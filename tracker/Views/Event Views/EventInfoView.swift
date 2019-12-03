@@ -23,7 +23,7 @@ struct EventInfoView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack { 
+            HStack {
                 Image(type == "Food" ? "food" : (type == "Transportation" ? "car" : "general"))
                     .resizable()
                     .frame(width: 60, height: 60)
@@ -32,7 +32,7 @@ struct EventInfoView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
 
-            HStack { 
+            HStack {
                 Image("location")
                     .resizable()
                     .frame(width: 60, height: 60)

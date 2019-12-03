@@ -31,17 +31,6 @@ class LocationManager: NSObject, ObservableObject {
         }
     }
 
-    @Published var lastCity: String? {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-
-    func updateOnce() {
-        lastCity = nil
-        locationManager.requestLocation()
-    }
-
     var statusString: String {
         guard let status = locationStatus else {
             return "unknown"
@@ -65,26 +54,11 @@ class LocationManager: NSObject, ObservableObject {
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         locationStatus = status
-        print(#function, statusString)
     }
 
     func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         lastLocation = location
-        print(#function, location)
-
-        let georeader = CLGeocoder()
-        if lastLocation != nil {
-            georeader.reverseGeocodeLocation(lastLocation!) { places, err in
-
-                if err != nil {
-                    print((err?.localizedDescription)!)
-                    return
-                }
-
-                self.lastCity = places?.first?.locality
-            }
-        }
     }
 
     func locationManager(_: CLLocationManager, didFailWithError error: Error) {

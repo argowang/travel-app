@@ -11,18 +11,19 @@ import SwiftUI
 
 struct SetCurrentLocationView: View {
     @Binding var newLocation: String
-    @State var manager = CLLocationManager()
+    @Binding var selectedCoordinate: CLLocationCoordinate2D?
+
     @State var alert = false
     @State var nearByPlaces: [MKMapItem] = []
     @State var cardPosition = CardPosition.middle
 
-    @Binding var selectedCoordinate: CLLocationCoordinate2D?
-
+//    @EnvironmentObject var manager: LocationManager
     @EnvironmentObject var placeFinder: PlaceFinder
 
     var body: some View {
         ZStack(alignment: Alignment.top) {
-            MapView(manager: $manager, alert: $alert, nearByPlaces: $nearByPlaces, selectedCoordinate: $selectedCoordinate)
+            MapView(alert: $alert, nearByPlaces: $nearByPlaces, selectedCoordinate: $selectedCoordinate, selectedLocation: $newLocation)
+
                 .alert(isPresented: $alert) {
                     Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
                 }.edgesIgnoringSafeArea(.vertical)
