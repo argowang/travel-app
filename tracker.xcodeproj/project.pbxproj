@@ -17,6 +17,10 @@
 		1552FAE4238BA94800060E05 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAE3238BA94800060E05 /* CardListView.swift */; };
 		1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */; };
 		1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FD238FA15D00FC33E9 /* AddEventView.swift */; };
+		44AE2C55239640FE00724F90 /* TripListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE2C54239640FE00724F90 /* TripListView.swift */; };
+		44AE2C572396472500724F90 /* TripCardview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE2C562396472500724F90 /* TripCardview.swift */; };
+		44AE2C592396485300724F90 /* TripInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE2C582396485300724F90 /* TripInfoView.swift */; };
+		44AE2C5B23964AA600724F90 /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE2C5A23964AA600724F90 /* AddTripView.swift */; };
 		B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31662389EE6C00B31FE2 /* ViewExtension.swift */; };
 		B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316A2389EFE100B31FE2 /* SearchBarView.swift */; };
 		B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316C238A262400B31FE2 /* PlaceFinder.swift */; };
@@ -48,6 +52,10 @@
 		1552FAE3238BA94800060E05 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripCardView.swift; sourceTree = "<group>"; };
 		1571D4FD238FA15D00FC33E9 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
+		44AE2C54239640FE00724F90 /* TripListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListView.swift; sourceTree = "<group>"; };
+		44AE2C562396472500724F90 /* TripCardview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCardview.swift; sourceTree = "<group>"; };
+		44AE2C582396485300724F90 /* TripInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoView.swift; sourceTree = "<group>"; };
+		44AE2C5A23964AA600724F90 /* AddTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripView.swift; sourceTree = "<group>"; };
 		B86E31662389EE6C00B31FE2 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		B86E316A2389EFE100B31FE2 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B86E316C238A262400B31FE2 /* PlaceFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceFinder.swift; sourceTree = "<group>"; };
@@ -80,6 +88,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44AE2C53239640D800724F90 /* Trip Views */ = {
+			isa = PBXGroup;
+			children = (
+				44AE2C54239640FE00724F90 /* TripListView.swift */,
+				44AE2C562396472500724F90 /* TripCardview.swift */,
+				44AE2C582396485300724F90 /* TripInfoView.swift */,
+				44AE2C5A23964AA600724F90 /* AddTripView.swift */,
+			);
+			path = "Trip Views";
+			sourceTree = "<group>";
+		};
 		B86E319523948A8C00B31FE2 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +154,7 @@
 		B8AEB6A12388FAF5003E100E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				44AE2C53239640D800724F90 /* Trip Views */,
 				B86E31982394D89E00B31FE2 /* Location Views */,
 				B86E319523948A8C00B31FE2 /* UI Components */,
 				B86E319A2394D8E800B31FE2 /* Legacy (Reference Only) */,
@@ -276,21 +296,25 @@
 				B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */,
 				B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */,
 				B8ED92682380727900025623 /* Record.swift in Sources */,
+				44AE2C572396472500724F90 /* TripCardview.swift in Sources */,
 				154D6F072390509700169C25 /* TripCard.swift in Sources */,
 				15114DDF2395B48D003863FD /* EventListView.swift in Sources */,
 				1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */,
 				B8DA964F237FC34600BC1801 /* SceneDelegate.swift in Sources */,
 				154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */,
 				1552FAE4238BA94800060E05 /* CardListView.swift in Sources */,
+				44AE2C5B23964AA600724F90 /* AddTripView.swift in Sources */,
 				1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */,
 				B86E316F238B308F00B31FE2 /* SlideOverCardView.swift in Sources */,
 				15114DE12395B4AC003863FD /* EventDetailView.swift in Sources */,
 				B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */,
 				B8DA9654237FC34600BC1801 /* ContentView.swift in Sources */,
-				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */, 
-				15114DE923962794003863FD /* EventCard.swift in Sources */, 
-				B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */, 
+				44AE2C55239640FE00724F90 /* TripListView.swift in Sources */,
+				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */,
+				15114DE923962794003863FD /* EventCard.swift in Sources */,
+				B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */,
 				B8AEB69E2388F9BF003E100E /* RecordsListView.swift in Sources */,
+				44AE2C592396485300724F90 /* TripInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
