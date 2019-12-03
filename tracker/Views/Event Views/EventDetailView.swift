@@ -5,16 +5,21 @@
 //  Created by Bingxin Zhu on 12/2/19.
 //  Copyright © 2019 TechLead. All rights reserved.
 //
-
 import SwiftUI
 
 struct EventDetailView: View {
     var title: String
+    var type: String
     var dateString: String
 
     var body: some View {
         VStack {
             HStack {
+                Image(type == "Food" ? "food" : (type == "Transportation" ? "car" : "general"))
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .padding()
+
                 VStack(alignment: .leading) {
                     Text(self.dateString)
                         .font(.headline)
@@ -42,8 +47,9 @@ struct EventDetailView: View {
 
 struct EventDetailView_Previews: PreviewProvider {
     static var title = ""
+    static var type = "general"
     static var dateString = ""
     static var previews: some View {
-        EventDetailView(title: title, dateString: dateString)
+        EventDetailView(title: title, type: type, dateString: dateString)
     }
 }

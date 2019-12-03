@@ -5,7 +5,6 @@
 //  Created by Bingxin Zhu on 12/2/19.
 //  Copyright © 2019 TechLead. All rights reserved.
 //
-
 import CoreData
 import SwiftUI
 
@@ -18,13 +17,13 @@ struct EventListView: View {
 
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.editMode) var mode
-    @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
+    @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
     @State var title = ""
 
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(self.tripCards) { card in
+                ForEach(self.eventCards) { card in
                     HStack {
                         if self.mode?.wrappedValue == .active {
                             Button("DELETE") {
@@ -32,10 +31,10 @@ struct EventListView: View {
                             }
                             .padding()
 
-                            EventDetailView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
-                            NavigationLink(destination: EventInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
-                                EventDetailView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            NavigationLink(destination: EventInfoView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
+                                EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
@@ -43,7 +42,7 @@ struct EventListView: View {
                 }
             }
 
-            HStack {
+            VStack {
                 if self.mode?.wrappedValue == .inactive {
                     Button(action: {
                         if self.title != "" {}
@@ -55,15 +54,7 @@ struct EventListView: View {
                     .buttonStyle(PlainButtonStyle())
                     .padding()
                 }
-
-                Spacer()
-                Button(self.mode?.wrappedValue == .inactive ? "Delete" : "Cancel") {
-                    self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding()
             }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 60, alignment: .topLeading)
         }
     }
 }
