@@ -5,11 +5,12 @@ import SwiftUI
 struct AddEventView: View {
     @State var title = ""
     @State var defaultTitle = ""
-    @Environment(\.managedObjectContext) var managedObjectContext 
     @State var selectedDate = Date()
     @State var selectedTime = Date()
     @State var type = "General"
-    @ObservedObject var manager = LocationManager() 
+    
+    @EnvironmentObject var manager: LocationManager
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {

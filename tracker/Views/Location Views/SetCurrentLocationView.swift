@@ -20,6 +20,7 @@ struct SetCurrentLocationView: View {
     @State var cardPosition = CardPosition.middle
 
     @EnvironmentObject var placeFinder: PlaceFinder
+    @EnvironmentObject var manager: LocationManager
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
@@ -33,7 +34,7 @@ struct SetCurrentLocationView: View {
 
             SlideOverCard(position: $cardPosition) {
                 SearchBarView(cardPosition: self.$cardPosition, nearByPlaces: self.$nearByPlaces, newLocation: self.$draftNewLocation, selectedCoordinate: self.$draftSelectedCoordinate).environmentObject(self.placeFinder).padding(.bottom, 5)
-            }.foregroundColor(.primary)
+            }
         }.edgesIgnoringSafeArea(.vertical)
             .navigationBarItems(trailing: Button(action: {
                 self.newLocation = self.draftNewLocation
@@ -41,8 +42,29 @@ struct SetCurrentLocationView: View {
                 self.mode.wrappedValue.dismiss()
             }, label: { Text("Save") }))
             .onAppear{
-                self.draftNewLocation = self.newLocation
-                self.draftSelectedCoordinate = self.selectedCoordinate
+                // If user selected location before, we should honor it
+                if self.selectedCoordinate != nil {
+                    self.draftNewLocation = self.newLocation
+                    self.draftSelectedCoordinate = self.selectedCoordinate
+                } else {
+                    // If user have not selected location before, we should provide a default coordinate of last location and take a best guess on the name
+                    let georeader = CLGeocoder()
+                    if let lastLocation = self.manager.lastLocation {
+                        georeader.reverseGeocodeLocation(lastLocation) { places, err in
+                            if err != nil {
+                                print((err?.localizedDescription)!)
+                                return
+                            }
+                            
+                            if let defaultLocation = places?.first?.name {
+                                self.draftNewLocation = defaultLocation
+                            }
+                            
+                            self.draftSelectedCoordinate = lastLocation.coordinate
+                        }
+                    }
+                }
+                
             }
     }
 }

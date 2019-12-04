@@ -25,7 +25,7 @@ struct SlideOverCard<Content: View>: View {
         }
         .frame(height: UIScreen.main.bounds.height)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .background(Color.white)
+        .background(Color(UIColor.systemBackground))
         .cornerRadius(10.0)
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.13), radius: 10.0)
         .offset(y: max(self.position.rawValue + self.dragState.translation.height, CardPosition.top.rawValue))
