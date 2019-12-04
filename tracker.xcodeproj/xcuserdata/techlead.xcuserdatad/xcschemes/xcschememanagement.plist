@@ -4,7 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>tracker.xcscheme_^#shared#^_</key>
+		<key>Copy of tracker.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>tracker.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
