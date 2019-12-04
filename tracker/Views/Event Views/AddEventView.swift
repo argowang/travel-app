@@ -24,29 +24,7 @@ struct AddEventView: View {
 
             locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle) 
                 .padding()
-
-            Button(action: {
-                let card = EventCard(context: self.managedObjectContext)
-
-                if self.title != "" {
-                    card.title = self.title
-                } else {
-                    card.title = self.defaultTitle
-                }
-
-                card.start = self.selectedDate
-                card.type = self.type
-
-                do {
-                    try self.managedObjectContext.save()
-                    self.mode.wrappedValue.dismiss()
-                } catch {
-                    print(error)
-                }
-            }) {
-                Text("Add event")
-            }
-            .padding()
+            
             Spacer()
         }.onAppear {
             let georeader = CLGeocoder()
@@ -61,6 +39,25 @@ struct AddEventView: View {
                 }
             }
         }
+        .navigationBarItems(trailing: Button(action: {
+            let card = EventCard(context: self.managedObjectContext)
+
+            if self.title != "" {
+                card.title = self.title
+            } else {
+                card.title = self.defaultTitle
+            }
+
+            card.start = self.selectedDate
+            card.type = self.type
+
+            do {
+                try self.managedObjectContext.save()
+                self.mode.wrappedValue.dismiss()
+            } catch {
+                print(error)
+            }
+        }, label: { Text("Save") }))
     }
 }
 
@@ -131,8 +128,7 @@ struct locationRows: View {
     @Binding var autoPopulated: String
     @State private var selectedCoordinate: CLLocationCoordinate2D?
 
-    var body: some View {
-        List {
+    var body: some View { 
             HStack {
                 Text("Location:")
                 NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(PlaceFinder())) {
@@ -144,7 +140,6 @@ struct locationRows: View {
                 }
                 .padding()
             }
-        }
     }
 }
 
