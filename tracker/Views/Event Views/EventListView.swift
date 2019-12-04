@@ -41,6 +41,7 @@ struct EventListView: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                     }
+                    // temp fix, fetchrequest sometimes will not update, this is apple native bug
                     .onReceive(self.didSave) { _ in
                         self.refreshing.toggle()
                     }
