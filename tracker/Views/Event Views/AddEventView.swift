@@ -8,14 +8,14 @@ struct AddEventView: View {
     @State var selectedDate = Date()
     @State var selectedTime = Date()
     @State var type = "General"
-    
+
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
     var body: some View {
         VStack {
-            eventTypeRow(type: $type) 
+            eventTypeRow(type: $type)
 
             datePicker(selectedDate: self.$selectedDate)
                 .padding()
@@ -23,9 +23,9 @@ struct AddEventView: View {
             timePicker(selectedTime: self.$selectedTime)
                 .padding()
 
-            locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle) 
+            locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle)
                 .padding()
-            
+
             Spacer()
         }.onAppear {
             let georeader = CLGeocoder()
@@ -129,18 +129,18 @@ struct locationRows: View {
     @Binding var autoPopulated: String
     @State private var selectedCoordinate: CLLocationCoordinate2D?
 
-    var body: some View { 
-            HStack {
-                Text("Location:")
-                NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(PlaceFinder())) {
-                    if self.newLocation == "" {
-                        Text("\(self.autoPopulated)")
-                    } else {
-                        Text("\(self.newLocation)")
-                    }
+    var body: some View {
+        HStack {
+            Text("Location:")
+            NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(PlaceFinder())) {
+                if self.newLocation == "" {
+                    Text("\(self.autoPopulated)")
+                } else {
+                    Text("\(self.newLocation)")
                 }
-                .padding()
             }
+            .padding()
+        }
     }
 }
 

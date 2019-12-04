@@ -41,7 +41,7 @@ struct SetCurrentLocationView: View {
                 self.selectedCoordinate = self.draftSelectedCoordinate
                 self.mode.wrappedValue.dismiss()
             }, label: { Text("Save") }))
-            .onAppear{
+            .onAppear {
                 // If user selected location before, we should honor it
                 if self.selectedCoordinate != nil {
                     self.draftNewLocation = self.newLocation
@@ -55,16 +55,15 @@ struct SetCurrentLocationView: View {
                                 print((err?.localizedDescription)!)
                                 return
                             }
-                            
+
                             if let defaultLocation = places?.first?.name {
                                 self.draftNewLocation = defaultLocation
                             }
-                            
+
                             self.draftSelectedCoordinate = lastLocation.coordinate
                         }
                     }
                 }
-                
             }
     }
 }

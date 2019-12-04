@@ -20,11 +20,12 @@ struct SlideOverCard<Content: View>: View {
             .onEnded(onDragEnded)
 
         return VStack {
-            HandleView().padding(.top, 2)
-            self.content()
+            HandleView()
+            self.content().frame(maxHeight: UIScreen.main.bounds.height - position.rawValue - 60)
+            Spacer()
         }
         .frame(height: UIScreen.main.bounds.height)
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: UIScreen.main.bounds.height)
         .background(Color(UIColor.systemBackground))
         .cornerRadius(10.0)
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.13), radius: 10.0)
