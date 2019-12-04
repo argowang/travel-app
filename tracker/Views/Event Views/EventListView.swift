@@ -19,6 +19,8 @@ struct EventListView: View {
     @Environment(\.editMode) var mode
     @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
     @State var title = ""
+    @State private var refreshing = false
+    private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
     var body: some View {
         VStack {
@@ -38,6 +40,9 @@ struct EventListView: View {
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
+                    }
+                    .onReceive(self.didSave) { _ in
+                        self.refreshing.toggle()
                     }
                 }
             }
