@@ -16,7 +16,7 @@ class LocationManager: NSObject, ObservableObject {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
     }
 
     @Published var locationStatus: CLAuthorizationStatus? {
@@ -49,6 +49,14 @@ class LocationManager: NSObject, ObservableObject {
     let objectWillChange = PassthroughSubject<Void, Never>()
 
     private let locationManager = CLLocationManager()
+    
+    func stopUpdating() {
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func continueUpdating() {
+        locationManager.startUpdatingLocation()
+    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
