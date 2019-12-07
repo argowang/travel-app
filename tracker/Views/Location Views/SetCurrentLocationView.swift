@@ -63,8 +63,11 @@ struct SetCurrentLocationView: View {
                             self.draftSelectedCoordinate = lastLocation.coordinate
                         }
                     }
+                    self.manager.stopUpdating()
                 }
-            }
+        }.onDisappear{
+            self.manager.continueUpdating()
+        }
     }
 }
 
