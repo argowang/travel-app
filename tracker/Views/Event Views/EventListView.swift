@@ -26,12 +26,16 @@ struct EventListView: View {
         VStack {
             ScrollView {
                 ForEach(self.eventCards) { card in
-                    HStack {
+                    ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
                         if self.mode?.wrappedValue == .active {
-                            Button("DELETE") {
+                            Button(action: {
                                 self.managedObjectContext.delete(card)
-                            }
-                            .padding()
+
+                            }) {
+                                Image("delete")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                            }.buttonStyle(PlainButtonStyle())
 
                             EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
@@ -61,7 +65,9 @@ struct EventListView: View {
                     .padding()
                 }
             }
-        }
+        }.navigationBarItems(trailing: Button(action: {
+            self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
+        }, label: { Text(self.mode?.wrappedValue == .inactive ? "Edit" : "Done") }))
     }
 }
 
