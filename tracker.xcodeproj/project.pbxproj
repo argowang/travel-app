@@ -287,9 +287,9 @@
 				15114DE12395B4AC003863FD /* EventDetailView.swift in Sources */,
 				B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */,
 				B8DA9654237FC34600BC1801 /* ContentView.swift in Sources */,
-				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */, 
-				15114DE923962794003863FD /* EventCard.swift in Sources */, 
-				B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */, 
+				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */,
+				15114DE923962794003863FD /* EventCard.swift in Sources */,
+				B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */,
 				B8AEB69E2388F9BF003E100E /* RecordsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

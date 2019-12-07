@@ -24,7 +24,7 @@ struct EventInfoView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(type == "Food" ? "food" : (type == "Transportation" ? "car" : "general"))
+                Image(EventDetailView.getImage(type: type))
                     .resizable()
                     .frame(width: 60, height: 60)
 

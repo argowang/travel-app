@@ -12,10 +12,19 @@ struct EventDetailView: View {
     var type: String
     var dateString: String
 
+    static func getImage(type: String) -> String {
+        if type == "food" {
+            return "food"
+        } else if type == "Transportation" {
+            return "car"
+        }
+        return "general"
+    }
+
     var body: some View {
         VStack {
             HStack {
-                Image(type == "Food" ? "food" : (type == "Transportation" ? "car" : "general"))
+                Image(EventDetailView.getImage(type: type))
                     .resizable()
                     .frame(width: 60, height: 60)
                     .padding()
