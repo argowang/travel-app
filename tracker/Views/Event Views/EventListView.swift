@@ -26,10 +26,10 @@ struct EventListView: View {
         VStack {
             ScrollView {
                 ForEach(self.eventCards) { card in
-                    ZStack(alignment: Alignment(horizontal: .leading, vertical: .top))  {
+                    ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
                         if self.mode?.wrappedValue == .active {
                             Button(action: {
-                             self.managedObjectContext.delete(card)
+                                self.managedObjectContext.delete(card)
 
                             }) {
                                 Image("delete")
@@ -65,9 +65,9 @@ struct EventListView: View {
                     .padding()
                 }
             }
-        } .navigationBarItems(trailing: Button(action: {
-                self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
-                   }, label: { Text(self.mode?.wrappedValue == .inactive ? "Edit" : "Done") }))
+        }.navigationBarItems(trailing: Button(action: {
+            self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
+        }, label: { Text(self.mode?.wrappedValue == .inactive ? "Edit" : "Done") }))
     }
 }
 
@@ -78,4 +78,3 @@ struct EventListView_Previews: PreviewProvider {
         }
     }
 }
-
