@@ -7,7 +7,6 @@
 //
 import CoreData
 import SwiftUI
-
 struct EventListView: View {
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
