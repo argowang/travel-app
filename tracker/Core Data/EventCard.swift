@@ -14,6 +14,7 @@ public class EventCard: NSManagedObject, Identifiable {
     @NSManaged public var start: Date?
     @NSManaged public var end: Date?
     @NSManaged public var type: String?
+    @NSManaged public var uuid: UUID?
 }
 
 extension EventCard {
