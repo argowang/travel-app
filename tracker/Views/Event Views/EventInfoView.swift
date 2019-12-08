@@ -20,45 +20,44 @@ struct EventInfoView: View {
     }
 
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.editMode) var mode
+    @State var card: EventCard
+    @State private var goEdit: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
-            if self.mode?.wrappedValue == .inactive {
-                HStack {
-                    Image(EventDetailView.getImage(type: type))
-                        .resizable()
-                        .frame(width: 60, height: 60)
+            // https://forums.developer.apple.com/thread/124757
+            NavigationLink(destination: AddEventView(title: card.title ?? "", defaultTitle: "", selectedDate: card.start ?? Date(), selectedTime: Date(), type: card.type ?? "", rating: 5, card: card), isActive: self.$goEdit) {
+                Text("Work Around")
+            }.hidden()
 
-                    Text("Event Type : \(type)")
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
+            HStack {
+                Image(EventDetailView.getImage(type: card.type ?? "general"))
+                    .resizable()
+                    .frame(width: 60, height: 60)
 
-                HStack {
-                    Image("location")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-
-                    Text("Location : \(title)")
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-
-                HStack {
-                    Image("calendar")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                    Text("Date is \(self.dateFormatter.string(from: self.start))")
-                }
-
-                Spacer()
-            } else {
-                AddEventView(title: self.title, defaultTitle: "", selectedDate: self.start, selectedTime: Date(), type: self.type, rating: 5)
+                Text("Event Type : \(card.type ?? "")")
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
             }
+
+            HStack {
+                Image("location")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+
+                Text("Location : \(card.title ?? "")")
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+
+            HStack {
+                Image("calendar")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                Text("Date is \(self.dateFormatter.string(from: card.start ?? Date()))")
+            }
+
+            Spacer()
         }
-        .navigationBarItems(trailing: Button(action: {
-            self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
-            }, label: { Text(self.mode?.wrappedValue == .inactive ? "Edit" : "Save")
-        }))
+        .navigationBarItems(trailing: Button(action: { self.goEdit = true }, label: { Text("Edit") }))
     }
 }
 
@@ -67,7 +66,8 @@ struct ViewTripEventInfoView_Previews: PreviewProvider {
     static var dateString = ""
     static var date = Date()
     static var type = ""
+    static var card = EventCard()
     static var previews: some View {
-        EventInfoView(title: title, type: type, start: date)
+        EventInfoView(title: title, type: type, start: date, card: card)
     }
 }

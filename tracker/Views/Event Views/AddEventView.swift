@@ -10,6 +10,7 @@ struct AddEventView: View {
     @State var type: String
     @State var rating: Int
 
+    @State var card: EventCard?
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -46,16 +47,21 @@ struct AddEventView: View {
             }
         }
         .navigationBarItems(trailing: Button(action: {
-            let card = EventCard(context: self.managedObjectContext)
+            var cardToSave: EventCard?
 
-            if self.title != "" {
-                card.title = self.title
+            if self.card != nil {
+                cardToSave = self.card
             } else {
-                card.title = self.defaultTitle
+                cardToSave = EventCard(context: self.managedObjectContext)
+            }
+            if self.title != "" {
+                cardToSave!.title = self.title
+            } else {
+                cardToSave!.title = self.defaultTitle
             }
 
-            card.start = self.selectedDate
-            card.type = self.type
+            cardToSave!.start = self.selectedDate
+            cardToSave!.type = self.type
 
             do {
                 try self.managedObjectContext.save()
@@ -193,6 +199,6 @@ struct eventTypeRow: View {
 
 struct AddTripEventInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEventView(title: "", defaultTitle: "", selectedDate: Date(), selectedTime: Date(), type: "General", rating: 5)
+        AddEventView(title: "", defaultTitle: "", selectedDate: Date(), selectedTime: Date(), type: "General", rating: 5, card: EventCard())
     }
 }

@@ -39,7 +39,7 @@ struct EventListView: View {
 
                             EventDetailView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date()))
                         } else {
-                            NavigationLink(destination: EventInfoView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", start: self.eventCards[index].start ?? Date()), tag: index, selection: self.$selected) {
+                            NavigationLink(destination: EventInfoView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", start: self.eventCards[index].start ?? Date(), card: self.eventCards[index]), tag: index, selection: self.$selected) {
                                 EventDetailView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date()))
                                     .onTapGesture {
                                         self.selected = index

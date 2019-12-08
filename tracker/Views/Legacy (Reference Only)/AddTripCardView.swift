@@ -9,9 +9,11 @@
 import SwiftUI
 
 struct AddTripCardView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+
     var body: some View {
         VStack {
-            NavigationLink(destination: AddEventView(title: "", defaultTitle: "", selectedDate: Date(), selectedTime: Date(), type: "General", rating: 5)) {
+            NavigationLink(destination: AddEventView(title: "", defaultTitle: "", selectedDate: Date(), selectedTime: Date(), type: "General", rating: 5, card: EventCard(context: self.managedObjectContext))) {
                 VStack {
                     Image("add")
                         .resizable()
