@@ -8,6 +8,7 @@ struct AddEventView: View {
     @State var selectedDate = Date()
     @State var selectedTime = Date()
     @State var type = "General"
+    @State var rating = 5
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -25,6 +26,11 @@ struct AddEventView: View {
 
             locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle)
                 .padding()
+
+            HStack {
+                Text("Rating:")
+                StarRatingView(rating: self.$rating)
+            }
 
             Spacer()
         }.onAppear {

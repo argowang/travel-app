@@ -65,9 +65,9 @@ struct SetCurrentLocationView: View {
                     }
                     self.manager.stopUpdating()
                 }
-        }.onDisappear{
-            self.manager.continueUpdating()
-        }
+            }.onDisappear {
+                self.manager.continueUpdating()
+            }
     }
 }
 

@@ -23,6 +23,7 @@
 		B86E316F238B308F00B31FE2 /* SlideOverCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */; };
 		B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E3170238B30AB00B31FE2 /* HandleView.swift */; };
 		B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE623960905003863FD /* EventCard.swift */; };
+		B86E319E239C74F700B31FE2 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E319D239C74F700B31FE2 /* StarRatingView.swift */; };
 		B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */; };
 		B8AEB69E2388F9BF003E100E /* RecordsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69D2388F9BF003E100E /* RecordsListView.swift */; };
 		B8AEB6A02388FA57003E100E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69F2388FA57003E100E /* MapView.swift */; };
@@ -53,6 +54,7 @@
 		B86E316C238A262400B31FE2 /* PlaceFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceFinder.swift; sourceTree = "<group>"; };
 		B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOverCardView.swift; sourceTree = "<group>"; };
 		B86E3170238B30AB00B31FE2 /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
+		B86E319D239C74F700B31FE2 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCurrentLocationView.swift; sourceTree = "<group>"; };
 		B8AEB69D2388F9BF003E100E /* RecordsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsListView.swift; sourceTree = "<group>"; };
 		B8AEB69F2388FA57003E100E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				B86E31662389EE6C00B31FE2 /* ViewExtension.swift */,
 				B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */,
 				B86E3170238B30AB00B31FE2 /* HandleView.swift */,
+				B86E319D239C74F700B31FE2 /* StarRatingView.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */,
 				B86E316F238B308F00B31FE2 /* SlideOverCardView.swift in Sources */,
 				15114DE12395B4AC003863FD /* EventDetailView.swift in Sources */,
+				B86E319E239C74F700B31FE2 /* StarRatingView.swift in Sources */,
 				B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */,
 				B8DA9654237FC34600BC1801 /* ContentView.swift in Sources */,
 				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */,
