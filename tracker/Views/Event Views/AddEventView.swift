@@ -57,7 +57,7 @@ struct AddEventView: View {
 
             card.start = self.selectedDate
             card.type = self.type
-
+            card.uuid = UUID()
             do {
                 try self.managedObjectContext.save()
                 self.mode.wrappedValue.dismiss()

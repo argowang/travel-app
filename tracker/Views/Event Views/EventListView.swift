@@ -19,42 +19,41 @@ struct EventListView: View {
     @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
     @State var title = ""
     @State private var refreshing = false
-    @State var selected: Int?
+    @State var selected: UUID?
     private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(self.eventCards.indices) { index in
+                ForEach(self.eventCards, id: \.uuid) { card in
                     ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
                         if self.mode?.wrappedValue == .active {
                             Button(action: {
-                                self.managedObjectContext.delete(self.eventCards[index])
-
+                                self.managedObjectContext.delete(card)
                             }) {
                                 Image("delete")
                                     .resizable()
                                     .frame(width: 40, height: 40)
                             }.buttonStyle(PlainButtonStyle())
 
-                            EventDetailView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date()))
+                            EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
-                            NavigationLink(destination: EventInfoView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date())), tag: index, selection: self.$selected) {
-                                EventDetailView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date()))
+                            NavigationLink(destination: EventInfoView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date())), tag: card.uuid!, selection: self.$selected) {
+                                EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                                     .onTapGesture {
-                                        self.selected = index
+                                        self.selected = card.uuid
                                     }
                                     .onLongPressGesture {
-                                        debugPrint("hi")
+                                        self.mode?.wrappedValue = .active
                                     }
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
                     }
-                    // temp fix, fetchrequest sometimes will not update, this is apple native bug
-                    .onReceive(self.didSave) { _ in
-                        self.refreshing.toggle()
-                    }
+                }
+                // temp fix, fetchrequest sometimes will not update, this is apple native bug
+                .onReceive(self.didSave) { _ in
+                    self.refreshing.toggle()
                 }
             }
 
