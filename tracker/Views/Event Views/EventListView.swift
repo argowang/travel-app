@@ -20,16 +20,17 @@ struct EventListView: View {
     @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
     @State var title = ""
     @State private var refreshing = false
+    @State var selected: Int?
     private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(self.eventCards) { card in
+                ForEach(self.eventCards.indices) { index in
                     ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
                         if self.mode?.wrappedValue == .active {
                             Button(action: {
-                                self.managedObjectContext.delete(card)
+                                self.managedObjectContext.delete(self.eventCards[index])
 
                             }) {
                                 Image("delete")
@@ -37,10 +38,16 @@ struct EventListView: View {
                                     .frame(width: 40, height: 40)
                             }.buttonStyle(PlainButtonStyle())
 
-                            EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            EventDetailView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date()))
                         } else {
-                            NavigationLink(destination: EventInfoView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
-                                EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            NavigationLink(destination: EventInfoView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date())), tag: index, selection: self.$selected) {
+                                EventDetailView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date()))
+                                    .onTapGesture {
+                                        self.selected = index
+                                    }
+                                    .onLongPressGesture {
+                                        debugPrint("hi")
+                                    }
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
