@@ -3,12 +3,12 @@ import MapKit
 import SwiftUI
 
 struct AddEventView: View {
-    @State var title = ""
-    @State var defaultTitle = ""
-    @State var selectedDate = Date()
-    @State var selectedTime = Date()
-    @State var type = "General"
-    @State var rating = 5
+    @State var title: String
+    @State var defaultTitle: String
+    @State var selectedDate: Date
+    @State var selectedTime: Date
+    @State var type: String
+    @State var rating: Int
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -31,7 +31,6 @@ struct AddEventView: View {
                 Text("Rating:")
                 StarRatingView(rating: self.$rating)
             }
-
             Spacer()
         }.onAppear {
             let georeader = CLGeocoder()
@@ -194,6 +193,6 @@ struct eventTypeRow: View {
 
 struct AddTripEventInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEventView()
+        AddEventView(title: "", defaultTitle: "", selectedDate: Date(), selectedTime: Date(), type: "General", rating: 5)
     }
 }

@@ -48,7 +48,8 @@ struct CardListView: View {
                     Button(action: {
                         if self.title != "" {}
                     }) {
-                        NavigationLink(destination: AddEventView()) {
+                        NavigationLink(destination:
+                            AddEventView(title: "", defaultTitle: "", selectedDate: Date(), selectedTime: Date(), type: "General", rating: 5)) {
                             Text("Add event")
                         }
                     }

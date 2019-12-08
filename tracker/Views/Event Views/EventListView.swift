@@ -39,7 +39,7 @@ struct EventListView: View {
 
                             EventDetailView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date()))
                         } else {
-                            NavigationLink(destination: EventInfoView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date())), tag: index, selection: self.$selected) {
+                            NavigationLink(destination: EventInfoView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", start: self.eventCards[index].start ?? Date()), tag: index, selection: self.$selected) {
                                 EventDetailView(title: self.eventCards[index].title ?? "title place holder", type: self.eventCards[index].type ?? "general", dateString: self.dateFormatter.string(from: self.eventCards[index].start ?? Date()))
                                     .onTapGesture {
                                         self.selected = index
@@ -63,7 +63,8 @@ struct EventListView: View {
                     Button(action: {
                         if self.title != "" {}
                     }) {
-                        NavigationLink(destination: AddEventView()) {
+                        NavigationLink(destination:
+                            AddEventView(title: "", defaultTitle: "", selectedDate: Date(), selectedTime: Date(), type: "General", rating: 5)) {
                             Text("Add event")
                         }
                     }
