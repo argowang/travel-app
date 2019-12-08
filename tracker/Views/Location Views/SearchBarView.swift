@@ -21,7 +21,7 @@ struct SearchBarView: View {
     let greeting = "Hello, world!"
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
                 HStack {
                     Image(systemName: "magnifyingglass")
@@ -60,6 +60,8 @@ struct SearchBarView: View {
             if placeFinder.searchString != "" {
                 OnNotEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation, selectedCoordinate: $selectedCoordinate)
             } else {
+                Text("Suggested Nearby Places").font(.footnote).foregroundColor(Color.gray).padding(.leading)
+
                 OnEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation, selectedCoordinate: $selectedCoordinate)
             }
         }
@@ -116,10 +118,9 @@ struct OnEmptyStringSearchBarView: View {
             }) {
                 VStack(alignment: .leading) {
                     Text(result.name!).font(.headline)
-                    HStack {
-                        // TODO: Handle optional values here
-                        Text("\(result.placemark.subThoroughfare!) \(result.placemark.thoroughfare!),  \(result.placemark.subAdministrativeArea!), \(result.placemark.administrativeArea!)")
-                    }.font(.footnote).foregroundColor(Color.gray)
+
+                    // TODO: Handle optional values here
+                    Text("\(result.placemark.subThoroughfare!) \(result.placemark.thoroughfare!),  \(result.placemark.subAdministrativeArea!), \(result.placemark.administrativeArea!)").font(.footnote).foregroundColor(Color.gray)
                 }
             }
 
