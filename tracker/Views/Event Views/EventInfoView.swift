@@ -22,7 +22,7 @@ struct EventInfoView: View {
     var body: some View {
         VStack(alignment: .leading) {
             // https://forums.developer.apple.com/thread/124757
-            NavigationLink(destination: AddEventView(title: card.title ?? "", defaultTitle: "", selectedDate: card.start ?? Date(), selectedTime: Date(), type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: 5, card: card), isActive: self.$goEdit) {
+            NavigationLink(destination: AddEventView(title: card.title ?? "", defaultTitle: "", selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: 5, card: card), isActive: self.$goEdit) {
                 Text("Work Around")
             }.hidden()
 
