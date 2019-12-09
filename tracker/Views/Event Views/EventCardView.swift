@@ -7,7 +7,7 @@
 //
 import SwiftUI
 
-struct EventDetailView: View {
+struct EventCardView: View {
     var title: String
     var type: String
     var dateString: String
@@ -24,7 +24,7 @@ struct EventDetailView: View {
     var body: some View {
         VStack {
             HStack {
-                Image(EventDetailView.getImage(type: type))
+                Image(EventCardView.getImage(type: type))
                     .resizable()
                     .frame(width: 60, height: 60)
                     .padding()
@@ -54,11 +54,11 @@ struct EventDetailView: View {
     }
 }
 
-struct EventDetailView_Previews: PreviewProvider {
+struct EventCardView_Previews: PreviewProvider {
     static var title = ""
     static var type = "general"
     static var dateString = ""
     static var previews: some View {
-        EventDetailView(title: title, type: type, dateString: dateString)
+        EventCardView(title: title, type: type, dateString: dateString)
     }
 }

@@ -27,7 +27,7 @@ struct EventInfoView: View {
             }.hidden()
 
             HStack {
-                Image(EventDetailView.getImage(type: card.type ?? "general"))
+                Image(EventCardView.getImage(type: card.type ?? "general"))
                     .resizable()
                     .frame(width: 60, height: 60)
 
