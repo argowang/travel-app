@@ -10,6 +10,8 @@ struct AddEventView: View {
     @State var type = "General"
     @State var rating = 5
 
+    @State var card: EventCard?
+
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -47,20 +49,30 @@ struct AddEventView: View {
             }
         }
         .navigationBarItems(trailing: Button(action: {
-            let card = EventCard(context: self.managedObjectContext)
-
-            if self.title != "" {
-                card.title = self.title
+            var cardToSave: EventCard!
+            var newCard: Bool = false
+            if self.card != nil {
+                cardToSave = self.card
             } else {
-                card.title = self.defaultTitle
+                cardToSave = EventCard(context: self.managedObjectContext)
+                cardToSave.uuid = UUID()
+                newCard = true
+            }
+            if self.title != "" {
+                cardToSave.title = self.title
+            } else {
+                cardToSave.title = self.defaultTitle
             }
 
-            card.start = self.selectedDate
-            card.type = self.type
-            card.uuid = UUID()
+            cardToSave.start = self.selectedDate
+            cardToSave.type = self.type
+
             do {
                 try self.managedObjectContext.save()
                 self.mode.wrappedValue.dismiss()
+                if !newCard {
+                    self.mode.wrappedValue.dismiss()
+                }
             } catch {
                 print(error)
             }
