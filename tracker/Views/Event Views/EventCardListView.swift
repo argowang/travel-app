@@ -20,6 +20,10 @@ struct EventCardListView: View {
     @State var title = ""
     @State private var refreshing = false
     @State var selected: UUID?
+    @State private var showingSheet = false
+    @State private var addEventActive = false
+    @State var eventType = "general"
+
     private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
     var body: some View {
@@ -61,18 +65,47 @@ struct EventCardListView: View {
                 HStack {
                     Spacer()
                     if self.mode?.wrappedValue == .inactive {
+                        // https://forums.developer.apple.com/thread/124757
+                        NavigationLink(destination: AddEventView(type: eventType), isActive: self.$addEventActive) {
+                            Text("Work Around")
+                        }.hidden()
+
                         Button(action: {
                             if self.title != "" {}
+                            self.showingSheet = true
                         }) {
-                            NavigationLink(destination: AddEventView()) {
-                                Image("plus")
-                                    .resizable()
-                                    .frame(width: 90, height: 90)
-                            }
-                            .buttonStyle(PlainButtonStyle())
+                            Image("plus")
+                                .resizable()
+                                .frame(width: 90, height: 90)
                         }
                         .buttonStyle(PlainButtonStyle())
                         .padding()
+                        .actionSheet(isPresented: $showingSheet) {
+                            ActionSheet(title: Text("Select an event type fits for you."), message: Text("Choose general if you are not satisified with all options"), buttons: [
+                                .default(
+                                    Text("Food"),
+                                    action: {
+                                        self.addEventActive = true
+                                        self.eventType = "Food"
+                                    }
+                                ),
+                                .default(
+                                    Text("Transportation"),
+                                    action: {
+                                        self.addEventActive = true
+                                        self.eventType = "Transportation"
+                                    }
+                                ),
+                                .default(
+                                    Text("General"),
+                                    action: {
+                                        self.addEventActive = true
+                                        self.eventType = "General"
+                                    }
+                                ),
+                                .destructive(Text("Dismiss")),
+                            ])
+                        }
                     }
                 }
             }
