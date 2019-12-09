@@ -11,6 +11,8 @@ struct AddEventView: View {
     @State var rating = 5
 
     @State var card: EventCard?
+    @State var defaultCoordinate: CLLocationCoordinate2D?
+    @State var selectedCoordinate: CLLocationCoordinate2D?
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -26,7 +28,7 @@ struct AddEventView: View {
             timePicker(selectedTime: self.$selectedTime)
                 .padding()
 
-            locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle)
+            locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle, selectedCoordinate: self.$selectedCoordinate)
                 .padding()
 
             HStack {
@@ -43,7 +45,7 @@ struct AddEventView: View {
                         print((err?.localizedDescription)!)
                         return
                     }
-
+                    self.defaultCoordinate = lastLocation.coordinate
                     self.defaultTitle = places?.first?.locality ?? ""
                 }
             }
@@ -60,12 +62,17 @@ struct AddEventView: View {
             }
             if self.title != "" {
                 cardToSave.title = self.title
+                cardToSave.latitude = self.selectedCoordinate?.latitude ?? 0
+                cardToSave.longitude = self.selectedCoordinate?.longitude ?? 0
             } else {
                 cardToSave.title = self.defaultTitle
+                cardToSave.latitude = self.defaultCoordinate?.latitude ?? 0
+                cardToSave.longitude = self.defaultCoordinate?.longitude ?? 0
             }
 
             cardToSave.start = self.selectedDate
             cardToSave.type = self.type
+            cardToSave.rating = Int16(self.rating)
 
             do {
                 try self.managedObjectContext.save()
@@ -145,7 +152,7 @@ struct timePicker: View {
 struct locationRows: View {
     @Binding var newLocation: String
     @Binding var autoPopulated: String
-    @State private var selectedCoordinate: CLLocationCoordinate2D?
+    @Binding var selectedCoordinate: CLLocationCoordinate2D?
 
     var body: some View {
         HStack {
