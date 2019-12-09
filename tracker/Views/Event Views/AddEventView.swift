@@ -20,23 +20,25 @@ struct AddEventView: View {
 
     var body: some View {
         VStack {
-            eventTypeRow(type: $type)
-
-            datePicker(selectedDate: self.$selectedDate)
-                .padding()
-
-            timePicker(selectedTime: self.$selectedTime)
-                .padding()
-
-            locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle, selectedCoordinate: self.$selectedCoordinate)
-                .padding()
-
-            HStack {
-                Text("Rating:")
-                StarRatingView(rating: self.$rating)
+            Form {
+                Section {
+                    Text("Event Type: \(type.rawValue)")
+                }
+                Section {
+                    datePicker(selectedDate: self.$selectedDate)
+                    timePicker(selectedTime: self.$selectedTime)
+                }
+                Section {
+                    locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle, selectedCoordinate: self.$selectedCoordinate)
+                }
+                Section {
+                    HStack {
+                        Text("Rating:")
+                        StarRatingView(rating: self.$rating)
+                    }
+                }
             }
 
-            Spacer()
         }.onAppear {
             let georeader = CLGeocoder()
             if let lastLocation = self.manager.lastLocation {
@@ -69,8 +71,10 @@ struct AddEventView: View {
                 cardToSave.latitude = self.defaultCoordinate?.latitude ?? 0
                 cardToSave.longitude = self.defaultCoordinate?.longitude ?? 0
             }
+            let dateInt = (Int(self.selectedDate.timeIntervalSince1970) / (3600 * 24)) * (3600 * 24)
+            let timeInt = Int(self.selectedTime.timeIntervalSince1970) % (3600 * 24)
 
-            cardToSave.start = self.selectedDate
+            cardToSave.start = Date(timeIntervalSince1970: Double(dateInt + timeInt))
             cardToSave.type = self.type.rawValue
             cardToSave.rating = Int16(self.rating)
 
@@ -98,17 +102,8 @@ struct datePicker: View {
     }
 
     var body: some View {
-        HStack {
-            Text("Date is ")
-            Button("\(selectedDate, formatter: dateFormatter)") {
-                self.showDatePicker = true
-            }.sheet(
-                isPresented: self.$showDatePicker
-            ) {
-                DatePicker(selection: self.$selectedDate, in: ...Date(), displayedComponents: .date) {
-                    Text("Select a date")
-                }
-            }
+        DatePicker(selection: self.$selectedDate, in: ...Date(), displayedComponents: .date) {
+            Text("Date")
         }
     }
 }
@@ -123,28 +118,12 @@ struct timePicker: View {
         return formatter
     }
 
-    var dateClosedRange: ClosedRange<Date> {
-        let min = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        let max = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        return min ... max
-    }
-
     var body: some View {
-        HStack {
-            Text("Time is ")
-            Button("\(selectedTime, formatter: dateFormatter)") {
-                self.showDatePicker = true
-            }.sheet(
-                isPresented: self.$showDatePicker
-            ) {
-                DatePicker(
-                    selection: self.$selectedTime,
-                    in: self.dateClosedRange,
-                    displayedComponents: .hourAndMinute
-                ) {
-                    Text("Select a time")
-                }
-            }
+        DatePicker(
+            selection: self.$selectedTime,
+            displayedComponents: .hourAndMinute
+        ) {
+            Text("Time")
         }
     }
 }
@@ -165,48 +144,6 @@ struct locationRows: View {
                 }
             }
             .padding()
-        }
-    }
-}
-
-struct eventTypeRow: View {
-    @Binding var type: EventType
-
-    var body: some View {
-        VStack {
-            Text("Event Type: \(type.rawValue)")
-                .padding()
-            HStack {
-                Button(action: { self.type = EventType.general
-                }) {
-                    Text("General")
-                        .fontWeight(.bold)
-                }
-                .foregroundColor(Color.white)
-                .padding(8)
-                .background(Color.blue)
-                .cornerRadius(20)
-
-                Button(action: { self.type = EventType.transportation
-                }) {
-                    Text(EventType.transportation.rawValue)
-                        .fontWeight(.bold)
-                }
-                .foregroundColor(Color.white)
-                .padding(8)
-                .background(Color.purple)
-                .cornerRadius(20)
-
-                Button(action: { self.type = EventType.food
-                }) {
-                    Text(EventType.food.rawValue)
-                        .fontWeight(.bold)
-                }
-                .foregroundColor(Color.white)
-                .padding(8)
-                .background(Color.green)
-                .cornerRadius(20)
-            }
         }
     }
 }
