@@ -24,6 +24,7 @@
 		B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E3170238B30AB00B31FE2 /* HandleView.swift */; };
 		B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE623960905003863FD /* EventCard.swift */; };
 		B86E319E239C74F700B31FE2 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E319D239C74F700B31FE2 /* StarRatingView.swift */; };
+		B86E31A0239E051E00B31FE2 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E319F239E051D00B31FE2 /* EventType.swift */; };
 		B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */; };
 		B8AEB6A02388FA57003E100E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69F2388FA57003E100E /* MapView.swift */; };
 		B8DA964D237FC34600BC1801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA964C237FC34600BC1801 /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 		B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOverCardView.swift; sourceTree = "<group>"; };
 		B86E3170238B30AB00B31FE2 /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
 		B86E319D239C74F700B31FE2 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		B86E319F239E051D00B31FE2 /* EventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCurrentLocationView.swift; sourceTree = "<group>"; };
 		B8AEB69F2388FA57003E100E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		B8DA9649237FC34600BC1801 /* tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +128,7 @@
 			children = (
 				B8ED926C238083C400025623 /* LocationManager.swift */,
 				B86E316C238A262400B31FE2 /* PlaceFinder.swift */,
+				B86E319F239E051D00B31FE2 /* EventType.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */,
+				B86E31A0239E051E00B31FE2 /* EventType.swift in Sources */,
 				B8ED925A23806BDB00025623 /* tracker.xcdatamodeld in Sources */,
 				B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */,
 				B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */,
