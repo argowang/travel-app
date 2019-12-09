@@ -38,7 +38,7 @@ struct EventListView: View {
 
                             EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
-                            NavigationLink(destination: EventInfoView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date())), tag: card.uuid!, selection: self.$selected) {
+                            NavigationLink(destination: EventInfoView(card: card as! EventCard), tag: card.uuid!, selection: self.$selected) {
                                 EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                                     .onTapGesture {
                                         self.selected = card.uuid
