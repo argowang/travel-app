@@ -23,7 +23,7 @@ struct EventListView: View {
     private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
     var body: some View {
-        VStack {
+        ZStack {
             ScrollView {
                 ForEach(self.eventCards, id: \.uuid) { card in
                     ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
@@ -56,18 +56,24 @@ struct EventListView: View {
                     self.refreshing.toggle()
                 }
             }
-
-            VStack {
-                if self.mode?.wrappedValue == .inactive {
-                    Button(action: {
-                        if self.title != "" {}
-                    }) {
-                        NavigationLink(destination: AddEventView()) {
-                            Text("Add event")
+            VStack(alignment: .trailing) {
+                Spacer()
+                HStack {
+                    Spacer()
+                    if self.mode?.wrappedValue == .inactive {
+                        Button(action: {
+                            if self.title != "" {}
+                        }) {
+                            NavigationLink(destination: AddEventView()) {
+                                Image("plus")
+                                    .resizable()
+                                    .frame(width: 90, height: 90)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding()
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding()
                 }
             }
         }.navigationBarItems(trailing: Button(action: {
