@@ -9,22 +9,13 @@ import SwiftUI
 
 struct EventCardView: View {
     var title: String
-    var type: String
+    var type: EventType
     var dateString: String
-
-    static func getImage(type: String) -> String {
-        if type == "food" {
-            return "food"
-        } else if type == "Transportation" {
-            return "car"
-        }
-        return "general"
-    }
 
     var body: some View {
         VStack {
             HStack {
-                Image(EventCardView.getImage(type: type))
+                type.getImage()
                     .resizable()
                     .frame(width: 60, height: 60)
                     .padding()
@@ -56,7 +47,7 @@ struct EventCardView: View {
 
 struct EventCardView_Previews: PreviewProvider {
     static var title = ""
-    static var type = "general"
+    static var type = EventType.general
     static var dateString = ""
     static var previews: some View {
         EventCardView(title: title, type: type, dateString: dateString)

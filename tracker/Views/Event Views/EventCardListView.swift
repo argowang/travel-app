@@ -22,7 +22,7 @@ struct EventCardListView: View {
     @State var selected: UUID?
     @State private var showingSheet = false
     @State private var addEventActive = false
-    @State var eventType = "general"
+    @State var eventType: EventType = .general
 
     private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
@@ -40,10 +40,10 @@ struct EventCardListView: View {
                                     .frame(width: 40, height: 40)
                             }.buttonStyle(PlainButtonStyle())
 
-                            EventCardView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
                             NavigationLink(destination: EventInfoView(card: card as! EventCard), tag: card.uuid!, selection: self.$selected) {
-                                EventCardView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                                EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
                                     .onTapGesture {
                                         self.selected = card.uuid
                                     }
@@ -60,11 +60,11 @@ struct EventCardListView: View {
                     self.refreshing.toggle()
                 }
             }
-            VStack(alignment: .trailing) {
-                Spacer()
-                HStack {
+            if self.mode?.wrappedValue == .inactive {
+                VStack(alignment: .trailing) {
                     Spacer()
-                    if self.mode?.wrappedValue == .inactive {
+                    HStack {
+                        Spacer()
                         // https://forums.developer.apple.com/thread/124757
                         NavigationLink(destination: AddEventView(type: eventType), isActive: self.$addEventActive) {
                             Text("Work Around")
@@ -86,21 +86,21 @@ struct EventCardListView: View {
                                     Text("Food"),
                                     action: {
                                         self.addEventActive = true
-                                        self.eventType = "Food"
+                                        self.eventType = .food
                                     }
                                 ),
                                 .default(
                                     Text("Transportation"),
                                     action: {
                                         self.addEventActive = true
-                                        self.eventType = "Transportation"
+                                        self.eventType = .transportation
                                     }
                                 ),
                                 .default(
                                     Text("General"),
                                     action: {
                                         self.addEventActive = true
-                                        self.eventType = "General"
+                                        self.eventType = .general
                                     }
                                 ),
                                 .destructive(Text("Dismiss")),

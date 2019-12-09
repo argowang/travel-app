@@ -7,7 +7,7 @@ struct AddEventView: View {
     @State var defaultTitle = ""
     @State var selectedDate = Date()
     @State var selectedTime = Date()
-    @State var type = "General"
+    @State var type = EventType.general
     @State var rating = 5
 
     @State var card: EventCard?
@@ -71,7 +71,7 @@ struct AddEventView: View {
             }
 
             cardToSave.start = self.selectedDate
-            cardToSave.type = self.type
+            cardToSave.type = self.type.rawValue
             cardToSave.rating = Int16(self.rating)
 
             do {
@@ -170,14 +170,14 @@ struct locationRows: View {
 }
 
 struct eventTypeRow: View {
-    @Binding var type: String
+    @Binding var type: EventType
 
     var body: some View {
         VStack {
-            Text("Event Type: \(type)")
+            Text("Event Type: \(type.rawValue)")
                 .padding()
             HStack {
-                Button(action: { self.type = "general"
+                Button(action: { self.type = EventType.general
                 }) {
                     Text("General")
                         .fontWeight(.bold)
@@ -187,9 +187,9 @@ struct eventTypeRow: View {
                 .background(Color.blue)
                 .cornerRadius(20)
 
-                Button(action: { self.type = "transportation"
+                Button(action: { self.type = EventType.transportation
                 }) {
-                    Text("transportation")
+                    Text(EventType.transportation.rawValue)
                         .fontWeight(.bold)
                 }
                 .foregroundColor(Color.white)
@@ -197,9 +197,9 @@ struct eventTypeRow: View {
                 .background(Color.purple)
                 .cornerRadius(20)
 
-                Button(action: { self.type = "food"
+                Button(action: { self.type = EventType.food
                 }) {
-                    Text("food")
+                    Text(EventType.food.rawValue)
                         .fontWeight(.bold)
                 }
                 .foregroundColor(Color.white)
