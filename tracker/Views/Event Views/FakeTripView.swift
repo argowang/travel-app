@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FakeTripView: View {
     var body: some View {
-        NavigationLink(destination: LazyView(EventListView())) {
+        NavigationLink(destination: LazyView(EventCardListView())) {
             Text("Your Trip Events")
         }
     }

@@ -7,7 +7,7 @@
 //
 import CoreData
 import SwiftUI
-struct EventListView: View {
+struct EventCardListView: View {
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy HH:mm"
@@ -36,10 +36,10 @@ struct EventListView: View {
                                     .frame(width: 40, height: 40)
                             }.buttonStyle(PlainButtonStyle())
 
-                            EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            EventCardView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
                             NavigationLink(destination: EventInfoView(card: card as! EventCard), tag: card.uuid!, selection: self.$selected) {
-                                EventDetailView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                                EventCardView(title: card.title ?? "title place holder", type: card.type ?? "general", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                                     .onTapGesture {
                                         self.selected = card.uuid
                                     }
@@ -82,10 +82,10 @@ struct EventListView: View {
     }
 }
 
-struct EventListView_Previews: PreviewProvider {
+struct EventCardListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            EventListView()
+            EventCardListView()
         }
     }
 }
