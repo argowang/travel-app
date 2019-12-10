@@ -9,7 +9,6 @@ struct AddEventView: View {
     @State var selectedTime = Date()
     @State var type = EventType.general
     @State var rating = 5
-
     @State var card: EventCard?
     @State var defaultCoordinate: CLLocationCoordinate2D?
     @State var selectedCoordinate: CLLocationCoordinate2D?
@@ -17,8 +16,9 @@ struct AddEventView: View {
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+
     let animation = Animation.easeInOut(duration: 1.0)
-    @State private var moveIt = true
+
     var body: some View {
         VStack {
             ZStack {
