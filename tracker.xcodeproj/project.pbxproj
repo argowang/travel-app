@@ -17,6 +17,7 @@
 		1552FAE4238BA94800060E05 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAE3238BA94800060E05 /* CardListView.swift */; };
 		1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */; };
 		1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FD238FA15D00FC33E9 /* AddEventView.swift */; };
+		15EAB7A4239F3742000A4730 /* LocationAirplaneIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EAB7A3239F3742000A4730 /* LocationAirplaneIcon.swift */; };
 		B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31662389EE6C00B31FE2 /* ViewExtension.swift */; };
 		B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316A2389EFE100B31FE2 /* SearchBarView.swift */; };
 		B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316C238A262400B31FE2 /* PlaceFinder.swift */; };
@@ -48,6 +49,7 @@
 		1552FAE3238BA94800060E05 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripCardView.swift; sourceTree = "<group>"; };
 		1571D4FD238FA15D00FC33E9 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
+		15EAB7A3239F3742000A4730 /* LocationAirplaneIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAirplaneIcon.swift; sourceTree = "<group>"; };
 		B86E31662389EE6C00B31FE2 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		B86E316A2389EFE100B31FE2 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B86E316C238A262400B31FE2 /* PlaceFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceFinder.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		B86E319523948A8C00B31FE2 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				15EAB7A3239F3742000A4730 /* LocationAirplaneIcon.swift */,
 				B86E31662389EE6C00B31FE2 /* ViewExtension.swift */,
 				B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */,
 				B86E3170238B30AB00B31FE2 /* HandleView.swift */,
@@ -281,6 +284,7 @@
 				1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */,
 				B8DA964F237FC34600BC1801 /* SceneDelegate.swift in Sources */,
 				154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */,
+				15EAB7A4239F3742000A4730 /* LocationAirplaneIcon.swift in Sources */,
 				1552FAE4238BA94800060E05 /* CardListView.swift in Sources */,
 				1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */,
 				B86E316F238B308F00B31FE2 /* SlideOverCardView.swift in Sources */,

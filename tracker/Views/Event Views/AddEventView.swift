@@ -17,19 +17,23 @@ struct AddEventView: View {
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-
+    let animation = Animation.easeInOut(duration: 1.0)
+    @State private var moveIt = true
     var body: some View {
         VStack {
-            Form {
-                Section {
-                    Text("Event Type: \(type.rawValue)")
+            ZStack {
+                VStack {
+                    LocationAirplaneIcon().frame(minWidth: 0, maxWidth: 400, minHeight: 0, maxHeight: 50)
+                    Spacer()
+                        .frame(height: 50)
                 }
+                locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle, selectedCoordinate: self.$selectedCoordinate)
+            }
+
+            List {
                 Section {
                     datePicker(selectedDate: self.$selectedDate)
                     timePicker(selectedTime: self.$selectedTime)
-                }
-                Section {
-                    locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle, selectedCoordinate: self.$selectedCoordinate)
                 }
                 Section {
                     HStack {
@@ -38,8 +42,10 @@ struct AddEventView: View {
                     }
                 }
             }
-
-        }.onAppear {
+            .listStyle(GroupedListStyle())
+        }
+        .navigationBarTitle(Text("\(type.rawValue)"))
+        .onAppear {
             let georeader = CLGeocoder()
             if let lastLocation = self.manager.lastLocation {
                 georeader.reverseGeocodeLocation(lastLocation) { places, err in
@@ -130,6 +136,7 @@ struct locationRows: View {
 
     var body: some View {
         HStack {
+            Image("location").resizable().frame(width: 50, height: 50).padding()
             Text("Location:")
             NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(PlaceFinder())) {
                 if self.newLocation == "" {
@@ -138,7 +145,7 @@ struct locationRows: View {
                     Text("\(self.newLocation)")
                 }
             }
-            .padding()
+            Spacer()
         }
     }
 }
