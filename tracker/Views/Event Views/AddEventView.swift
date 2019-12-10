@@ -54,13 +54,11 @@ struct AddEventView: View {
         }
         .navigationBarItems(trailing: Button(action: {
             var cardToSave: EventCard!
-            var newCard: Bool = false
             if self.card != nil {
                 cardToSave = self.card
             } else {
                 cardToSave = EventCard(context: self.managedObjectContext)
                 cardToSave.uuid = UUID()
-                newCard = true
             }
             if self.title != "" {
                 cardToSave.title = self.title
@@ -81,9 +79,6 @@ struct AddEventView: View {
             do {
                 try self.managedObjectContext.save()
                 self.mode.wrappedValue.dismiss()
-                if !newCard {
-                    self.mode.wrappedValue.dismiss()
-                }
             } catch {
                 print(error)
             }
