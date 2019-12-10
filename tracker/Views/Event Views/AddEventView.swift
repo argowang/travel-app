@@ -22,7 +22,11 @@ struct AddEventView: View {
     var body: some View {
         VStack {
             ZStack {
-                LocationAirplaneIcon().frame(minWidth: 0, maxWidth: 400, minHeight: 0, maxHeight: 50)
+                VStack {
+                    LocationAirplaneIcon().frame(minWidth: 0, maxWidth: 400, minHeight: 0, maxHeight: 50)
+                    Spacer()
+                        .frame(height: 50)
+                }
                 locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle, selectedCoordinate: self.$selectedCoordinate)
             }
 

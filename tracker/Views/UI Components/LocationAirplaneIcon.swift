@@ -28,8 +28,7 @@ struct Example9: View {
             Image(systemName: "airplane").resizable().foregroundColor(Color.blue)
                 .frame(width: 50, height: 50).offset(x: -25, y: -25)
                 .modifier(FollowEffect(pct: self.flag ? 1 : 0, path: InfinityShape.createInfinityPath(in: CGRect(x: 0, y: 0, width:
-                    proxy.size.width,
-                                                                                                                 height: 100)), rotate: true))
+                    proxy.size.width, height: 100)), rotate: true))
                 .onAppear {
                     withAnimation(Animation.linear(duration: 6.0).repeatForever(autoreverses: false)) {
                         self.flag.toggle()
