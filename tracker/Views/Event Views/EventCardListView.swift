@@ -42,7 +42,7 @@ struct EventCardListView: View {
 
                             EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
-                            NavigationLink(destination: EventInfoView(card: card as! EventCard), tag: card.uuid!, selection: self.$selected) {
+                            NavigationLink(destination: AddEventView(title: card.title ?? "", defaultTitle: "", selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: 5, card: card as! EventCard), tag: card.uuid!, selection: self.$selected) {
                                 EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
                                     .onTapGesture {
                                         self.selected = card.uuid

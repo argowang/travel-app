@@ -106,21 +106,21 @@
 			children = (
 				15114DDC2395B2F8003863FD /* FakeTripView.swift */,
 				1571D4FD238FA15D00FC33E9 /* AddEventView.swift */,
-				154D6F08239066EA00169C25 /* EventInfoView.swift */,
 				15114DDE2395B48D003863FD /* EventCardListView.swift */,
 				15114DE02395B4AC003863FD /* EventCardView.swift */,
 			);
 			path = "Event Views";
 			sourceTree = "<group>";
 		};
-		B86E319A2394D8E800B31FE2 /* Legacy (Reference Only) */ = {
+		B86E319A2394D8E800B31FE2 /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
+				154D6F08239066EA00169C25 /* EventInfoView.swift */,
 				1552FAD5238B344300060E05 /* CardDetailView.swift */,
 				1552FAE3238BA94800060E05 /* CardListView.swift */,
 				1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */,
 			);
-			path = "Legacy (Reference Only)";
+			path = Legacy;
 			sourceTree = "<group>";
 		};
 		B86E319B2394D90D00B31FE2 /* Modals */ = {
@@ -138,7 +138,7 @@
 			children = (
 				B86E31982394D89E00B31FE2 /* Location Views */,
 				B86E319523948A8C00B31FE2 /* UI Components */,
-				B86E319A2394D8E800B31FE2 /* Legacy (Reference Only) */,
+				B86E319A2394D8E800B31FE2 /* Legacy */,
 				B86E31992394D8D600B31FE2 /* Event Views */,
 			);
 			path = Views;
@@ -431,6 +431,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 9Q368PTXL6;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "Views/Legacy/*";
 				INFOPLIST_FILE = tracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -454,6 +455,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 9Q368PTXL6;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "Views/Legacy/*";
 				INFOPLIST_FILE = tracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
