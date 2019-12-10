@@ -9,6 +9,17 @@
 import MapKit
 import SwiftUI
 
+class CustomMKMarkerSubclass: MKMarkerAnnotationView {
+    override var annotation: MKAnnotation? {
+        willSet {
+            // We need to set the priority to required. Otherwise the annotation
+            // would be blocked by userLocation annotation
+            displayPriority = MKFeatureDisplayPriority.required
+            canShowCallout = true
+        }
+    }
+}
+
 struct MapView: UIViewRepresentable {
     @Binding var alert: Bool
     @Binding var nearByPlaces: [MKMapItem]
@@ -49,6 +60,7 @@ struct MapView: UIViewRepresentable {
         map.addGestureRecognizer(tapGesture)
         map.setUserTrackingMode(.none, animated: false)
         map.delegate = context.coordinator
+        map.register(CustomMKMarkerSubclass.self, forAnnotationViewWithReuseIdentifier: "selectedID")
 
         if let selected = self.selectedCoordinate {
             let point = MKPointAnnotation()
@@ -146,8 +158,29 @@ struct MapView: UIViewRepresentable {
 
         func mapView(_ mapView: MKMapView, didAdd _: [MKAnnotationView]) {
             if let userLocation = mapView.view(for: mapView.userLocation) {
-                userLocation.isHidden = true
+                userLocation.canShowCallout = false
+                userLocation.isSelected = false
             }
+        }
+
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            var markerView: CustomMKMarkerSubclass
+
+            guard !annotation.isKind(of: MKUserLocation.self) else {
+                return nil
+            }
+
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: "selectedID")
+                as? CustomMKMarkerSubclass {
+                dequeuedView.annotation = annotation
+                markerView = dequeuedView
+            } else {
+                markerView = CustomMKMarkerSubclass(annotation: annotation, reuseIdentifier: "selectedID")
+                markerView.canShowCallout = true
+                markerView.calloutOffset = CGPoint(x: -5, y: 5)
+                markerView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            }
+            return markerView
         }
     }
 }
