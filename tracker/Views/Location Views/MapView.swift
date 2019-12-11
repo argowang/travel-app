@@ -22,7 +22,7 @@ class CustomMKMarkerSubclass: MKMarkerAnnotationView {
 
 struct MapView: UIViewRepresentable {
     @Binding var nearByPlaces: [MKMapItem]
-    
+
     @ObservedObject var place: Place
 
     @EnvironmentObject var manager: LocationManager
