@@ -5,6 +5,7 @@ import SwiftUI
 struct AddEventView: View {
     @State var selectedDate = Date()
     @State var selectedTime = Date()
+    @State var price = ""
     @State var type = EventType.general
     @State var rating = 5
     @State var transporatation = ""
@@ -41,7 +42,15 @@ struct AddEventView: View {
                 }
                 Section {
                     HStack {
-                        Text("Rating:")
+                        Text("💰 Price:")
+                        Spacer()
+                            .frame(width: 180)
+                        TextField("Enter price here", text: $price)
+                            .foregroundColor(.secondary)
+                    }
+                    HStack {
+                        Text("👍 Rating:")
+                        Spacer()
                         StarRatingView(rating: self.$rating)
                     }
                 }
@@ -99,6 +108,7 @@ struct AddEventView: View {
             cardToSave.start = Date(timeIntervalSince1970: Double(dateInt + timeInt))
             cardToSave.type = self.type.rawValue
             cardToSave.rating = Int16(self.rating)
+            cardToSave.price = self.price
 
             do {
                 try self.managedObjectContext.save()
