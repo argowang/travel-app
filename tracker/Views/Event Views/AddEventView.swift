@@ -45,7 +45,7 @@ struct AddEventView: View {
                         Text("💰 Price:")
                         Spacer()
                             .frame(width: 180)
-                        TextField("Enter pricce here", text: $price)
+                        TextField("Enter price here", text: $price)
                             .foregroundColor(.secondary)
                     }
                     HStack {
