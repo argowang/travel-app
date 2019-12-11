@@ -21,6 +21,7 @@ public class EventCard: NSManagedObject, Identifiable {
     @NSManaged public var originTitle: String?
     @NSManaged public var originLongitude: Double
     @NSManaged public var originLatitude: Double
+    @NSManaged public var transportation: String?
 }
 
 extension EventCard {

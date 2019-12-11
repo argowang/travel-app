@@ -44,7 +44,7 @@ struct EventCardListView: View {
 
                             EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
-                            NavigationLink(destination: AddEventView(selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: Int(card.rating), card: card as! EventCard, place: Place(card.title ?? "", CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude)), origin: Place(card.originTitle ?? "", CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))), tag: card.uuid!, selection: self.$selected) {
+                            NavigationLink(destination: AddEventView(selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: Int(card.rating), transporatation: card.transportation ?? "", card: card as! EventCard, place: Place(card.title ?? "", CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude)), origin: Place(card.originTitle ?? "", CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))), tag: card.uuid!, selection: self.$selected) {
                                 EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
                                     .onTapGesture {
                                         self.selected = card.uuid
