@@ -6,7 +6,9 @@
 //  Copyright © 2019 TechLead. All rights reserved.
 //
 import CoreData
+import CoreLocation
 import SwiftUI
+
 struct EventCardListView: View {
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -42,7 +44,7 @@ struct EventCardListView: View {
 
                             EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         } else {
-                            NavigationLink(destination: AddEventView(title: card.title ?? "", defaultTitle: "", selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: Int(card.rating), card: card as! EventCard), tag: card.uuid!, selection: self.$selected) {
+                            NavigationLink(destination: AddEventView(title: card.title ?? "", defaultTitle: "", selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: Int(card.rating), card: card as! EventCard, selectedCoordinate: CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude)), tag: card.uuid!, selection: self.$selected) {
                                 EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
                                     .onTapGesture {
                                         self.selected = card.uuid
