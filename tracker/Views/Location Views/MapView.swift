@@ -21,10 +21,9 @@ class CustomMKMarkerSubclass: MKMarkerAnnotationView {
 }
 
 struct MapView: UIViewRepresentable {
-    @Binding var alert: Bool
     @Binding var nearByPlaces: [MKMapItem]
-    @Binding var selectedCoordinate: CLLocationCoordinate2D?
-    @Binding var selectedLocation: String
+    
+    @ObservedObject var place: Place
 
     @EnvironmentObject var manager: LocationManager
 
@@ -62,10 +61,10 @@ struct MapView: UIViewRepresentable {
         map.delegate = context.coordinator
         map.register(CustomMKMarkerSubclass.self, forAnnotationViewWithReuseIdentifier: "selectedID")
 
-        if let selected = self.selectedCoordinate {
+        if let selected = self.place.coordinate {
             let point = MKPointAnnotation()
             point.coordinate = selected
-            point.title = selectedLocation
+            point.title = place.name
             let region = MKCoordinateRegion(center: selected, latitudinalMeters: 1000, longitudinalMeters: 1000)
             map.region = region
             map.addAnnotation(point)
@@ -86,11 +85,11 @@ struct MapView: UIViewRepresentable {
     }
 
     func updateUIView(_ mapView: MKMapView, context _: UIViewRepresentableContext<MapView>) {
-        if selectedCoordinate != nil {
-            let region = MKCoordinateRegion(center: selectedCoordinate!, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        if place.coordinate != nil {
+            let region = MKCoordinateRegion(center: place.coordinate!, latitudinalMeters: 1000, longitudinalMeters: 1000)
             let annotation = MKPointAnnotation()
-            annotation.coordinate = selectedCoordinate!
-            annotation.title = selectedLocation
+            annotation.coordinate = place.coordinate!
+            annotation.title = place.name
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotation(annotation)
             mapView.setRegion(region, animated: true)
@@ -134,14 +133,14 @@ struct MapView: UIViewRepresentable {
                     return
                 }
 
-                let place = places?.first?.name
-                annotationPoint.title = place
+                let placeName = places?.first?.name
+                annotationPoint.title = placeName
                 annotationPoint.coordinate = location.coordinate
                 self.parent.map.removeAnnotations(self.parent.map.annotations)
                 self.parent.map.addAnnotation(annotationPoint)
 
-                self.parent.selectedCoordinate = location.coordinate
-                self.parent.selectedLocation = place ?? ""
+                self.parent.place.coordinate = location.coordinate
+                self.parent.place.name = placeName ?? ""
             }
         }
 
@@ -187,11 +186,9 @@ struct MapView: UIViewRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     @State static var locationManager = CLLocationManager()
-    @State static var alert = false
     @State static var nearBy: [MKMapItem] = []
-    @State static var selectedCoordinate: CLLocationCoordinate2D?
-    @State static var newLocation = ""
+    @State static var place = Place("Aruba", nil)
     static var previews: some View {
-        MapView(alert: $alert, nearByPlaces: $nearBy, selectedCoordinate: $selectedCoordinate, selectedLocation: $newLocation)
+        MapView(nearByPlaces: $nearBy, place: place)
     }
 }

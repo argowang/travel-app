@@ -3,15 +3,13 @@ import MapKit
 import SwiftUI
 
 struct AddEventView: View {
-    @State var title = ""
-    @State var defaultTitle = ""
     @State var selectedDate = Date()
     @State var selectedTime = Date()
     @State var type = EventType.general
     @State var rating = 5
     @State var card: EventCard?
-    @State var defaultCoordinate: CLLocationCoordinate2D?
-    @State var selectedCoordinate: CLLocationCoordinate2D?
+
+    @ObservedObject var place: Place = Place()
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -27,7 +25,7 @@ struct AddEventView: View {
                     Spacer()
                         .frame(height: 50)
                 }
-                locationRows(newLocation: self.$title, autoPopulated: self.$defaultTitle, selectedCoordinate: self.$selectedCoordinate)
+                locationRow(place: self.place)
             }
 
             List {
@@ -46,15 +44,17 @@ struct AddEventView: View {
         }
         .navigationBarTitle(Text("\(type.rawValue)"))
         .onAppear {
-            let georeader = CLGeocoder()
-            if let lastLocation = self.manager.lastLocation {
-                georeader.reverseGeocodeLocation(lastLocation) { places, err in
-                    if err != nil {
-                        print((err?.localizedDescription)!)
-                        return
+            if self.place.name == "" {
+                let georeader = CLGeocoder()
+                if let lastLocation = self.manager.lastLocation {
+                    georeader.reverseGeocodeLocation(lastLocation) { places, err in
+                        if err != nil {
+                            print((err?.localizedDescription)!)
+                            return
+                        }
+                        self.place.name = places?.first?.locality ?? ""
+                        self.place.coordinate = lastLocation.coordinate
                     }
-                    self.defaultCoordinate = lastLocation.coordinate
-                    self.defaultTitle = places?.first?.locality ?? ""
                 }
             }
         }
@@ -66,15 +66,11 @@ struct AddEventView: View {
                 cardToSave = EventCard(context: self.managedObjectContext)
                 cardToSave.uuid = UUID()
             }
-            if self.title != "" {
-                cardToSave.title = self.title
-                cardToSave.latitude = self.selectedCoordinate?.latitude ?? 0
-                cardToSave.longitude = self.selectedCoordinate?.longitude ?? 0
-            } else {
-                cardToSave.title = self.defaultTitle
-                cardToSave.latitude = self.defaultCoordinate?.latitude ?? 0
-                cardToSave.longitude = self.defaultCoordinate?.longitude ?? 0
-            }
+
+            cardToSave.title = self.place.name
+            cardToSave.latitude = self.place.coordinate?.latitude ?? 0
+            cardToSave.longitude = self.place.coordinate?.longitude ?? 0
+
             let dateInt = (Int(self.selectedDate.timeIntervalSince1970) / (3600 * 24)) * (3600 * 24)
             let timeInt = Int(self.selectedTime.timeIntervalSince1970) % (3600 * 24)
 
@@ -129,21 +125,16 @@ struct timePicker: View {
     }
 }
 
-struct locationRows: View {
-    @Binding var newLocation: String
-    @Binding var autoPopulated: String
-    @Binding var selectedCoordinate: CLLocationCoordinate2D?
+struct locationRow: View {
+    @ObservedObject var place: Place
 
+    @State var display: String = ""
     var body: some View {
         HStack {
             Image("location").resizable().frame(width: 50, height: 50).padding()
             Text("Location:")
-            NavigationLink(destination: SetCurrentLocationView(newLocation: self.$newLocation, selectedCoordinate: self.$selectedCoordinate).environmentObject(PlaceFinder())) {
-                if self.newLocation == "" {
-                    Text("\(self.autoPopulated)")
-                } else {
-                    Text("\(self.newLocation)")
-                }
+            NavigationLink(destination: SetCurrentLocationView(place: self.place).environmentObject(PlaceFinder())) {
+                Text("\(self.place.name)")
             }
             Spacer()
         }
@@ -152,6 +143,6 @@ struct locationRows: View {
 
 struct AddTripEventInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEventView()
+        AddEventView(place: Place())
     }
 }
