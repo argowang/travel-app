@@ -22,7 +22,8 @@ class CustomMKMarkerSubclass: MKMarkerAnnotationView {
 
 struct MapView: UIViewRepresentable {
     @Binding var nearByPlaces: [MKMapItem]
-    @Binding var place: Place
+    
+    @ObservedObject var place: Place
 
     @EnvironmentObject var manager: LocationManager
 
@@ -188,6 +189,6 @@ struct MapView_Previews: PreviewProvider {
     @State static var nearBy: [MKMapItem] = []
     @State static var place = Place("Aruba", nil)
     static var previews: some View {
-        MapView(nearByPlaces: $nearBy, place: $place)
+        MapView(nearByPlaces: $nearBy, place: place)
     }
 }

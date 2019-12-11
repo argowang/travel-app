@@ -14,7 +14,8 @@ struct SearchBarView: View {
     @Binding var cardPosition: CardPosition
     @Binding var nearByPlaces: [MKMapItem]
 
-    @Binding var place: Place
+    @ObservedObject var place: Place
+    
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
@@ -58,11 +59,11 @@ struct SearchBarView: View {
             .padding(.horizontal)
 
             if placeFinder.searchString != "" {
-                OnNotEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, place: $place)
+                OnNotEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, place: place)
             } else {
                 Text("Suggested Nearby Places").font(.footnote).foregroundColor(Color.gray).padding(.leading)
 
-                OnEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, place: $place)
+                OnEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, place: place)
             }
         }
     }
@@ -72,7 +73,7 @@ struct OnNotEmptyStringSearchBarView: View {
     @Binding var cardPosition: CardPosition
     @Binding var nearByPlaces: [MKMapItem]
 
-    @Binding var place: Place
+    @ObservedObject var place: Place
 
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -104,7 +105,7 @@ struct OnNotEmptyStringSearchBarView: View {
 struct OnEmptyStringSearchBarView: View {
     @Binding var cardPosition: CardPosition
     @Binding var nearByPlaces: [MKMapItem]
-    @Binding var place: Place
+    @ObservedObject var place: Place
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
@@ -134,6 +135,6 @@ struct SearchBarView_Previews: PreviewProvider {
     @State static var nearByPlaces: [MKMapItem] = []
     @State static var place = Place("Aruba", nil)
     static var previews: some View {
-        SearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, place: $place)
+        SearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, place: place)
     }
 }
