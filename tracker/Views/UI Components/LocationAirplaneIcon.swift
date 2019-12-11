@@ -25,10 +25,21 @@ struct Example9: View {
 
     var body: some View {
         GeometryReader { proxy in
-            Image(systemName: "airplane").resizable().foregroundColor(Color.blue)
-                .frame(width: 50, height: 50).offset(x: -25, y: -25)
+            HStack{
+            
+            Text("🍔")
+            Text("🍔")
+            Text("🍔")
+            Text("🍔")
+            Text("🍔")
+            Text("🍔")
+            Text("🍔")
+            }
+          //  Image(systemName: "airplane").resizable()
+                .foregroundColor(Color.blue)
+                .frame(width: 400, height: 50).offset(x: -200, y: -25)
                 .modifier(FollowEffect(pct: self.flag ? 1 : 0, path: InfinityShape.createInfinityPath(in: CGRect(x: 0, y: 0, width:
-                    proxy.size.width, height: 100)), rotate: true))
+                    proxy.size.width, height: 100)), rotate: false))
                 .onAppear {
                     withAnimation(Animation.linear(duration: 6.0).repeatForever(autoreverses: false)) {
                         self.flag.toggle()
@@ -95,8 +106,8 @@ struct InfinityShape: Shape {
         path.move(to: CGPoint(x: width, y: height))
         path.addCurve(to: CGPoint(x: width, y: height), control1: CGPoint(x: 0, y: height), control2: CGPoint(x: 0, y: height))
 
-        path.move(to: CGPoint(x: width, y: height))
-        path.addCurve(to: CGPoint(x: width, y: height), control1: CGPoint(x: width, y: height), control2: CGPoint(x: width, y: height))
+//        path.move(to: CGPoint(x: width, y: height))
+//        path.addCurve(to: CGPoint(x: width, y: height), control1: CGPoint(x: width, y: height), control2: CGPoint(x: width, y: height))
 
         return path
     }
