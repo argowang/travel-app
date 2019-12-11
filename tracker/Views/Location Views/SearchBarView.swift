@@ -13,8 +13,8 @@ struct SearchBarView: View {
     @State private var showCancelButton: Bool = false
     @Binding var cardPosition: CardPosition
     @Binding var nearByPlaces: [MKMapItem]
-    @Binding var newLocation: String
-    @Binding var selectedCoordinate: CLLocationCoordinate2D?
+
+    @Binding var place: Place
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
@@ -58,11 +58,11 @@ struct SearchBarView: View {
             .padding(.horizontal)
 
             if placeFinder.searchString != "" {
-                OnNotEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation, selectedCoordinate: $selectedCoordinate)
+                OnNotEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, place: $place)
             } else {
                 Text("Suggested Nearby Places").font(.footnote).foregroundColor(Color.gray).padding(.leading)
 
-                OnEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation, selectedCoordinate: $selectedCoordinate)
+                OnEmptyStringSearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, place: $place)
             }
         }
     }
@@ -71,8 +71,9 @@ struct SearchBarView: View {
 struct OnNotEmptyStringSearchBarView: View {
     @Binding var cardPosition: CardPosition
     @Binding var nearByPlaces: [MKMapItem]
-    @Binding var newLocation: String
-    @Binding var selectedCoordinate: CLLocationCoordinate2D?
+
+    @Binding var place: Place
+
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
@@ -82,13 +83,13 @@ struct OnNotEmptyStringSearchBarView: View {
                 let search = MKLocalSearch(request: request)
                 search.start(completionHandler: { response, error in
                     if error == nil {
-                        self.selectedCoordinate = response?.mapItems[0].placemark.coordinate
+                        self.place.coordinate = response?.mapItems[0].placemark.coordinate
                     }
                 })
 
                 self.placeFinder.searchString = ""
                 UIApplication.shared.endEditing()
-                self.newLocation = result.title
+                self.place.name = result.title
                 self.cardPosition = CardPosition.bottom
             }) {
                 VStack(alignment: .leading) {
@@ -103,8 +104,7 @@ struct OnNotEmptyStringSearchBarView: View {
 struct OnEmptyStringSearchBarView: View {
     @Binding var cardPosition: CardPosition
     @Binding var nearByPlaces: [MKMapItem]
-    @Binding var newLocation: String
-    @Binding var selectedCoordinate: CLLocationCoordinate2D?
+    @Binding var place: Place
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     var body: some View {
@@ -112,8 +112,8 @@ struct OnEmptyStringSearchBarView: View {
             Button(action: {
                 self.placeFinder.searchString = ""
                 UIApplication.shared.endEditing()
-                self.newLocation = result.name!
-                self.selectedCoordinate = result.placemark.coordinate
+                self.place.name = result.name!
+                self.place.coordinate = result.placemark.coordinate
                 self.cardPosition = CardPosition.bottom
             }) {
                 VStack(alignment: .leading) {
@@ -132,9 +132,8 @@ struct SearchBarView_Previews: PreviewProvider {
     static var placeFinder = PlaceFinder()
     @State static var cardPosition: CardPosition = CardPosition.middle
     @State static var nearByPlaces: [MKMapItem] = []
-    @State static var newLocation: String = ""
-    @State static var selectedCoordinate: CLLocationCoordinate2D?
+    @State static var place = Place("Aruba", nil)
     static var previews: some View {
-        SearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, newLocation: $newLocation, selectedCoordinate: $selectedCoordinate)
+        SearchBarView(cardPosition: $cardPosition, nearByPlaces: $nearByPlaces, place: $place)
     }
 }
