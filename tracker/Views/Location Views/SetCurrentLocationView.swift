@@ -12,7 +12,7 @@ import SwiftUI
 struct SetCurrentLocationView: View {
     @ObservedObject var place: Place
     @ObservedObject var draftPlace: Place = Place()
-    
+
     @State var alert = false
     @State var nearByPlaces: [MKMapItem] = []
     @State var cardPosition = CardPosition.middle

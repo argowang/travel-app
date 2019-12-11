@@ -10,6 +10,7 @@ struct AddEventView: View {
     @State var card: EventCard?
 
     @ObservedObject var place: Place = Place()
+    @ObservedObject var destination: Place = Place()
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -19,13 +20,17 @@ struct AddEventView: View {
 
     var body: some View {
         VStack {
-            ZStack {
-                VStack {
-                    LocationAirplaneIcon().frame(minWidth: 0, maxWidth: 400, minHeight: 0, maxHeight: 50)
-                    Spacer()
-                        .frame(height: 50)
+            if type == .transportation {
+                transportationLocationRow(origin: place, destination: destination)
+            } else {
+                ZStack {
+                    VStack {
+                        LocationAirplaneIcon().frame(minWidth: 0, maxWidth: 400, minHeight: 0, maxHeight: 50)
+                        Spacer()
+                            .frame(height: 50)
+                    }
+                    locationRow(place: self.place)
                 }
-                locationRow(place: self.place)
             }
 
             List {
@@ -128,7 +133,6 @@ struct timePicker: View {
 struct locationRow: View {
     @ObservedObject var place: Place
 
-    @State var display: String = ""
     var body: some View {
         HStack {
             Image("location").resizable().frame(width: 50, height: 50).padding()
@@ -138,6 +142,40 @@ struct locationRow: View {
             }
             Spacer()
         }
+    }
+}
+
+struct transportationLocationRow: View {
+    @ObservedObject var origin: Place
+    @ObservedObject var destination: Place
+
+    var body: some View {
+        HStack(alignment: .center) {
+            VStack(alignment: .leading) {
+                NavigationLink(destination: SetCurrentLocationView(place: self.origin).environmentObject(PlaceFinder())) {
+                    Text("\(self.origin.name == "" ? "Origin" : self.origin.name)").lineLimit(2)
+                }
+            }.frame(minWidth: 0, maxWidth: .infinity)
+
+            VStack {
+                Button(action: {
+                    let temp = Place(self.origin)
+                    self.origin.name = self.destination.name
+                    self.origin.coordinate = self.destination.coordinate
+                    self.destination.name = temp.name
+                    self.destination.coordinate = temp.coordinate
+                }) {
+                    Image(systemName: "arrow.right.arrow.left").foregroundColor(.blue)
+                }
+            }.frame(minWidth: 0, maxWidth: .infinity)
+
+            VStack(alignment: .trailing) {
+                NavigationLink(destination: SetCurrentLocationView(place: self.destination).environmentObject(PlaceFinder())) {
+                    Text("\(self.destination.name == "" ? "Destination" : self.destination.name)")
+                }
+            }.frame(minWidth: 0, maxWidth: .infinity)
+
+        }.padding(.horizontal)
     }
 }
 

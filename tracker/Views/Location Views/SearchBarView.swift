@@ -15,7 +15,7 @@ struct SearchBarView: View {
     @Binding var nearByPlaces: [MKMapItem]
 
     @ObservedObject var place: Place
-    
+
     @EnvironmentObject var placeFinder: PlaceFinder
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
