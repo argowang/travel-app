@@ -21,7 +21,6 @@ class CustomMKMarkerSubclass: MKMarkerAnnotationView {
 }
 
 struct MapView: UIViewRepresentable {
-    @Binding var alert: Bool
     @Binding var nearByPlaces: [MKMapItem]
     @Binding var selectedCoordinate: CLLocationCoordinate2D?
     @Binding var selectedLocation: String
@@ -187,11 +186,10 @@ struct MapView: UIViewRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     @State static var locationManager = CLLocationManager()
-    @State static var alert = false
     @State static var nearBy: [MKMapItem] = []
     @State static var selectedCoordinate: CLLocationCoordinate2D?
     @State static var newLocation = ""
     static var previews: some View {
-        MapView(alert: $alert, nearByPlaces: $nearBy, selectedCoordinate: $selectedCoordinate, selectedLocation: $newLocation)
+        MapView(nearByPlaces: $nearBy, selectedCoordinate: $selectedCoordinate, selectedLocation: $newLocation)
     }
 }
