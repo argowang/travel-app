@@ -8,6 +8,7 @@ struct AddEventView: View {
     @State var price = ""
     @State var type = EventType.general
     @State var rating = 5
+    @State var transporatation = ""
     @State var card: EventCard?
 
     @ObservedObject var place: Place = Place()
@@ -53,6 +54,14 @@ struct AddEventView: View {
                         StarRatingView(rating: self.$rating)
                     }
                 }
+                if type == .transportation {
+                    Section {
+                        VStack(alignment: .leading) {
+                            Text("Transportation")
+                            transporatationMethodsSelectionRow(transportationMethod: self.$transporatation)
+                        }
+                    }
+                }
             }
             .listStyle(GroupedListStyle())
         }
@@ -89,6 +98,8 @@ struct AddEventView: View {
                 cardToSave.originTitle = self.origin.name
                 cardToSave.originLatitude = self.origin.coordinate?.latitude ?? 0
                 cardToSave.originLongitude = self.origin.coordinate?.longitude ?? 0
+
+                cardToSave.transportation = self.transporatation
             }
 
             let dateInt = (Int(self.selectedDate.timeIntervalSince1970) / (3600 * 24)) * (3600 * 24)
@@ -192,6 +203,25 @@ struct transportationLocationRow: View {
             }.frame(minWidth: 0, maxWidth: .infinity)
 
         }.padding(.horizontal)
+    }
+}
+
+struct transporatationMethodsSelectionRow: View {
+    @Binding var transportationMethod: String
+
+    var body: some View {
+        VStack {
+            Picker(selection: $transportationMethod, label: Text("What is your favorite color?")) {
+                Text("🚶").tag("walk")
+                Text("🚴‍♀️").tag("bike")
+                Text("🚗").tag("car")
+                Text("🚌").tag("bus")
+                Text("✈️").tag("airplaine")
+                Text("🚢").tag("ship")
+                Text("🚇").tag("metro")
+                Text("🚄").tag("train")
+            }.pickerStyle(SegmentedPickerStyle())
+        }
     }
 }
 
