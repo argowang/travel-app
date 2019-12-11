@@ -10,7 +10,7 @@ struct AddEventView: View {
     @State var card: EventCard?
 
     @ObservedObject var place: Place = Place()
-    @ObservedObject var destination: Place = Place()
+    @ObservedObject var origin: Place = Place()
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -21,7 +21,7 @@ struct AddEventView: View {
     var body: some View {
         VStack {
             if type == .transportation {
-                transportationLocationRow(origin: place, destination: destination)
+                transportationLocationRow(origin: origin, destination: place)
             } else {
                 ZStack {
                     VStack {
@@ -75,6 +75,12 @@ struct AddEventView: View {
             cardToSave.title = self.place.name
             cardToSave.latitude = self.place.coordinate?.latitude ?? 0
             cardToSave.longitude = self.place.coordinate?.longitude ?? 0
+
+            if self.type == .transportation {
+                cardToSave.originTitle = self.origin.name
+                cardToSave.originLatitude = self.origin.coordinate?.latitude ?? 0
+                cardToSave.originLongitude = self.origin.coordinate?.longitude ?? 0
+            }
 
             let dateInt = (Int(self.selectedDate.timeIntervalSince1970) / (3600 * 24)) * (3600 * 24)
             let timeInt = Int(self.selectedTime.timeIntervalSince1970) % (3600 * 24)
@@ -151,9 +157,9 @@ struct transportationLocationRow: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            VStack(alignment: .leading) {
+            VStack {
                 NavigationLink(destination: SetCurrentLocationView(place: self.origin).environmentObject(PlaceFinder())) {
-                    Text("\(self.origin.name == "" ? "Origin" : self.origin.name)").lineLimit(2)
+                    Text("\(self.origin.name == "" ? "From" : self.origin.name)")
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
 
@@ -169,7 +175,7 @@ struct transportationLocationRow: View {
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
 
-            VStack(alignment: .trailing) {
+            VStack {
                 NavigationLink(destination: SetCurrentLocationView(place: self.destination).environmentObject(PlaceFinder())) {
                     Text("\(self.destination.name == "" ? "Destination" : self.destination.name)")
                 }
