@@ -17,7 +17,6 @@ struct EventCardListView: View {
     }
 
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.editMode) var mode
     @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
     @State var title = ""
     @State private var refreshing = false
@@ -32,28 +31,32 @@ struct EventCardListView: View {
         ZStack {
             ScrollView {
                 ForEach(self.eventCards, id: \.uuid) { card in
-                    ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
-                        if self.mode?.wrappedValue == .active {
-                            Button(action: {
-                                self.managedObjectContext.delete(card)
-                            }) {
-                                Image("delete")
-                                    .resizable()
-                                    .frame(width: 40, height: 40)
-                            }.buttonStyle(PlainButtonStyle())
-
-                            EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
-                        } else {
-                            NavigationLink(destination: AddEventView(selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), price: card.price ?? "", type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: Int(card.rating), transporatation: card.transportation ?? "", card: card as! EventCard, place: Place(card.title ?? "", CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude)), origin: Place(card.originTitle ?? "", CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))), tag: card.uuid!, selection: self.$selected) {
-                                EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
-                                    .onTapGesture {
-                                        self.selected = card.uuid
-                                    }
-                                    .onLongPressGesture {
-                                        self.mode?.wrappedValue = .active
-                                    }
+                    ZStack {
+                        NavigationLink(destination:
+                            AddEventView(selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), price: card.price ?? "", type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: Int(card.rating), transporatation: card.transportation ?? "", card: card as! EventCard, place: Place(card.title ?? "", CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude)), origin: Place(card.originTitle ?? "", CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))), tag: card.uuid!, selection: self.$selected) {
+                            Text("Work Around")
+                        }.hidden()
+                        EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            .onTapGesture {
+                                self.selected = card.uuid
                             }
-                            .buttonStyle(PlainButtonStyle())
+                    }
+                    .contextMenu {
+                        Button(action: {
+                            self.selected = card.uuid
+                        }) {
+                            HStack {
+                                Text("See Detail")
+                                Image(systemName: "arrowshape.turn.up.right.circle")
+                            }
+                        }
+                        Button(action: {
+                            self.managedObjectContext.delete(card)
+                        }) {
+                            HStack {
+                                Text("Remove")
+                                Image(systemName: "trash.circle")
+                            }
                         }
                     }
                 }
@@ -62,58 +65,54 @@ struct EventCardListView: View {
                     self.refreshing.toggle()
                 }
             }
-            if self.mode?.wrappedValue == .inactive {
-                VStack(alignment: .trailing) {
+            VStack(alignment: .trailing) {
+                Spacer()
+                HStack {
                     Spacer()
-                    HStack {
-                        Spacer()
-                        // https://forums.developer.apple.com/thread/124757
-                        NavigationLink(destination: AddEventView(type: eventType), isActive: self.$addEventActive) {
-                            Text("Work Around")
-                        }.hidden()
+                    // https://forums.developer.apple.com/thread/124757
+                    NavigationLink(destination: AddEventView(type: eventType), isActive: self.$addEventActive) {
+                        Text("Work Around")
+                    }.hidden()
 
-                        Button(action: {
-                            if self.title != "" {}
-                            self.showingSheet = true
-                        }) {
-                            Image("plus")
-                                .resizable()
-                                .frame(width: 90, height: 90)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .padding()
-                        .actionSheet(isPresented: $showingSheet) {
-                            ActionSheet(title: Text("Select an event type fits for you."), message: Text("Choose general if you are not satisified with all options"), buttons: [
-                                .default(
-                                    Text("Food"),
-                                    action: {
-                                        self.addEventActive = true
-                                        self.eventType = .food
-                                    }
-                                ),
-                                .default(
-                                    Text("Transportation"),
-                                    action: {
-                                        self.addEventActive = true
-                                        self.eventType = .transportation
-                                    }
-                                ),
-                                .default(
-                                    Text("General"),
-                                    action: {
-                                        self.addEventActive = true
-                                        self.eventType = .general
-                                    }
-                                ),
-                                .destructive(Text("Dismiss")),
-                            ])
-                        }
+                    Button(action: {
+                        if self.title != "" {}
+                        self.showingSheet = true
+                    }) {
+                        Image("plus")
+                            .resizable()
+                            .frame(width: 90, height: 90)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding()
+                    .actionSheet(isPresented: $showingSheet) {
+                        ActionSheet(title: Text("Select an event type fits for you."), message: Text("Choose general if you are not satisified with all options"), buttons: [
+                            .default(
+                                Text("Food"),
+                                action: {
+                                    self.addEventActive = true
+                                    self.eventType = .food
+                                }
+                            ),
+                            .default(
+                                Text("Transportation"),
+                                action: {
+                                    self.addEventActive = true
+                                    self.eventType = .transportation
+                                }
+                            ),
+                            .default(
+                                Text("General"),
+                                action: {
+                                    self.addEventActive = true
+                                    self.eventType = .general
+                                }
+                            ),
+                            .destructive(Text("Dismiss")),
+                        ])
                     }
                 }
             }
-        }.navigationBarItems(trailing: Button(action: {
-            self.mode?.animation().wrappedValue = self.mode?.wrappedValue == .inactive ? .active : .inactive
-        }, label: { Text(self.mode?.wrappedValue == .inactive ? "Edit" : "Done") }))
+        }
     }
 }
 
