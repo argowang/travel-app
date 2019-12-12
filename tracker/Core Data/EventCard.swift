@@ -23,7 +23,8 @@ public class EventCard: NSManagedObject, Identifiable {
     @NSManaged public var originLatitude: Double
     @NSManaged public var price: String?
     @NSManaged public var transportation: String?
-    
+    @NSManaged public var eventDescription: String?
+
     @NSManaged public var trip: TripCard?
 }
 

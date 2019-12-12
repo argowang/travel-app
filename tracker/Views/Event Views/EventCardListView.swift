@@ -41,6 +41,7 @@ struct EventCardListView: View {
                                 self.selected = card.uuid
                             }
                     }
+                    .padding(.bottom, 5)
                     .contextMenu {
                         Button(action: {
                             self.selected = card.uuid
