@@ -9,10 +9,12 @@ struct AddEventView: View {
     @State var type = EventType.general
     @State var rating = 5
     @State var transporatation = ""
+    @State var eventDescription = ""
     @State var card: EventCard?
 
     @ObservedObject var place: Place = Place()
     @ObservedObject var origin: Place = Place()
+    @ObservedObject private var keyboard = KeyboardResponder()
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -34,36 +36,47 @@ struct AddEventView: View {
                     locationRow(place: self.place)
                 }
             }
-
-            List {
-                Section {
-                    datePicker(selectedDate: self.$selectedDate)
-                    timePicker(selectedTime: self.$selectedTime)
-                }
-                Section {
-                    HStack {
-                        Text("💰 Price:")
-                        Spacer()
-                            .frame(width: 180)
-                        TextField("Enter price here", text: $price)
-                            .foregroundColor(.secondary)
-                    }
-                    HStack {
-                        Text("👍 Rating:")
-                        Spacer()
-                        StarRatingView(rating: self.$rating)
-                    }
-                }
-                if type == .transportation {
+            VStack{
+                List {
                     Section {
-                        VStack(alignment: .leading) {
-                            Text("Transportation")
-                            transporatationMethodsSelectionRow(transportationMethod: self.$transporatation)
+                        datePicker(selectedDate: self.$selectedDate)
+                        timePicker(selectedTime: self.$selectedTime)
+                    }
+                    Section {
+                        HStack {
+                            Text("💰 Price:")
+                            Spacer()
+                                .frame(width: 180)
+                            TextField("Enter price here", text: $price)
+                                .foregroundColor(.secondary)
+                        }
+                        HStack {
+                            Text("👍 Rating:")
+                            Spacer()
+                            StarRatingView(rating: self.$rating)
                         }
                     }
-                }
+                    if type == .transportation {
+                        Section {
+                            VStack(alignment: .leading) {
+                                Text("Transportation")
+                                transporatationMethodsSelectionRow(transportationMethod: self.$transporatation)
+                            }
+                        }
+                    }
+
+                    Section {
+                        HStack {
+                            TextField("Enter your description here", text: $eventDescription)
+                        }
+                    }
+                
             }
-            .listStyle(GroupedListStyle())
+                .listStyle(GroupedListStyle())
+            }.padding(.bottom, keyboard.currentHeight)
+                .edgesIgnoringSafeArea(.bottom)
+                .animation(.easeOut(duration: 0.16))
+            
         }
         .navigationBarTitle(Text("\(type.rawValue)"))
         .onAppear {
@@ -109,6 +122,8 @@ struct AddEventView: View {
             cardToSave.type = self.type.rawValue
             cardToSave.rating = Int16(self.rating)
             cardToSave.price = self.price
+            
+            cardToSave.eventDescription = self.eventDescription
 
             do {
                 try self.managedObjectContext.save()
