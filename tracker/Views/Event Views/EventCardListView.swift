@@ -23,7 +23,6 @@ struct EventCardListView: View {
     @State var selected: UUID?
     @State private var showingSheet = false
     @State private var addEventActive = false
-    @State private var seePreview = false
     @State var eventType: EventType = .general
 
     private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
