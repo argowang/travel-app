@@ -48,8 +48,11 @@ struct TripListView: View {
                     }) {
                         Text("Add event")
                     }
-                    .sheet(isPresented: $showingDetail) {
-                        AddTripView()
+                    .sheet(isPresented: $showingDetail, onDismiss: {
+                        // we should decide on dismiss behavior here
+                        print("on dismiss")
+                    }) {
+                        AddTripView().environment(\.managedObjectContext, self.managedObjectContext)
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding()

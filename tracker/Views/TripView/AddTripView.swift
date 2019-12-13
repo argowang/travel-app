@@ -10,9 +10,13 @@ import CoreData
 import SwiftUI
 
 struct AddTripView: View {
-    @State var title = ""
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    @State var title = ""
+    @State var defaultTitle = "hhhhhh"
+    @State var selectedDate = Date()
+    @State var selectedTime = Date()
     var body: some View {
         VStack {
             Spacer()
@@ -63,17 +67,15 @@ struct AddTripView: View {
                 )
                 .padding()
 
-//                TextField("Enter your trip name", text: $title)
-
                 RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.gray)
-                .frame(height: 70)
-                .opacity(0.1)
-                .overlay(
-                    TextField("Enter your trip name", text: $title)
+                    .foregroundColor(.gray)
+                    .frame(height: 70)
+                    .opacity(0.1)
+                    .overlay(
+                        TextField("Enter your trip name", text: $title)
+                            .padding()
+                    )
                     .padding()
-                )
-                .padding()
             }
 
             Spacer()
