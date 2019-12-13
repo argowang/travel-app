@@ -16,40 +16,39 @@ struct AddTripView: View {
     @State var selectedDate = Date()
     @State var selectedTime = Date()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
+
     var body: some View {
-        VStack{
-                datePicker(selectedDate: self.$selectedDate)
-                    .padding()
-
-                timePicker(selectedTime: self.$selectedTime)
-                    .padding()
-                
-                Button(action: {
-                    let card = TripCard(context: self.managedObjectContext)
-
-                    if self.title != "" {
-                        card.title = self.title
-                    } else {
-                        card.title = self.defaultTitle
-                    }
-
-                    card.start = self.selectedDate
-
-                    do {
-                        try self.managedObjectContext.save()
-                        self.mode.wrappedValue.dismiss()
-                    } catch {
-                        print(error)
-                    }
-                }) {
-                    Text("Add event")
-                }
+        VStack {
+            datePicker(selectedDate: self.$selectedDate)
                 .padding()
-                Spacer()
+
+            timePicker(selectedTime: self.$selectedTime)
+                .padding()
+
+            Button(action: {
+                let card = TripCard(context: self.managedObjectContext)
+
+                if self.title != "" {
+                    card.title = self.title
+                } else {
+                    card.title = self.defaultTitle
+                }
+
+                card.start = self.selectedDate
+
+                do {
+                    try self.managedObjectContext.save()
+                    self.mode.wrappedValue.dismiss()
+                } catch {
+                    print(error)
+                }
+            }) {
+                Text("Add event")
             }
-            
+            .padding()
+            Spacer()
         }
+    }
 }
 
 struct AddTripView_Previews: PreviewProvider {

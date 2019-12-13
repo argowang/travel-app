@@ -11,7 +11,7 @@ import SwiftUI
 struct TripCardView: View {
     var title: String
     var dateString: String
-    
+
     var body: some View {
         VStack {
             HStack {

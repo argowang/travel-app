@@ -33,10 +33,11 @@ struct EventCardListView: View {
                 ForEach(self.eventCards, id: \.uuid) { card in
                     ZStack {
                         NavigationLink(destination:
-                            AddEventView(selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), price: card.price ?? "", type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: Int(card.rating), transporatation: card.transportation ?? "", card: card as! EventCard, place: Place(card.title ?? "", CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude)), origin: Place(card.originTitle ?? "", CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))), tag: card.uuid!, selection: self.$selected) {
+                            AddEventView(card: card, draftEvent: UserEvent(card)), tag: card.uuid, selection: self.$selected) {
                             Text("Work Around")
                         }.hidden()
-                        EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
+
+                        EventCardView(title: card.title, type: EventType(rawValue: card.type), dateString: self.dateFormatter.string(from: card.start))
                             .onTapGesture {
                                 self.selected = card.uuid
                             }
@@ -71,7 +72,7 @@ struct EventCardListView: View {
                 HStack {
                     Spacer()
                     // https://forums.developer.apple.com/thread/124757
-                    NavigationLink(destination: AddEventView(type: eventType), isActive: self.$addEventActive) {
+                    NavigationLink(destination: AddEventView(draftEvent: UserEvent()), isActive: self.$addEventActive) {
                         Text("Work Around")
                     }.hidden()
 
