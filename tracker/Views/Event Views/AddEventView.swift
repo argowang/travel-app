@@ -3,18 +3,12 @@ import MapKit
 import SwiftUI
 
 struct AddEventView: View {
-    @State var selectedDate = Date()
-    @State var selectedTime = Date()
-    @State var price = ""
-    @State var type = EventType.general
-    @State var rating = 5
-    @State var transporatation = ""
-    @State var eventDescription = ""
     @State var card: EventCard?
 
     @ObservedObject var place: Place = Place()
     @ObservedObject var origin: Place = Place()
     @ObservedObject private var keyboard = KeyboardResponder()
+    @ObservedObject var draftEvent: UserEvent
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -24,7 +18,7 @@ struct AddEventView: View {
 
     var body: some View {
         VStack {
-            if type == .transportation {
+            if draftEvent.type == .transportation {
                 transportationLocationRow(origin: origin, destination: place)
             } else {
                 ZStack {
@@ -36,49 +30,47 @@ struct AddEventView: View {
                     locationRow(place: self.place)
                 }
             }
-            VStack{
+            VStack {
                 List {
                     Section {
-                        datePicker(selectedDate: self.$selectedDate)
-                        timePicker(selectedTime: self.$selectedTime)
+                        datePicker(selectedDate: $draftEvent.dateForDate)
+                        timePicker(selectedTime: $draftEvent.dateForTime)
                     }
                     Section {
                         HStack {
                             Text("💰 Price:")
                             Spacer()
                                 .frame(width: 180)
-                            TextField("Enter price here", text: $price)
+                            TextField("Enter price here", text: $draftEvent.price)
                                 .foregroundColor(.secondary)
                         }
                         HStack {
                             Text("👍 Rating:")
                             Spacer()
-                            StarRatingView(rating: self.$rating)
+                            StarRatingView(rating: $draftEvent.rating)
                         }
                     }
-                    if type == .transportation {
+                    if draftEvent.type == .transportation {
                         Section {
                             VStack(alignment: .leading) {
                                 Text("Transportation")
-                                transporatationMethodsSelectionRow(transportationMethod: self.$transporatation)
+                                transporatationMethodsSelectionRow(transportationMethod: $draftEvent.transportation)
                             }
                         }
                     }
 
                     Section {
                         HStack {
-                            TextField("Enter your description here", text: $eventDescription)
+                            TextField("Enter your description here", text: $draftEvent.eventDescription)
                         }
                     }
-                
-            }
+                }
                 .listStyle(GroupedListStyle())
             }.padding(.bottom, keyboard.currentHeight)
                 .edgesIgnoringSafeArea(.bottom)
                 .animation(.easeOut(duration: 0.16))
-            
         }
-        .navigationBarTitle(Text("\(type.rawValue)"))
+        .navigationBarTitle(Text("\(draftEvent.type.rawValue)"))
         .onAppear {
             if self.place.name == "" {
                 let georeader = CLGeocoder()
@@ -105,25 +97,26 @@ struct AddEventView: View {
 
             cardToSave.title = self.place.name
             cardToSave.latitude = self.place.coordinate?.latitude ?? 0
+
             cardToSave.longitude = self.place.coordinate?.longitude ?? 0
 
-            if self.type == .transportation {
+            if self.draftEvent.type == .transportation {
                 cardToSave.originTitle = self.origin.name
                 cardToSave.originLatitude = self.origin.coordinate?.latitude ?? 0
                 cardToSave.originLongitude = self.origin.coordinate?.longitude ?? 0
 
-                cardToSave.transportation = self.transporatation
+                cardToSave.transportation = self.draftEvent.transportation
             }
 
-            let dateInt = (Int(self.selectedDate.timeIntervalSince1970) / (3600 * 24)) * (3600 * 24)
-            let timeInt = Int(self.selectedTime.timeIntervalSince1970) % (3600 * 24)
+            let dateInt = (Int(self.draftEvent.dateForDate.timeIntervalSince1970) / (3600 * 24)) * (3600 * 24)
+            let timeInt = Int(self.draftEvent.dateForTime.timeIntervalSince1970) % (3600 * 24)
 
             cardToSave.start = Date(timeIntervalSince1970: Double(dateInt + timeInt))
-            cardToSave.type = self.type.rawValue
-            cardToSave.rating = Int16(self.rating)
-            cardToSave.price = self.price
-            
-            cardToSave.eventDescription = self.eventDescription
+            cardToSave.type = self.draftEvent.type.rawValue
+            cardToSave.rating = Int16(self.draftEvent.rating)
+            cardToSave.price = self.draftEvent.price
+
+            cardToSave.eventDescription = self.draftEvent.eventDescription
 
             do {
                 try self.managedObjectContext.save()
@@ -240,8 +233,8 @@ struct transporatationMethodsSelectionRow: View {
     }
 }
 
-struct AddTripEventInfoView_Previews: PreviewProvider {
+ struct AddTripEventInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEventView(place: Place())
+        AddEventView(draftEvent: UserEvent())
     }
-}
+ }

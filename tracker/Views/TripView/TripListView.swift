@@ -15,45 +15,45 @@ struct TripListView: View {
         formatter.dateFormat = "MM-dd-yyyy HH:mm"
         return formatter
     }
-    
+
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.editMode) var mode
     @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
     @State var title = ""
-    
-    var body: some View {
-            VStack {
-                ScrollView {
-                    ForEach(self.tripCards) { card in
-                            if self.mode?.wrappedValue == .active {
-                                Button("DELETE") {
-                                    self.managedObjectContext.delete(card)
-                                }
-                                .padding()
 
-                                TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
-                            } else {
-                                NavigationLink(destination: TripInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
-                                    TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            }
-                    }
-                }
-                VStack {
-                    if self.mode?.wrappedValue == .inactive {
-                        Button(action: {
-                            if self.title != "" {}
-                        }) {
-                            NavigationLink(destination: AddTripView()) {
-                                Text("Add event")
-                            }
+    var body: some View {
+        VStack {
+            ScrollView {
+                ForEach(self.tripCards) { card in
+                    if self.mode?.wrappedValue == .active {
+                        Button("DELETE") {
+                            self.managedObjectContext.delete(card)
+                        }
+                        .padding()
+
+                        TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                    } else {
+                        NavigationLink(destination: TripInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
+                            TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .padding()
                     }
                 }
             }
+            VStack {
+                if self.mode?.wrappedValue == .inactive {
+                    Button(action: {
+                        if self.title != "" {}
+                    }) {
+                        NavigationLink(destination: AddTripView()) {
+                            Text("Add event")
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding()
+                }
+            }
+        }
     }
 }
 

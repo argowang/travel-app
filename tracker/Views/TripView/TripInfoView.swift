@@ -18,9 +18,9 @@ struct TripInfoView: View {
         formatter.dateStyle = .long
         return formatter
     }
-    
+
     @Environment(\.managedObjectContext) var managedObjectContext
-    
+
     var body: some View {
         VStack {
             HStack {
