@@ -17,23 +17,24 @@ struct EventCardListView: View {
     }
 
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
     @State var title = ""
-    @State private var refreshing = false
+    @State var refreshing = false
     @State var selected: UUID?
-    @State private var showingSheet = false
-    @State private var addEventActive = false
+    @State var showingSheet = false
+    @State var addEventActive = false
     @State var eventType: EventType = .general
+    
+    @State var trip: TripCard = TripCard()
 
-    private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
+    var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
     var body: some View {
         ZStack {
             ScrollView {
-                ForEach(self.eventCards, id: \.uuid) { card in
+                ForEach(self.trip.events, id: \.uuid) { card in
                     ZStack {
                         NavigationLink(destination:
-                            AddEventView(selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), price: card.price ?? "", type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: Int(card.rating), transporatation: card.transportation ?? "", card: card as! EventCard, place: Place(card.title ?? "", CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude)), origin: Place(card.originTitle ?? "", CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))), tag: card.uuid!, selection: self.$selected) {
+                        AddEventView(selectedDate: card.start ?? Date(), selectedTime: card.start ?? Date(), price: card.price ?? "", type: EventType(rawValue: card.type ?? EventType.general.rawValue), rating: Int(card.rating), transporatation: card.transportation ?? "", card: card as! EventCard, trip: self.$trip, place: Place(card.title ?? "", CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude)), origin: Place(card.originTitle ?? "", CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))), tag: card.uuid!, selection: self.$selected) {
                             Text("Work Around")
                         }.hidden()
                         EventCardView(title: card.title ?? "title place holder", type: EventType(rawValue: card.type ?? EventType.general.rawValue), dateString: self.dateFormatter.string(from: card.start ?? Date()))
@@ -66,61 +67,61 @@ struct EventCardListView: View {
                     self.refreshing.toggle()
                 }
             }
-            VStack(alignment: .trailing) {
-                Spacer()
-                HStack {
-                    Spacer()
-                    // https://forums.developer.apple.com/thread/124757
-                    NavigationLink(destination: AddEventView(type: eventType), isActive: self.$addEventActive) {
-                        Text("Work Around")
-                    }.hidden()
-
-                    Button(action: {
-                        if self.title != "" {}
-                        self.showingSheet = true
-                    }) {
-                        Image("plus")
-                            .resizable()
-                            .frame(width: 90, height: 90)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding()
-                    .actionSheet(isPresented: $showingSheet) {
-                        ActionSheet(title: Text("Select an event type fits for you."), message: Text("Choose general if you are not satisified with all options"), buttons: [
-                            .default(
-                                Text("Food"),
-                                action: {
-                                    self.addEventActive = true
-                                    self.eventType = .food
-                                }
-                            ),
-                            .default(
-                                Text("Transportation"),
-                                action: {
-                                    self.addEventActive = true
-                                    self.eventType = .transportation
-                                }
-                            ),
-                            .default(
-                                Text("General"),
-                                action: {
-                                    self.addEventActive = true
-                                    self.eventType = .general
-                                }
-                            ),
-                            .destructive(Text("Dismiss")),
-                        ])
-                    }
-                }
-            }
+//            VStack(alignment: .trailing) {
+//                Spacer()
+//                HStack {
+//                    Spacer()
+//                    // https://forums.developer.apple.com/thread/124757
+//                    NavigationLink(destination: AddEventView(type: eventType, trip: self.$trip), isActive: self.$addEventActive) {
+//                        Text("Work Around")
+//                    }.hidden()
+//
+//                    Button(action: {
+//                        if self.title != "" {}
+//                        self.showingSheet = true
+//                    }) {
+//                        Image("plus")
+//                            .resizable()
+//                            .frame(width: 90, height: 90)
+//                    }
+//                    .buttonStyle(PlainButtonStyle())
+//                    .padding()
+//                    .actionSheet(isPresented: $showingSheet) {
+//                        ActionSheet(title: Text("Select an event type fits for you."), message: Text("Choose general if you are not satisified with all options"), buttons: [
+//                            .default(
+//                                Text("Food"),
+//                                action: {
+//                                    self.addEventActive = true
+//                                    self.eventType = .food
+//                                }
+//                            ),
+//                            .default(
+//                                Text("Transportation"),
+//                                action: {
+//                                    self.addEventActive = true
+//                                    self.eventType = .transportation
+//                                }
+//                            ),
+//                            .default(
+//                                Text("General"),
+//                                action: {
+//                                    self.addEventActive = true
+//                                    self.eventType = .general
+//                                }
+//                            ),
+//                            .destructive(Text("Dismiss")),
+//                        ])
+//                    }
+//                }
+//            }
         }
     }
 }
 
-struct EventCardListView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            EventCardListView()
-        }
-    }
-}
+//struct EventCardListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VStack {
+//            EventCardListView()
+//        }
+//    }
+//}

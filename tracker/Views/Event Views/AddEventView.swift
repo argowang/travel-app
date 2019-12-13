@@ -11,6 +11,8 @@ struct AddEventView: View {
     @State var transporatation = ""
     @State var eventDescription = ""
     @State var card: EventCard?
+    
+    @Binding var trip: TripCard
 
     @ObservedObject var place: Place = Place()
     @ObservedObject var origin: Place = Place()
@@ -124,6 +126,8 @@ struct AddEventView: View {
             cardToSave.price = self.price
             
             cardToSave.eventDescription = self.eventDescription
+            cardToSave.trip = self.trip
+            self.trip.addToEvents(cardToSave)
 
             do {
                 try self.managedObjectContext.save()
@@ -239,9 +243,9 @@ struct transporatationMethodsSelectionRow: View {
         }
     }
 }
-
-struct AddTripEventInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddEventView(place: Place())
-    }
-}
+//
+//struct AddTripEventInfoView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddEventView(place: Place())
+//    }
+//}

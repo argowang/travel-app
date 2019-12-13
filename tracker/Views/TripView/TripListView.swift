@@ -25,19 +25,9 @@ struct TripListView: View {
             VStack {
                 ScrollView {
                     ForEach(self.tripCards) { card in
-                            if self.mode?.wrappedValue == .active {
-                                Button("DELETE") {
-                                    self.managedObjectContext.delete(card)
-                                }
-                                .padding()
-
-                                TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
-                            } else {
-                                NavigationLink(destination: TripInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
-                                    TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            }
+                        NavigationLink(destination: EventCardListView(trip: card as! TripCard)) {
+                            TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                        }
                     }
                 }
                 VStack {

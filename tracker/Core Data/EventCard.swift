@@ -26,6 +26,10 @@ public class EventCard: NSManagedObject, Identifiable {
     @NSManaged public var eventDescription: String?
 
     @NSManaged public var trip: TripCard?
+    
+    public var wrappedStart: Date {
+        start ?? Date()
+    }
 }
 
 extension EventCard {
