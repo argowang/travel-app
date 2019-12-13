@@ -20,6 +20,7 @@ struct TripListView: View {
     @Environment(\.editMode) var mode
     @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
     @State var title = ""
+    @State var showingDetail = false
 
     var body: some View {
         VStack {
@@ -43,11 +44,12 @@ struct TripListView: View {
             VStack {
                 if self.mode?.wrappedValue == .inactive {
                     Button(action: {
-                        if self.title != "" {}
+                        self.showingDetail.toggle()
                     }) {
-                        NavigationLink(destination: AddTripView()) {
-                            Text("Add event")
-                        }
+                        Text("Add event")
+                    }
+                    .sheet(isPresented: $showingDetail) {
+                        AddTripView()
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding()
@@ -59,8 +61,6 @@ struct TripListView: View {
 
 struct TripListView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            TripListView()
-        }
+        TripListView()
     }
 }

@@ -11,41 +11,71 @@ import SwiftUI
 
 struct AddTripView: View {
     @State var title = ""
-    @State var defaultTitle = "hhhhhh"
     @Environment(\.managedObjectContext) var managedObjectContext
-    @State var selectedDate = Date()
-    @State var selectedTime = Date()
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         VStack {
-            datePicker(selectedDate: self.$selectedDate)
-                .padding()
+            Spacer()
+                .frame(height: 20)
+            HStack {
+                Button(
+                    action: { self.presentationMode.wrappedValue.dismiss()
+                    }
+                ) {
+                    Text("Dismiss")
+                        .padding()
+                }
+                .foregroundColor(.gray)
 
-            timePicker(selectedTime: self.$selectedTime)
-                .padding()
-
-            Button(action: {
-                let card = TripCard(context: self.managedObjectContext)
-
-                if self.title != "" {
+                Spacer()
+                Button(action: {
+                    let card = TripCard(context: self.managedObjectContext)
                     card.title = self.title
-                } else {
-                    card.title = self.defaultTitle
+                    do {
+                        try self.managedObjectContext.save()
+                        self.presentationMode.wrappedValue.dismiss()
+                    } catch {
+                        print(error)
+                    }
+                }) {
+                    Text("Save")
+                        .padding()
                 }
-
-                card.start = self.selectedDate
-
-                do {
-                    try self.managedObjectContext.save()
-                    self.mode.wrappedValue.dismiss()
-                } catch {
-                    print(error)
-                }
-            }) {
-                Text("Add event")
             }
-            .padding()
+            HStack {
+                Button(
+                    action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                ) {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 70, height: 70)
+                        .opacity(0.1)
+                }
+                .foregroundColor(.gray)
+                .frame(width: 60, height: 60)
+                .overlay(
+                    Image(systemName: "camera.circle")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(.gray)
+                        .cornerRadius(10)
+                )
+                .padding()
+
+//                TextField("Enter your trip name", text: $title)
+
+                RoundedRectangle(cornerRadius: 10)
+                .foregroundColor(.gray)
+                .frame(height: 70)
+                .opacity(0.1)
+                .overlay(
+                    TextField("Enter your trip name", text: $title)
+                    .padding()
+                )
+                .padding()
+            }
+
             Spacer()
         }
     }
