@@ -12,11 +12,8 @@ import SwiftUI
 struct AddTripView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
     @State var title = ""
-    @State var defaultTitle = "hhhhhh"
-    @State var selectedDate = Date()
-    @State var selectedTime = Date()
+
     var body: some View {
         VStack {
             Spacer()

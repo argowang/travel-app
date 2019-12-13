@@ -46,7 +46,7 @@ struct TripListView: View {
                     Button(action: {
                         self.showingDetail.toggle()
                     }) {
-                        Text("Add event")
+                        Text("Add Trip")
                     }
                     .sheet(isPresented: $showingDetail, onDismiss: {
                         // we should decide on dismiss behavior here
