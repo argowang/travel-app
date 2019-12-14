@@ -86,6 +86,10 @@ struct AddEventView: View {
                         }
                         self.draftEvent.place.name = places?.first?.locality ?? ""
                         self.draftEvent.place.coordinate = lastLocation.coordinate
+
+                        if self.draftEvent.title == "" {
+                            self.draftEvent.title = "\(self.draftEvent.type == .transportation ? "Trip to" : "") \(self.draftEvent.place.name)"
+                        }
                     }
                 }
             }
@@ -109,11 +113,9 @@ struct AddEventView: View {
                 cardToSave.originLatitude = self.draftEvent.origin.coordinate?.latitude ?? 0
                 cardToSave.originLongitude = self.draftEvent.origin.coordinate?.longitude ?? 0
                 cardToSave.transportation = self.draftEvent.transportation
-
-                cardToSave.title = "From \(self.draftEvent.origin.name) to \(self.draftEvent.place.name)"
-            } else {
-                cardToSave.title = self.draftEvent.place.name
             }
+
+            cardToSave.title = self.draftEvent.title
 
             cardToSave.start = self.draftEvent.calculatedDate
             cardToSave.type = self.draftEvent.type.rawValue
