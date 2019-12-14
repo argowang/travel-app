@@ -24,6 +24,13 @@ class UserEvent: NSObject, ObservableObject {
     @Published var parentTrip: TripCard
     @Published var event: EventCard?
 
+    public var calculatedDate: Date {
+        let dateInt = (Int(dateForDate.timeIntervalSince1970) / (3600 * 24)) * (3600 * 24)
+        let timeInt = Int(dateForTime.timeIntervalSince1970) % (3600 * 24)
+
+        return Date(timeIntervalSince1970: Double(dateInt + timeInt))
+    }
+
     init(_ eventType: EventType, _ trip: TripCard) {
         title = ""
         let currDate = Date()
@@ -48,8 +55,12 @@ class UserEvent: NSObject, ObservableObject {
         rating = Int(card.rating)
         transportation = card.transportation
         eventDescription = card.eventDescription
+        if EventType(rawValue: card.type) == .transportation {
+            origin = Place(card.originTitle, CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))
+        } else {
+            origin = Place()
+        }
         place = Place(card.title, CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude))
-        origin = Place()
         parentTrip = trip
         event = card
     }

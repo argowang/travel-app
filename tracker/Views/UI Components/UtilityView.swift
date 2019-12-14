@@ -22,7 +22,7 @@ struct LazyView<Content: View>: View {
 struct RefreshView: View {
     @State var refresh: Bool
     var body: some View {
-        VStack{
+        VStack {
             if self.refresh {
                 Text("Hi").hidden()
             } else {

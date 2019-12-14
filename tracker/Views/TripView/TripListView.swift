@@ -49,8 +49,7 @@ struct TripListView: View {
                         Text("Add Trip")
                     }
                     .sheet(isPresented: $showingDetail, onDismiss: {
-                        // we should decide on dismiss behavior here
-                        print("on dismiss")
+                        //todo we should decide on dismiss behavior here
                     }) {
                         AddTripView().environment(\.managedObjectContext, self.managedObjectContext)
                     }

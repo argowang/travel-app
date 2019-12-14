@@ -20,13 +20,13 @@ struct EventCardListView: View {
     @State var eventType: EventType = .general
 
     var didChange = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
-    
+
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy HH:mm"
         return formatter
     }
-    
+
     var body: some View {
         ZStack {
             RefreshView(refresh: refreshing)
@@ -34,7 +34,7 @@ struct EventCardListView: View {
                 ForEach(self.trip.eventArray, id: \.uuid) { card in
                     ZStack {
                         NavigationLink(destination:
-                        AddEventView(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected) {
+                            AddEventView(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected) {
                             Text("Work Around")
                         }.hidden()
 
@@ -42,7 +42,7 @@ struct EventCardListView: View {
                             .onTapGesture {
                                 self.selected = card.uuid
                             }
-                        .background(RefreshView(refresh: self.refreshing))
+                            .background(RefreshView(refresh: self.refreshing))
                     }
                     .padding(.bottom, 5)
                     .contextMenu {

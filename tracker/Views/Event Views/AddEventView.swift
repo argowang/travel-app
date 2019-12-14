@@ -3,8 +3,6 @@ import MapKit
 import SwiftUI
 
 struct AddEventView: View {
-    @ObservedObject var place: Place = Place()
-    @ObservedObject var origin: Place = Place()
     @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var draftEvent: UserEvent
 
@@ -17,7 +15,7 @@ struct AddEventView: View {
     var body: some View {
         VStack {
             if draftEvent.type == .transportation {
-                transportationLocationRow(origin: origin, destination: place)
+                transportationLocationRow(origin: draftEvent.origin, destination: draftEvent.place)
             } else {
                 ZStack {
                     VStack {
@@ -25,7 +23,7 @@ struct AddEventView: View {
                         Spacer()
                             .frame(height: 50)
                     }
-                    locationRow(place: self.place)
+                    locationRow(place: draftEvent.place)
                 }
             }
             VStack {
@@ -70,7 +68,7 @@ struct AddEventView: View {
         }
         .navigationBarTitle(Text("\(draftEvent.type.rawValue)"))
         .onAppear {
-            if self.place.name == "" {
+            if self.draftEvent.place.name == "" {
                 let georeader = CLGeocoder()
                 if let lastLocation = self.manager.lastLocation {
                     georeader.reverseGeocodeLocation(lastLocation) { places, err in
@@ -78,8 +76,8 @@ struct AddEventView: View {
                             print((err?.localizedDescription)!)
                             return
                         }
-                        self.place.name = places?.first?.locality ?? ""
-                        self.place.coordinate = lastLocation.coordinate
+                        self.draftEvent.place.name = places?.first?.locality ?? ""
+                        self.draftEvent.place.coordinate = lastLocation.coordinate
                     }
                 }
             }
@@ -94,23 +92,18 @@ struct AddEventView: View {
                 self.draftEvent.parentTrip.addToEvents(cardToSave)
             }
 
-            cardToSave.title = self.place.name
-            cardToSave.latitude = self.place.coordinate?.latitude ?? 0
-
-            cardToSave.longitude = self.place.coordinate?.longitude ?? 0
+            cardToSave.title = self.draftEvent.place.name
+            cardToSave.latitude = self.draftEvent.place.coordinate?.latitude ?? 0
+            cardToSave.longitude = self.draftEvent.place.coordinate?.longitude ?? 0
 
             if self.draftEvent.type == .transportation {
-                cardToSave.originTitle = self.origin.name
-                cardToSave.originLatitude = self.origin.coordinate?.latitude ?? 0
-                cardToSave.originLongitude = self.origin.coordinate?.longitude ?? 0
-
+                cardToSave.originTitle = self.draftEvent.origin.name
+                cardToSave.originLatitude = self.draftEvent.origin.coordinate?.latitude ?? 0
+                cardToSave.originLongitude = self.draftEvent.origin.coordinate?.longitude ?? 0
                 cardToSave.transportation = self.draftEvent.transportation
             }
 
-            let dateInt = (Int(self.draftEvent.dateForDate.timeIntervalSince1970) / (3600 * 24)) * (3600 * 24)
-            let timeInt = Int(self.draftEvent.dateForTime.timeIntervalSince1970) % (3600 * 24)
-
-            cardToSave.start = Date(timeIntervalSince1970: Double(dateInt + timeInt))
+            cardToSave.start = self.draftEvent.calculatedDate
             cardToSave.type = self.draftEvent.type.rawValue
             cardToSave.rating = Int16(self.draftEvent.rating)
             cardToSave.price = self.draftEvent.price

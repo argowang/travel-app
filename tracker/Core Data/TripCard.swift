@@ -15,7 +15,7 @@ public class TripCard: NSManagedObject, Identifiable {
     @NSManaged public var end: Date?
 
     @NSManaged public var events: NSSet?
-    
+
     public var eventArray: [EventCard] {
         let set = events as? Set<EventCard> ?? []
         return set.sorted {
