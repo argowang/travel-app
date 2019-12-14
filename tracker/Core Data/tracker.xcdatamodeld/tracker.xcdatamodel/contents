@@ -19,13 +19,14 @@
     </entity>
     <entity name="TripCard" representedClassName=".TripCard" syncable="YES">
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EventCard" inverseName="trip" inverseEntity="EventCard"/>
     </entity>
     <elements>
-       <element name="EventCard" positionX="-45" positionY="36" width="128" height="253"/>
-        <element name="TripCard" positionX="-54" positionY="27" width="128" height="118"/>
+        <element name="EventCard" positionX="-45" positionY="36" width="128" height="253"/>
+        <element name="TripCard" positionX="-54" positionY="27" width="128" height="28"/>
     </elements>
 </model>

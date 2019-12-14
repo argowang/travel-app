@@ -17,14 +17,7 @@ struct AddEventView: View {
             if draftEvent.type == .transportation {
                 transportationLocationRow(origin: draftEvent.origin, destination: draftEvent.place)
             } else {
-                ZStack {
-                    VStack {
-                        LocationAirplaneIcon().frame(minWidth: 0, maxWidth: 400, minHeight: 0, maxHeight: 50)
-                        Spacer()
-                            .frame(height: 50)
-                    }
-                    locationRow(place: draftEvent.place)
-                }
+                locationRow(place: draftEvent.place)
             }
             VStack {
                 Form {
