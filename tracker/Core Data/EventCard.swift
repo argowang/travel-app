@@ -25,7 +25,7 @@ public class EventCard: NSManagedObject, Identifiable {
     @NSManaged public var transportation: String
     @NSManaged public var eventDescription: String
 
-    @NSManaged public var trip: TripCard?
+    @NSManaged public var trip: TripCard
 }
 
 extension EventCard {

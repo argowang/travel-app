@@ -21,22 +21,24 @@ class UserEvent: NSObject, ObservableObject {
     @Published var eventDescription: String
     @Published var place: Place
     @Published var origin: Place
+    @Published var parentTrip: TripCard
 
-    override init() {
+    init(_ trip: TripCard, _ eventType: EventType) {
         title = ""
         let currDate = Date()
         dateForDate = currDate
         dateForTime = currDate
         price = ""
-        type = .general
+        type = eventType
         rating = 0
         transportation = ""
         eventDescription = ""
         place = Place()
         origin = Place()
+        parentTrip = trip
     }
 
-    init(_ card: EventCard) {
+    init(_ card: EventCard, _ trip: TripCard) {
         title = card.title
         dateForDate = card.start
         dateForTime = card.start
@@ -47,5 +49,6 @@ class UserEvent: NSObject, ObservableObject {
         eventDescription = card.eventDescription
         place = Place(card.title, CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude))
         origin = Place()
+        parentTrip = trip
     }
 }
