@@ -15,7 +15,6 @@ struct AddTripView: View {
     @State var title = ""
 
     @State var showImagePicker: Bool = false
-    @State var image: Image? = nil
     @State var uiImage: UIImage? = nil
 
     var body: some View {
@@ -37,8 +36,10 @@ struct AddTripView: View {
                     let card = TripCard(context: self.managedObjectContext)
                     card.title = self.title
                     card.uuid = UUID()
-                    if self.image != nil {
+                    if self.uiImage != nil {
                         card.image = self.uiImage!.pngData()
+                    } else {
+                        card.image = UIImage(named: "los-angeles")!.pngData()
                     }
                     do {
                         try self.managedObjectContext.save()
@@ -72,18 +73,20 @@ struct AddTripView: View {
                                             .foregroundColor(.gray)
                                             .cornerRadius(10)
                                     )
-                                image?.resizable().frame(width: 70, height: 70)
-                                    .cornerRadius(10)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 2.5)
-                                    )
+                                if self.uiImage != nil {
+                                    Image(uiImage: self.uiImage!).resizable().frame(width: 70, height: 70)
+                                        .cornerRadius(10)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 2.5)
+                                        )
+                                }
                             }
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
                     .sheet(isPresented: $showImagePicker) {
-                        ImagePicker(image: self.$image, uiimage: self.$uiImage)
+                        ImagePicker(uiimage: self.$uiImage)
                     }
                 }
 

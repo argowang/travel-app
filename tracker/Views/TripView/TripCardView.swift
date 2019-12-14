@@ -17,17 +17,9 @@ struct TripCardView: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    ZStack {
-                        if image != nil {
-                            Image(uiImage: self.image!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        } else {
-                            Image("los-angeles")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        }
-                    }
+                    Image(uiImage: self.image!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                     Text(self.dateString)
                         .font(.headline)
                         .foregroundColor(.secondary)
