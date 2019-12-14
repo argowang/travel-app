@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15114DDD2395B2F8003863FD /* FakeTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DDC2395B2F8003863FD /* FakeTripView.swift */; };
+		15114DDD2395B2F8003863FD /* UtilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DDC2395B2F8003863FD /* UtilityView.swift */; };
 		15114DDF2395B48D003863FD /* EventCardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DDE2395B48D003863FD /* EventCardListView.swift */; };
 		15114DE12395B4AC003863FD /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE02395B4AC003863FD /* EventCardView.swift */; };
 		15114DE923962794003863FD /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE623960905003863FD /* EventCard.swift */; };
@@ -46,7 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15114DDC2395B2F8003863FD /* FakeTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTripView.swift; sourceTree = "<group>"; };
+		15114DDC2395B2F8003863FD /* UtilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityView.swift; sourceTree = "<group>"; };
 		15114DDE2395B48D003863FD /* EventCardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardListView.swift; sourceTree = "<group>"; };
 		15114DE02395B4AC003863FD /* EventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
 		15114DE623960905003863FD /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
@@ -115,6 +115,7 @@
 				B86E316E238B308F00B31FE2 /* SlideOverCardView.swift */,
 				B86E3170238B30AB00B31FE2 /* HandleView.swift */,
 				B86E319D239C74F700B31FE2 /* StarRatingView.swift */,
+				15114DDC2395B2F8003863FD /* UtilityView.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -132,7 +133,6 @@
 		B86E31992394D8D600B31FE2 /* Event Views */ = {
 			isa = PBXGroup;
 			children = (
-				15114DDC2395B2F8003863FD /* FakeTripView.swift */,
 				1571D4FD238FA15D00FC33E9 /* AddEventView.swift */,
 				15114DDE2395B48D003863FD /* EventCardListView.swift */,
 				15114DE02395B4AC003863FD /* EventCardView.swift */,
@@ -307,7 +307,7 @@
 				B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */,
 				B8DA964D237FC34600BC1801 /* AppDelegate.swift in Sources */,
 				4481FC1123A1D44B0092DD97 /* TripInfoView.swift in Sources */,
-				15114DDD2395B2F8003863FD /* FakeTripView.swift in Sources */,
+				15114DDD2395B2F8003863FD /* UtilityView.swift in Sources */,
 				B8ED926D238083C500025623 /* LocationManager.swift in Sources */,
 				B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */,
 				B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */,
