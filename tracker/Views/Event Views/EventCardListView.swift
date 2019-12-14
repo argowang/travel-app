@@ -18,6 +18,7 @@ struct EventCardListView: View {
 
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
+//    @ObservedObject var trip: TripCard
     @State var title = ""
     @State private var refreshing = false
     @State var selected: UUID?
