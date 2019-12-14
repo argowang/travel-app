@@ -11,12 +11,13 @@ import SwiftUI
 struct TripCardView: View {
     var title: String
     var dateString: String
+    var image: UIImage?
 
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Image("los-angeles")
+                    Image(uiImage: self.image!)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                     Text(self.dateString)

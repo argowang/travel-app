@@ -29,9 +29,12 @@ struct TripListView: View {
                     ZStack {
                         NavigationLink(destination: LazyView(EventCardListView(trip: card)), tag: card.uuid, selection: self.$selected) {
                             Text("Work Around")
+
                         }.hidden()
 
-                        TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                        TripCardView(title: card.title ?? "title place holder",
+                                     dateString: self.dateFormatter.string(from: card.start ?? Date()),
+                                     image: UIImage(data: card.image!, scale: 1.0))
                             .onTapGesture {
                                 self.selected = card.uuid
                             }
