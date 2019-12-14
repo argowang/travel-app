@@ -23,6 +23,7 @@
 		4481FC0F23A1D4360092DD97 /* TripCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC0E23A1D4360092DD97 /* TripCardView.swift */; };
 		4481FC1123A1D44B0092DD97 /* TripInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC1023A1D44B0092DD97 /* TripInfoView.swift */; };
 		4481FC1323A1D45F0092DD97 /* TripListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC1223A1D45F0092DD97 /* TripListView.swift */; };
+		B81702B023A586CE002A28AD /* FloatingAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81702AF23A586CE002A28AD /* FloatingAddButtonView.swift */; };
 		B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31662389EE6C00B31FE2 /* ViewExtension.swift */; };
 		B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316A2389EFE100B31FE2 /* SearchBarView.swift */; };
 		B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316C238A262400B31FE2 /* PlaceFinder.swift */; };
@@ -63,6 +64,7 @@
 		4481FC0E23A1D4360092DD97 /* TripCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCardView.swift; sourceTree = "<group>"; };
 		4481FC1023A1D44B0092DD97 /* TripInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoView.swift; sourceTree = "<group>"; };
 		4481FC1223A1D45F0092DD97 /* TripListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListView.swift; sourceTree = "<group>"; };
+		B81702AF23A586CE002A28AD /* FloatingAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingAddButtonView.swift; sourceTree = "<group>"; };
 		B86E31662389EE6C00B31FE2 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		B86E316A2389EFE100B31FE2 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B86E316C238A262400B31FE2 /* PlaceFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceFinder.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				B86E3170238B30AB00B31FE2 /* HandleView.swift */,
 				B86E319D239C74F700B31FE2 /* StarRatingView.swift */,
 				15114DDC2395B2F8003863FD /* UtilityView.swift */,
+				B81702AF23A586CE002A28AD /* FloatingAddButtonView.swift */,
 				1524655523A5686B0086CAA1 /* ImagePicker.swift */,
 			);
 			path = "UI Components";
@@ -322,6 +325,7 @@
 				B8DA964F237FC34600BC1801 /* SceneDelegate.swift in Sources */,
 				154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */,
 				15EAB7A4239F3742000A4730 /* LocationAirplaneIcon.swift in Sources */,
+				B81702B023A586CE002A28AD /* FloatingAddButtonView.swift in Sources */,
 				1552FAE4238BA94800060E05 /* CardListView.swift in Sources */,
 				B86E31A423A2088400B31FE2 /* KeyBoardResponder.swift in Sources */,
 				1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */,

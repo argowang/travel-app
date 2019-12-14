@@ -18,7 +18,6 @@ struct TripListView: View {
 
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
-    @State var title = ""
     @State var showingDetail = false
     @State var selected: UUID?
 
@@ -57,26 +56,7 @@ struct TripListView: View {
                     }
                 }
             }
-            VStack(alignment: .trailing) {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        self.showingDetail.toggle()
-                    }) {
-                        Image("plus")
-                            .resizable()
-                            .frame(width: 90, height: 90)
-                    }
-                    .sheet(isPresented: $showingDetail, onDismiss: {
-                        //todo we should decide on dismiss behavior here
-                    }) {
-                        AddTripView().environment(\.managedObjectContext, self.managedObjectContext)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding()
-                }
-            }
+            FloatingAddButtonView(destinationView: AddTripView().environment(\.managedObjectContext, self.managedObjectContext))
         }
     }
 }
