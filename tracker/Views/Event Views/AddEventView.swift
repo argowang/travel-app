@@ -27,11 +27,21 @@ struct AddEventView: View {
                 }
             }
             VStack {
-                List {
-                    Section {
+                Form {
+                    Section(header: HStack {
+                        Text("Title:")
+                        Spacer()
+                        Button(action: {
+                            if self.draftEvent.type == .transportation {
+                                self.draftEvent.title = "From \(self.draftEvent.origin.name) to \(self.draftEvent.place.name)"
+                            } else {
+                                self.draftEvent.title = self.draftEvent.place.name
+                            }
+                        }) {
+                            Text("Sync with location")
+                        }
+                    }) {
                         HStack {
-                            Text("Title:")
-                            Spacer()
                             TextField("Enter event title", text: $draftEvent.title)
                         }
                     }
@@ -40,30 +50,26 @@ struct AddEventView: View {
                         datePicker(selectedDate: $draftEvent.dateForDate)
                         timePicker(selectedTime: $draftEvent.dateForTime)
                     }
-                    Section {
+                    Section(header: Text("💰 Price:")) {
                         HStack {
-                            Text("💰 Price:")
-                            Spacer()
-                                .frame(width: 180)
                             TextField("Enter price here", text: $draftEvent.price)
                                 .foregroundColor(.secondary)
                         }
+                    }
+                    Section(header: Text("👍 Rating:")) {
                         HStack {
-                            Text("👍 Rating:")
-                            Spacer()
                             StarRatingView(rating: $draftEvent.rating)
                         }
                     }
                     if draftEvent.type == .transportation {
-                        Section {
+                        Section(header: Text("Transportation")) {
                             VStack(alignment: .leading) {
-                                Text("Transportation")
                                 transporatationMethodsSelectionRow(transportationMethod: $draftEvent.transportation)
                             }
                         }
                     }
 
-                    Section {
+                    Section(header: Text("Description")) {
                         HStack {
                             TextField("Enter your description here", text: $draftEvent.eventDescription)
                         }
@@ -86,10 +92,6 @@ struct AddEventView: View {
                         }
                         self.draftEvent.place.name = places?.first?.locality ?? ""
                         self.draftEvent.place.coordinate = lastLocation.coordinate
-
-                        if self.draftEvent.title == "" {
-                            self.draftEvent.title = "\(self.draftEvent.type == .transportation ? "Trip to" : "") \(self.draftEvent.place.name)"
-                        }
                     }
                 }
             }
