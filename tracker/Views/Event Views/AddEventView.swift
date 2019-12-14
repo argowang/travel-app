@@ -9,6 +9,7 @@ struct AddEventView: View {
     @ObservedObject var origin: Place = Place()
     @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var draftEvent: UserEvent
+    @ObservedObject var trip: TripCard
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -93,6 +94,7 @@ struct AddEventView: View {
             } else {
                 cardToSave = EventCard(context: self.managedObjectContext)
                 cardToSave.uuid = UUID()
+                self.trip.addToEvents(cardToSave)
             }
 
             cardToSave.title = self.place.name
@@ -115,7 +117,6 @@ struct AddEventView: View {
             cardToSave.type = self.draftEvent.type.rawValue
             cardToSave.rating = Int16(self.draftEvent.rating)
             cardToSave.price = self.draftEvent.price
-
             cardToSave.eventDescription = self.draftEvent.eventDescription
 
             do {
@@ -230,11 +231,5 @@ struct transporatationMethodsSelectionRow: View {
                 Text("🚄").tag("train")
             }.pickerStyle(SegmentedPickerStyle())
         }
-    }
-}
-
-struct AddTripEventInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddEventView(draftEvent: UserEvent())
     }
 }

@@ -34,7 +34,7 @@ struct TripListView: View {
 
                         TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                     } else {
-                        NavigationLink(destination: TripInfoView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))) {
+                        NavigationLink(destination: LazyView(EventCardListView(trip: card))) {
                             TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
                         }
                         .buttonStyle(PlainButtonStyle())

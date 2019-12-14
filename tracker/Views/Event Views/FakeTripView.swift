@@ -8,14 +8,6 @@
 
 import SwiftUI
 
-struct FakeTripView: View {
-    var body: some View {
-        NavigationLink(destination: LazyView(EventCardListView())) {
-            Text("Your Trip Events")
-        }
-    }
-}
-
 struct LazyView<Content: View>: View {
     let build: () -> Content
     init(_ build: @autoclosure @escaping () -> Content) {
@@ -24,11 +16,5 @@ struct LazyView<Content: View>: View {
 
     var body: Content {
         build()
-    }
-}
-
-struct FakeTripView_Previews: PreviewProvider {
-    static var previews: some View {
-        FakeTripView()
     }
 }

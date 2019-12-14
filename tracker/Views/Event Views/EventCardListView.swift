@@ -9,6 +9,19 @@ import CoreData
 import CoreLocation
 import SwiftUI
 
+struct RefreshView: View {
+    @State var refresh: Bool
+    var body: some View {
+        VStack{
+            if self.refresh {
+                Text("Hi").hidden()
+            } else {
+                Text("Hello").hidden()
+            }
+        }.hidden()
+    }
+}
+
 struct EventCardListView: View {
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -17,23 +30,25 @@ struct EventCardListView: View {
     }
 
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
+//    @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
+    @ObservedObject var trip: TripCard
     @State var title = ""
-    @State private var refreshing = false
+    @State var refreshing = false
     @State var selected: UUID?
-    @State private var showingSheet = false
-    @State private var addEventActive = false
+    @State var showingSheet = false
+    @State var addEventActive = false
     @State var eventType: EventType = .general
 
-    private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
+    var didChange = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
 
     var body: some View {
         ZStack {
+            RefreshView(refresh: refreshing)
             ScrollView {
-                ForEach(self.eventCards, id: \.uuid) { card in
+                ForEach(self.trip.eventArray, id: \.uuid) { card in
                     ZStack {
                         NavigationLink(destination:
-                            AddEventView(card: card, draftEvent: UserEvent(card)), tag: card.uuid, selection: self.$selected) {
+                        AddEventView(card: card, draftEvent: UserEvent(card, self.trip), trip: self.trip), tag: card.uuid, selection: self.$selected) {
                             Text("Work Around")
                         }.hidden()
 
@@ -41,6 +56,7 @@ struct EventCardListView: View {
                             .onTapGesture {
                                 self.selected = card.uuid
                             }
+                        .background(RefreshView(refresh: self.refreshing))
                     }
                     .padding(.bottom, 5)
                     .contextMenu {
@@ -63,7 +79,7 @@ struct EventCardListView: View {
                     }
                 }
                 // temp fix, fetchrequest sometimes will not update, this is apple native bug
-                .onReceive(self.didSave) { _ in
+                .onReceive(self.didChange) { _ in
                     self.refreshing.toggle()
                 }
             }
@@ -72,7 +88,7 @@ struct EventCardListView: View {
                 HStack {
                     Spacer()
                     // https://forums.developer.apple.com/thread/124757
-                    NavigationLink(destination: AddEventView(draftEvent: UserEvent()), isActive: self.$addEventActive) {
+                    NavigationLink(destination: AddEventView(draftEvent: UserEvent(trip, self.eventType), trip: self.trip), isActive: self.$addEventActive) {
                         Text("Work Around")
                     }.hidden()
 
@@ -114,14 +130,6 @@ struct EventCardListView: View {
                     }
                 }
             }
-        }
-    }
-}
-
-struct EventCardListView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            EventCardListView()
         }
     }
 }
