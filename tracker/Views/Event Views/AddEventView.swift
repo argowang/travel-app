@@ -3,13 +3,10 @@ import MapKit
 import SwiftUI
 
 struct AddEventView: View {
-    @State var card: EventCard?
-
     @ObservedObject var place: Place = Place()
     @ObservedObject var origin: Place = Place()
     @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var draftEvent: UserEvent
-    @ObservedObject var trip: TripCard
 
     @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -89,12 +86,12 @@ struct AddEventView: View {
         }
         .navigationBarItems(trailing: Button(action: {
             var cardToSave: EventCard!
-            if self.card != nil {
-                cardToSave = self.card
+            if self.draftEvent.event != nil {
+                cardToSave = self.draftEvent.event
             } else {
                 cardToSave = EventCard(context: self.managedObjectContext)
                 cardToSave.uuid = UUID()
-                self.trip.addToEvents(cardToSave)
+                self.draftEvent.parentTrip.addToEvents(cardToSave)
             }
 
             cardToSave.title = self.place.name

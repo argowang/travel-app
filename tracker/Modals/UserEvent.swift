@@ -22,8 +22,9 @@ class UserEvent: NSObject, ObservableObject {
     @Published var place: Place
     @Published var origin: Place
     @Published var parentTrip: TripCard
+    @Published var event: EventCard?
 
-    init(_ trip: TripCard, _ eventType: EventType) {
+    init(_ eventType: EventType, _ trip: TripCard) {
         title = ""
         let currDate = Date()
         dateForDate = currDate
@@ -50,5 +51,6 @@ class UserEvent: NSObject, ObservableObject {
         place = Place(card.title, CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude))
         origin = Place()
         parentTrip = trip
+        event = card
     }
 }

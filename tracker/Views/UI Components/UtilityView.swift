@@ -18,3 +18,16 @@ struct LazyView<Content: View>: View {
         build()
     }
 }
+
+struct RefreshView: View {
+    @State var refresh: Bool
+    var body: some View {
+        VStack{
+            if self.refresh {
+                Text("Hi").hidden()
+            } else {
+                Text("Hello").hidden()
+            }
+        }.hidden()
+    }
+}

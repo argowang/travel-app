@@ -9,28 +9,8 @@ import CoreData
 import CoreLocation
 import SwiftUI
 
-struct RefreshView: View {
-    @State var refresh: Bool
-    var body: some View {
-        VStack{
-            if self.refresh {
-                Text("Hi").hidden()
-            } else {
-                Text("Hello").hidden()
-            }
-        }.hidden()
-    }
-}
-
 struct EventCardListView: View {
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return formatter
-    }
-
     @Environment(\.managedObjectContext) var managedObjectContext
-//    @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
     @ObservedObject var trip: TripCard
     @State var title = ""
     @State var refreshing = false
@@ -40,7 +20,13 @@ struct EventCardListView: View {
     @State var eventType: EventType = .general
 
     var didChange = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
-
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy HH:mm"
+        return formatter
+    }
+    
     var body: some View {
         ZStack {
             RefreshView(refresh: refreshing)
@@ -48,7 +34,7 @@ struct EventCardListView: View {
                 ForEach(self.trip.eventArray, id: \.uuid) { card in
                     ZStack {
                         NavigationLink(destination:
-                        AddEventView(card: card, draftEvent: UserEvent(card, self.trip), trip: self.trip), tag: card.uuid, selection: self.$selected) {
+                        AddEventView(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected) {
                             Text("Work Around")
                         }.hidden()
 
@@ -88,7 +74,7 @@ struct EventCardListView: View {
                 HStack {
                     Spacer()
                     // https://forums.developer.apple.com/thread/124757
-                    NavigationLink(destination: AddEventView(draftEvent: UserEvent(trip, self.eventType), trip: self.trip), isActive: self.$addEventActive) {
+                    NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip)), isActive: self.$addEventActive) {
                         Text("Work Around")
                     }.hidden()
 
