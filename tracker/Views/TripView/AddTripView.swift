@@ -32,6 +32,7 @@ struct AddTripView: View {
                 Button(action: {
                     let card = TripCard(context: self.managedObjectContext)
                     card.title = self.title
+                    card.uuid = UUID()
                     do {
                         try self.managedObjectContext.save()
                         self.presentationMode.wrappedValue.dismiss()

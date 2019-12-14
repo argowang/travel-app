@@ -9,7 +9,6 @@ import CoreData
 import CoreLocation
 import SwiftUI
 
-
 struct EventCardListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var trip: TripCard
@@ -57,7 +56,7 @@ struct EventCardListView: View {
                         }
                         Button(action: {
                             self.managedObjectContext.delete(card)
-                            
+
                             do {
                                 try self.managedObjectContext.save()
                             } catch {

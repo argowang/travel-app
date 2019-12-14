@@ -20,20 +20,22 @@ struct TripListView: View {
     @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
     @State var title = ""
     @State var showingDetail = false
+    @State var selected: UUID?
 
     var body: some View {
         ZStack {
             ScrollView {
                 ForEach(self.tripCards) { card in
                     ZStack {
-                        // workaround, for context menu, it will have  "[Assert] Presenting while the highlight platter isn't in a window." if we keep navigation link with trip card view together and apply contextMenu
-                        NavigationLink(destination: LazyView(EventCardListView(trip: card))) {
-                            Text("")
-                        }
+                        NavigationLink(destination: LazyView(EventCardListView(trip: card)), tag: card.uuid, selection: self.$selected) {
+                            Text("Work Around")
+                        }.hidden()
 
                         TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                            .onTapGesture {
+                                self.selected = card.uuid
+                            }
                     }
-
                     .buttonStyle(PlainButtonStyle())
                     .contextMenu {
                         Button(action: {
