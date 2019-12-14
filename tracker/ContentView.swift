@@ -13,7 +13,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            FakeTripView()
+            TripListView()
                 .navigationBarTitle("Your Trip")
         }
     }

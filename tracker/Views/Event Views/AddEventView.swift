@@ -233,8 +233,8 @@ struct transporatationMethodsSelectionRow: View {
     }
 }
 
- struct AddTripEventInfoView_Previews: PreviewProvider {
+struct AddTripEventInfoView_Previews: PreviewProvider {
     static var previews: some View {
         AddEventView(draftEvent: UserEvent())
     }
- }
+}
