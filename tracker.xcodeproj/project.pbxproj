@@ -11,6 +11,7 @@
 		15114DDF2395B48D003863FD /* EventCardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DDE2395B48D003863FD /* EventCardListView.swift */; };
 		15114DE12395B4AC003863FD /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE02395B4AC003863FD /* EventCardView.swift */; };
 		15114DE923962794003863FD /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE623960905003863FD /* EventCard.swift */; };
+		1524655623A5686B0086CAA1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524655523A5686B0086CAA1 /* ImagePicker.swift */; };
 		154D6F072390509700169C25 /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F062390509700169C25 /* TripCard.swift */; };
 		154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F08239066EA00169C25 /* EventInfoView.swift */; };
 		1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardDetailView.swift */; };
@@ -50,6 +51,7 @@
 		15114DDE2395B48D003863FD /* EventCardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardListView.swift; sourceTree = "<group>"; };
 		15114DE02395B4AC003863FD /* EventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
 		15114DE623960905003863FD /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
+		1524655523A5686B0086CAA1 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		154D6F062390509700169C25 /* TripCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCard.swift; sourceTree = "<group>"; };
 		154D6F08239066EA00169C25 /* EventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
 		1552FAD5238B344300060E05 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				B86E3170238B30AB00B31FE2 /* HandleView.swift */,
 				B86E319D239C74F700B31FE2 /* StarRatingView.swift */,
 				15114DDC2395B2F8003863FD /* UtilityView.swift */,
+				1524655523A5686B0086CAA1 /* ImagePicker.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */,
 				B86E31A0239E051E00B31FE2 /* EventType.swift in Sources */,
 				B86E31A623A3635D00B31FE2 /* UserEvent.swift in Sources */,
+				1524655623A5686B0086CAA1 /* ImagePicker.swift in Sources */,
 				B8ED925A23806BDB00025623 /* tracker.xcdatamodeld in Sources */,
 				4481FC0D23A1D4220092DD97 /* AddTripView.swift in Sources */,
 				B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */,
