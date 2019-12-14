@@ -12,7 +12,6 @@ import SwiftUI
 struct EventCardListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var trip: TripCard
-    @State var title = ""
     @State var refreshing = false
     @State var selected: UUID?
     @State var showingSheet = false
@@ -85,7 +84,6 @@ struct EventCardListView: View {
                     }.hidden()
 
                     Button(action: {
-                        if self.title != "" {}
                         self.showingSheet = true
                     }) {
                         Image("plus")
