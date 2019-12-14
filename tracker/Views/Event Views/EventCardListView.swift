@@ -18,12 +18,21 @@ struct EventCardListView: View {
 
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: EventCard.allEventCardsFetchRequest()) var eventCards: FetchedResults<EventCard>
+
     @State var title = ""
     @State private var refreshing = false
     @State var selected: UUID?
     @State private var showingSheet = false
     @State private var addEventActive = false
     @State var eventType: EventType = .general
+
+    let tripUuid: UUID
+
+    init(tripUuid: UUID) {
+        self.tripUuid = tripUuid
+        print(tripUuid)
+        _eventCards = FetchRequest<EventCard>(fetchRequest: EventCard.getSpecificTrip(tripUuid: tripUuid))
+    }
 
     private var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
@@ -33,7 +42,7 @@ struct EventCardListView: View {
                 ForEach(self.eventCards, id: \.uuid) { card in
                     ZStack {
                         NavigationLink(destination:
-                            AddEventView(card: card, draftEvent: UserEvent(card)), tag: card.uuid, selection: self.$selected) {
+                            AddEventView(tripUuid: self.tripUuid, card: card, draftEvent: UserEvent(card)), tag: card.uuid, selection: self.$selected) {
                             Text("Work Around")
                         }.hidden()
 
@@ -72,7 +81,7 @@ struct EventCardListView: View {
                 HStack {
                     Spacer()
                     // https://forums.developer.apple.com/thread/124757
-                    NavigationLink(destination: AddEventView(draftEvent: UserEvent()), isActive: self.$addEventActive) {
+                    NavigationLink(destination: AddEventView(tripUuid: self.tripUuid, draftEvent: UserEvent()), isActive: self.$addEventActive) {
                         Text("Work Around")
                     }.hidden()
 
@@ -121,7 +130,7 @@ struct EventCardListView: View {
 struct EventCardListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            EventCardListView()
+            EventCardListView(tripUuid: UUID())
         }
     }
 }

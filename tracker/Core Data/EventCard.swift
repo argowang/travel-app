@@ -24,6 +24,7 @@ public class EventCard: NSManagedObject, Identifiable {
     @NSManaged public var price: String
     @NSManaged public var transportation: String
     @NSManaged public var eventDescription: String
+    @NSManaged public var tripUuid: UUID
 
     @NSManaged public var trip: TripCard?
 }
@@ -31,6 +32,17 @@ public class EventCard: NSManagedObject, Identifiable {
 extension EventCard {
     public var wrappedRating: Int {
         Int(rating)
+    }
+
+    static func getSpecificTrip(tripUuid: UUID) -> NSFetchRequest<EventCard> {
+        let request: NSFetchRequest<EventCard> = EventCard.fetchRequest() as! NSFetchRequest<EventCard>
+
+        let findDescriptor = NSPredicate(format: "tripUuid == %@", "\(tripUuid.uuidString)")
+
+        request.predicate = findDescriptor
+        request.sortDescriptors = [NSSortDescriptor(key: "start", ascending: false)]
+
+        return request
     }
 
     static func allEventCardsFetchRequest() -> NSFetchRequest<EventCard> {

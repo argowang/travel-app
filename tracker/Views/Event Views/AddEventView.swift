@@ -3,6 +3,8 @@ import MapKit
 import SwiftUI
 
 struct AddEventView: View {
+    var tripUuid: UUID
+
     @State var card: EventCard?
 
     @ObservedObject var place: Place = Place()
@@ -93,6 +95,7 @@ struct AddEventView: View {
             } else {
                 cardToSave = EventCard(context: self.managedObjectContext)
                 cardToSave.uuid = UUID()
+                cardToSave.tripUuid = self.tripUuid
             }
 
             cardToSave.title = self.place.name
@@ -233,8 +236,8 @@ struct transporatationMethodsSelectionRow: View {
     }
 }
 
- struct AddTripEventInfoView_Previews: PreviewProvider {
+struct AddTripEventInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEventView(draftEvent: UserEvent())
+        AddEventView(tripUuid: UUID(), draftEvent: UserEvent())
     }
- }
+}

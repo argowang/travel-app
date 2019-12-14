@@ -35,6 +35,9 @@ struct AddTripView: View {
                 }
 
                 card.start = self.selectedDate
+                card.uuid = UUID()
+
+                print(card.uuid)
 
                 do {
                     try self.managedObjectContext.save()
