@@ -17,36 +17,51 @@ struct TripListView: View {
     }
 
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.editMode) var mode
     @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
     @State var title = ""
     @State var showingDetail = false
 
     var body: some View {
-        VStack {
+        ZStack {
             ScrollView {
                 ForEach(self.tripCards) { card in
-                    if self.mode?.wrappedValue == .active {
-                        Button("DELETE") {
-                            self.managedObjectContext.delete(card)
+                    ZStack {
+                        // workaround, for context menu, it will have  "[Assert] Presenting while the highlight platter isn't in a window." if we keep navigation link with trip card view together and apply contextMenu
+                        NavigationLink(destination: LazyView(EventCardListView(trip: card))) {
+                            Text("")
                         }
-                        .padding()
 
                         TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
-                    } else {
-                        NavigationLink(destination: LazyView(EventCardListView(trip: card))) {
-                            TripCardView(title: card.title ?? "title place holder", dateString: self.dateFormatter.string(from: card.start ?? Date()))
+                    }
+
+                    .buttonStyle(PlainButtonStyle())
+                    .contextMenu {
+                        Button(action: {
+                            self.managedObjectContext.delete(card)
+                            do {
+                                try self.managedObjectContext.save()
+                            } catch {
+                                print(error)
+                            }
+                        }) {
+                            HStack {
+                                Text("Remove")
+                                Image(systemName: "trash.circle")
+                            }
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }
-            VStack {
-                if self.mode?.wrappedValue == .inactive {
+            VStack(alignment: .trailing) {
+                Spacer()
+                HStack {
+                    Spacer()
                     Button(action: {
                         self.showingDetail.toggle()
                     }) {
-                        Text("Add Trip")
+                        Image("plus")
+                            .resizable()
+                            .frame(width: 90, height: 90)
                     }
                     .sheet(isPresented: $showingDetail, onDismiss: {
                         //todo we should decide on dismiss behavior here

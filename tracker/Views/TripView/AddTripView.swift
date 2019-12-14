@@ -62,7 +62,8 @@ struct AddTripView: View {
                         .foregroundColor(.gray)
                         .cornerRadius(10)
                 )
-                .padding()
+                Spacer()
+                    .frame(width: 20)
 
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(.gray)
@@ -72,8 +73,8 @@ struct AddTripView: View {
                         TextField("Enter your trip name", text: $title)
                             .padding()
                     )
-                    .padding()
             }
+            .padding()
 
             Spacer()
         }
