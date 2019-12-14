@@ -29,13 +29,13 @@ struct AddEventView: View {
             VStack {
                 List {
                     Section {
-                        HStack{
-                        Text("Title:")
-                        Spacer()
+                        HStack {
+                            Text("Title:")
+                            Spacer()
                             TextField("Enter event title", text: $draftEvent.title)
                         }
                     }
-                    
+
                     Section {
                         datePicker(selectedDate: $draftEvent.dateForDate)
                         timePicker(selectedTime: $draftEvent.dateForTime)
@@ -99,7 +99,7 @@ struct AddEventView: View {
                 cardToSave.uuid = UUID()
                 self.draftEvent.parentTrip.addToEvents(cardToSave)
             }
-            
+
             cardToSave.placeName = self.draftEvent.place.name
             cardToSave.latitude = self.draftEvent.place.coordinate?.latitude ?? 0
             cardToSave.longitude = self.draftEvent.place.coordinate?.longitude ?? 0
@@ -109,7 +109,7 @@ struct AddEventView: View {
                 cardToSave.originLatitude = self.draftEvent.origin.coordinate?.latitude ?? 0
                 cardToSave.originLongitude = self.draftEvent.origin.coordinate?.longitude ?? 0
                 cardToSave.transportation = self.draftEvent.transportation
-                
+
                 cardToSave.title = "From \(self.draftEvent.origin.name) to \(self.draftEvent.place.name)"
             } else {
                 cardToSave.title = self.draftEvent.place.name

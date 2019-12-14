@@ -32,6 +32,7 @@ struct AddTripView: View {
                 Button(action: {
                     let card = TripCard(context: self.managedObjectContext)
                     card.title = self.title
+                    card.uuid = UUID()
                     do {
                         try self.managedObjectContext.save()
                         self.presentationMode.wrappedValue.dismiss()
@@ -62,7 +63,8 @@ struct AddTripView: View {
                         .foregroundColor(.gray)
                         .cornerRadius(10)
                 )
-                .padding()
+                Spacer()
+                    .frame(width: 20)
 
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(.gray)
@@ -72,8 +74,8 @@ struct AddTripView: View {
                         TextField("Enter your trip name", text: $title)
                             .padding()
                     )
-                    .padding()
             }
+            .padding()
 
             Spacer()
         }
