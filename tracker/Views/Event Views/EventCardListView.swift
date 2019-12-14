@@ -56,6 +56,12 @@ struct EventCardListView: View {
                         }
                         Button(action: {
                             self.managedObjectContext.delete(card)
+                            
+                            do {
+                                try self.managedObjectContext.save()
+                            } catch {
+                                print(error)
+                            }
                         }) {
                             HStack {
                                 Text("Remove")

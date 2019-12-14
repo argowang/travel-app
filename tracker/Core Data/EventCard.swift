@@ -16,9 +16,10 @@ public class EventCard: NSManagedObject, Identifiable {
     @NSManaged public var type: String
     @NSManaged public var uuid: UUID
     @NSManaged public var rating: Int16
+    @NSManaged public var placeName: String
     @NSManaged public var longitude: Double
     @NSManaged public var latitude: Double
-    @NSManaged public var originTitle: String
+    @NSManaged public var originName: String
     @NSManaged public var originLongitude: Double
     @NSManaged public var originLatitude: Double
     @NSManaged public var price: String
