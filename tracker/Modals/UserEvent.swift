@@ -56,11 +56,11 @@ class UserEvent: NSObject, ObservableObject {
         transportation = card.transportation
         eventDescription = card.eventDescription
         if EventType(rawValue: card.type) == .transportation {
-            origin = Place(card.originTitle, CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))
+            origin = Place(card.originName, CLLocationCoordinate2D(latitude: card.originLatitude, longitude: card.originLongitude))
         } else {
             origin = Place()
         }
-        place = Place(card.title, CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude))
+        place = Place(card.placeName, CLLocationCoordinate2D(latitude: card.latitude, longitude: card.longitude))
         parentTrip = trip
         event = card
     }
