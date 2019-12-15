@@ -38,6 +38,12 @@ struct SetCurrentLocationView: View {
                 self.place.coordinate = self.draftPlace.coordinate
                 self.mode.wrappedValue.dismiss()
             }, label: { Text("Save") }))
+            .onAppear(perform: {
+                self.manager.stopUpdating()
+            })
+            .onDisappear(perform: {
+                self.manager.continueUpdating()
+            })
     }
 }
 
