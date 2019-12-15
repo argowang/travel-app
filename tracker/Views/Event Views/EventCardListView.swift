@@ -15,7 +15,6 @@ struct EventCardListView: View {
     @ObservedObject var trip: TripCard
     @State var refreshing = false
     @State var selected: UUID?
-    @State var showingSheet = false
     @State var addEventActive = false
     @State var eventType: EventType = .general
     @State var showingModal = false
@@ -88,67 +87,7 @@ struct EventCardListView: View {
                 Text("Work Around")
             }.hidden()
 
-            if $showingModal.wrappedValue {
-                // But it will not show unless this variable is true
-                ZStack {
-                    Color.black.opacity(0.4)
-                        .edgesIgnoringSafeArea(.vertical)
-                    // This VStack is the popup
-                    VStack {
-                        VStack {
-                            Text("Pick event type")
-                            Divider()
-                        }.padding(.vertical)
-
-                        HStack(spacing: 20) {
-                            VStack {
-                                Button(action: {
-                                    self.addEventActive = true
-                                    self.eventType = .food
-                                    self.showingModal = false
-
-                                }) {
-                                    EventType.food.getImage().resizable().frame(width: 60, height: 60)
-                                    Text("food").font(.subheadline)
-                                }.buttonStyle(PlainButtonStyle())
-                            }
-
-                            VStack {
-                                Button(action: {
-                                    self.addEventActive = true
-                                    self.eventType = .transportation
-                                    self.showingModal = false
-
-                                }) {
-                                    EventType.transportation.getImage().resizable().frame(width: 60, height: 60)
-                                    Text("transportation").font(.subheadline)
-                                }.buttonStyle(PlainButtonStyle())
-                            }
-
-                            VStack {
-                                Button(action: {
-                                    self.addEventActive = true
-                                    self.eventType = .general
-                                    self.showingModal = false
-
-                                }) {
-                                    EventType.general.getImage().resizable().frame(width: 60, height: 60)
-                                    Text("general").font(.subheadline)
-                                }.buttonStyle(PlainButtonStyle())
-                            }
-                        }
-
-                        Button(action: {
-                            self.showingModal = false
-                        }) {
-                            Text("Close")
-                        }.padding()
-                    }
-                    .frame(width: 300, height: 200)
-                    .background(Color.white)
-                    .cornerRadius(20).shadow(radius: 20)
-                }
-            }
+            AddEventSelectTypeView(display: $showingModal, navigateToAddEventView: $addEventActive, eventType: $eventType)
         }
     }
 }

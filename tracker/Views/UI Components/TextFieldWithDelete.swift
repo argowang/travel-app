@@ -11,16 +11,16 @@ import SwiftUI
 struct TextFieldWithDelete: View {
     private var defaultText: String
     @Binding var text: String
-    
-    init(_ defaultTextInput: String, text textBinding:Binding<String>) {
+
+    init(_ defaultTextInput: String, text textBinding: Binding<String>) {
         defaultText = defaultTextInput
-        self._text = textBinding
+        _text = textBinding
     }
-    
+
     var body: some View {
         HStack {
             TextField(defaultText, text: $text).foregroundColor(.primary)
-            
+
             Button(action: {
                 self.text = ""
             }) {
@@ -33,6 +33,6 @@ struct TextFieldWithDelete: View {
 struct TextFieldWithDelete_Previews: PreviewProvider {
     @State static var searchString = "s"
     static var previews: some View {
-        TextFieldWithDelete("Search",text: $searchString)
+        TextFieldWithDelete("Search", text: $searchString)
     }
 }
