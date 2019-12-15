@@ -31,7 +31,7 @@ class UserEvent: NSObject, ObservableObject {
         return Date(timeIntervalSince1970: Double(dateInt + timeInt))
     }
 
-    init(_ eventType: EventType, _ trip: TripCard) {
+    init(_ eventType: EventType, _ trip: TripCard, _ manager: LocationManager) {
         title = ""
         let currDate = Date()
         dateForDate = currDate
@@ -44,6 +44,19 @@ class UserEvent: NSObject, ObservableObject {
         place = Place()
         origin = Place()
         parentTrip = trip
+        super.init()
+
+        let georeader = CLGeocoder()
+        if let lastLocation = manager.lastLocation {
+            georeader.reverseGeocodeLocation(lastLocation) { places, err in
+                if err != nil {
+                    print((err?.localizedDescription)!)
+                    return
+                }
+                self.place.name = places?.first?.locality ?? ""
+                self.place.coordinate = lastLocation.coordinate
+            }
+        }
     }
 
     init(_ card: EventCard, _ trip: TripCard) {

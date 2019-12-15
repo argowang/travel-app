@@ -11,6 +11,7 @@ import SwiftUI
 
 struct EventCardListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    @EnvironmentObject var manager: LocationManager
     @ObservedObject var trip: TripCard
     @State var refreshing = false
     @State var selected: UUID?
@@ -79,7 +80,7 @@ struct EventCardListView: View {
                 HStack {
                     Spacer()
                     // https://forums.developer.apple.com/thread/124757
-                    NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip)), isActive: self.$addEventActive) {
+                    NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive) {
                         Text("Work Around")
                     }.hidden()
 

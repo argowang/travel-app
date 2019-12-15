@@ -11,7 +11,7 @@ import SwiftUI
 
 struct SetCurrentLocationView: View {
     @ObservedObject var place: Place
-    @ObservedObject var draftPlace: Place = Place()
+    @ObservedObject var draftPlace: Place
 
     @State var alert = false
     @State var nearByPlaces: [MKMapItem] = []
@@ -38,35 +38,12 @@ struct SetCurrentLocationView: View {
                 self.place.coordinate = self.draftPlace.coordinate
                 self.mode.wrappedValue.dismiss()
             }, label: { Text("Save") }))
-            .onAppear {
-                // If user selected location before, we should honor it
-                if self.place.coordinate != nil {
-                    self.draftPlace.name = self.place.name
-                    self.draftPlace.coordinate = self.place.coordinate
-                } else {
-                    // If user have not selected location before, we should provide a default coordinate of last location and take a best guess on the name
-                    let georeader = CLGeocoder()
-                    if let lastLocation = self.manager.lastLocation {
-                        georeader.reverseGeocodeLocation(lastLocation) { places, err in
-                            if err != nil {
-                                print((err?.localizedDescription)!)
-                                return
-                            }
-                            self.draftPlace.name = places?.first?.name ?? ""
-                            self.draftPlace.coordinate = lastLocation.coordinate
-                        }
-                    }
-                    self.manager.stopUpdating()
-                }
-            }.onDisappear {
-                self.manager.continueUpdating()
-            }
     }
 }
 
 struct SetCurrentLocationView_Previews: PreviewProvider {
     @State static var place = Place("Aruba", nil)
     static var previews: some View {
-        SetCurrentLocationView(place: self.place).environmentObject(PlaceFinder())
+        SetCurrentLocationView(place: self.place, draftPlace: Place(self.place)).environmentObject(PlaceFinder())
     }
 }

@@ -22,10 +22,7 @@ class CustomMKMarkerSubclass: MKMarkerAnnotationView {
 
 struct MapView: UIViewRepresentable {
     @Binding var nearByPlaces: [MKMapItem]
-
     @ObservedObject var place: Place
-
-    @EnvironmentObject var manager: LocationManager
 
     let map = MKMapView()
 
@@ -69,16 +66,6 @@ struct MapView: UIViewRepresentable {
             map.region = region
             map.addAnnotation(point)
             context.coordinator.searchInMap()
-        } else {
-            if let location = self.manager.lastLocation {
-                let point = MKPointAnnotation()
-                point.coordinate = location.coordinate
-                point.title = "Current"
-                let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-                map.region = region
-                map.addAnnotation(point)
-                context.coordinator.searchInMap()
-            }
         }
 
         return map
@@ -185,7 +172,6 @@ struct MapView: UIViewRepresentable {
 }
 
 struct MapView_Previews: PreviewProvider {
-    @State static var locationManager = CLLocationManager()
     @State static var nearBy: [MKMapItem] = []
     @State static var place = Place("Aruba", nil)
     static var previews: some View {
