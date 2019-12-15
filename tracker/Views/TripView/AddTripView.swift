@@ -50,7 +50,7 @@ struct AddTripView: View {
                 }) {
                     Text("Save")
                         .padding()
-                }
+                }.disabled(title == "")
             }
             HStack {
                 ZStack {
