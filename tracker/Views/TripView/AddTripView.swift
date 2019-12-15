@@ -98,7 +98,7 @@ struct AddTripView: View {
                     .frame(height: 70)
                     .opacity(0.1)
                     .overlay(
-                        TextField("Enter your trip name", text: $title)
+                        TextFieldWithDelete("Enter your trip name", text: $title)
                             .padding()
                     )
             }

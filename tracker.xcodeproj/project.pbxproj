@@ -42,6 +42,7 @@
 		B8DA9656237FC34900BC1801 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8DA9655237FC34900BC1801 /* Assets.xcassets */; };
 		B8DA9659237FC34900BC1801 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8DA9658237FC34900BC1801 /* Preview Assets.xcassets */; };
 		B8DA965C237FC34900BC1801 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8DA965A237FC34900BC1801 /* LaunchScreen.storyboard */; };
+		B8EB5D2723A68CEB003ECB73 /* TextFieldWithDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EB5D2623A68CEB003ECB73 /* TextFieldWithDelete.swift */; };
 		B8ED925A23806BDB00025623 /* tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9650237FC34600BC1801 /* tracker.xcdatamodeld */; };
 		B8ED926D238083C500025623 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ED926C238083C400025623 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,7 @@
 		B8DA9658237FC34900BC1801 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B8DA965B237FC34900BC1801 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8DA965D237FC34900BC1801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8EB5D2623A68CEB003ECB73 /* TextFieldWithDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithDelete.swift; sourceTree = "<group>"; };
 		B8ED926C238083C400025623 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 				B86E319D239C74F700B31FE2 /* StarRatingView.swift */,
 				15114DDC2395B2F8003863FD /* UtilityView.swift */,
 				1524655523A5686B0086CAA1 /* ImagePicker.swift */,
+				B8EB5D2623A68CEB003ECB73 /* TextFieldWithDelete.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				4481FC0D23A1D4220092DD97 /* AddTripView.swift in Sources */,
 				B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */,
 				B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */,
+				B8EB5D2723A68CEB003ECB73 /* TextFieldWithDelete.swift in Sources */,
 				B8DA964D237FC34600BC1801 /* AppDelegate.swift in Sources */,
 				4481FC1123A1D44B0092DD97 /* TripInfoView.swift in Sources */,
 				15114DDD2395B2F8003863FD /* UtilityView.swift in Sources */,
