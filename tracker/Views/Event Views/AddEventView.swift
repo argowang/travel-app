@@ -74,21 +74,6 @@ struct AddEventView: View {
                 .animation(.easeOut(duration: 0.16))
         }
         .navigationBarTitle(Text("\(draftEvent.type.rawValue)"))
-        .onAppear {
-            if self.draftEvent.place.name == "" {
-                let georeader = CLGeocoder()
-                if let lastLocation = self.manager.lastLocation {
-                    georeader.reverseGeocodeLocation(lastLocation) { places, err in
-                        if err != nil {
-                            print((err?.localizedDescription)!)
-                            return
-                        }
-                        self.draftEvent.place.name = places?.first?.locality ?? ""
-                        self.draftEvent.place.coordinate = lastLocation.coordinate
-                    }
-                }
-            }
-        }
         .navigationBarItems(trailing: Button(action: {
             var cardToSave: EventCard!
             if self.draftEvent.event != nil {
@@ -172,7 +157,7 @@ struct locationRow: View {
         HStack {
             Image("location").resizable().frame(width: 50, height: 50).padding()
             Text("Location:")
-            NavigationLink(destination: SetCurrentLocationView(place: self.place).environmentObject(PlaceFinder())) {
+            NavigationLink(destination: SetCurrentLocationView(place: self.place, draftPlace: Place(self.place)).environmentObject(PlaceFinder())) {
                 Text("\(self.place.name)")
             }
             Spacer()
@@ -187,7 +172,7 @@ struct transportationLocationRow: View {
     var body: some View {
         HStack(alignment: .center) {
             VStack {
-                NavigationLink(destination: SetCurrentLocationView(place: self.origin).environmentObject(PlaceFinder())) {
+                NavigationLink(destination: SetCurrentLocationView(place: self.origin, draftPlace: Place(self.origin)).environmentObject(PlaceFinder())) {
                     Text("\(self.origin.name == "" ? "From" : self.origin.name)")
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
@@ -205,7 +190,7 @@ struct transportationLocationRow: View {
             }.frame(minWidth: 0, maxWidth: .infinity)
 
             VStack {
-                NavigationLink(destination: SetCurrentLocationView(place: self.destination).environmentObject(PlaceFinder())) {
+                NavigationLink(destination: SetCurrentLocationView(place: self.destination, draftPlace: Place(self.destination)).environmentObject(PlaceFinder())) {
                     Text("\(self.destination.name == "" ? "Destination" : self.destination.name)")
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
