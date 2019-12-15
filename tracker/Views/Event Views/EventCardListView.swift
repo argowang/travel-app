@@ -18,6 +18,7 @@ struct EventCardListView: View {
     @State var showingSheet = false
     @State var addEventActive = false
     @State var eventType: EventType = .general
+    @State var showingModal = false
 
     var didChange = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
 
@@ -25,6 +26,10 @@ struct EventCardListView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy HH:mm"
         return formatter
+    }
+
+    private func displayPopup() {
+        showingModal = true
     }
 
     var body: some View {
@@ -75,50 +80,73 @@ struct EventCardListView: View {
                     self.refreshing.toggle()
                 }
             }
-            VStack(alignment: .trailing) {
-                Spacer()
-                HStack {
-                    Spacer()
-                    // https://forums.developer.apple.com/thread/124757
-                    NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive) {
-                        Text("Work Around")
-                    }.hidden()
 
-                    Button(action: {
-                        self.showingSheet = true
-                    }) {
-                        Image("plus")
-                            .resizable()
-                            .frame(width: 90, height: 90)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding()
-                    .actionSheet(isPresented: $showingSheet) {
-                        ActionSheet(title: Text("Select an event type fits for you."), message: Text("Choose general if you are not satisified with all options"), buttons: [
-                            .default(
-                                Text("Food"),
-                                action: {
+            FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
+
+            // https://forums.developer.apple.com/thread/124757
+            NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive) {
+                Text("Work Around")
+            }.hidden()
+
+            if $showingModal.wrappedValue {
+                // But it will not show unless this variable is true
+                ZStack {
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.vertical)
+                    // This VStack is the popup
+                    VStack {
+                        VStack {
+                            Text("Pick event type")
+                            Divider()
+                        }.padding(.vertical)
+
+                        HStack(spacing: 20) {
+                            VStack {
+                                Button(action: {
                                     self.addEventActive = true
                                     self.eventType = .food
-                                }
-                            ),
-                            .default(
-                                Text("Transportation"),
-                                action: {
+                                    self.showingModal = false
+
+                                }) {
+                                    EventType.food.getImage().resizable().frame(width: 60, height: 60)
+                                    Text("food").font(.subheadline)
+                                }.buttonStyle(PlainButtonStyle())
+                            }
+
+                            VStack {
+                                Button(action: {
                                     self.addEventActive = true
                                     self.eventType = .transportation
-                                }
-                            ),
-                            .default(
-                                Text("General"),
-                                action: {
+                                    self.showingModal = false
+
+                                }) {
+                                    EventType.transportation.getImage().resizable().frame(width: 60, height: 60)
+                                    Text("transportation").font(.subheadline)
+                                }.buttonStyle(PlainButtonStyle())
+                            }
+
+                            VStack {
+                                Button(action: {
                                     self.addEventActive = true
                                     self.eventType = .general
-                                }
-                            ),
-                            .destructive(Text("Dismiss")),
-                        ])
+                                    self.showingModal = false
+
+                                }) {
+                                    EventType.general.getImage().resizable().frame(width: 60, height: 60)
+                                    Text("general").font(.subheadline)
+                                }.buttonStyle(PlainButtonStyle())
+                            }
+                        }
+
+                        Button(action: {
+                            self.showingModal = false
+                        }) {
+                            Text("Close")
+                        }.padding()
                     }
+                    .frame(width: 300, height: 200)
+                    .background(Color.white)
+                    .cornerRadius(20).shadow(radius: 20)
                 }
             }
         }

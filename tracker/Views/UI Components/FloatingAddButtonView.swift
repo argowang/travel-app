@@ -11,19 +11,57 @@ import SwiftUI
 struct FloatingAddButtonView<Content: View>: View {
     @State var showSheet = false
 
-    private var destinationView: Content
+    private var destinationView: Content?
+    private var extraAction: () -> Void
+    private var isSheetMode: Bool
 
-    init(destinationView: Content) {
+    init(destinationView: Content, extraAction: @escaping () -> Void = {}) {
         self.destinationView = destinationView
+        self.extraAction = extraAction
+        isSheetMode = true
+    }
+
+    init(extraAction: @escaping () -> Void = {}) {
+        self.extraAction = extraAction
+        isSheetMode = false
     }
 
     var body: some View {
+        Group {
+            if isSheetMode {
+                sheetModeView
+            } else {
+                nonSheetModeView
+            }
+        }
+    }
+
+    private var nonSheetModeView: some View {
+        VStack(alignment: .trailing) {
+            Spacer()
+            HStack {
+                Spacer()
+                Button(action: {
+                    self.extraAction()
+                }) {
+                    Image("plus")
+                        .resizable()
+                        .frame(width: 90, height: 90)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding()
+            }
+        }
+    }
+
+    private var sheetModeView: some View {
         VStack(alignment: .trailing) {
             Spacer()
             HStack {
                 Spacer()
                 Button(action: {
                     self.showSheet.toggle()
+                    self.extraAction()
                 }) {
                     Image("plus")
                         .resizable()
