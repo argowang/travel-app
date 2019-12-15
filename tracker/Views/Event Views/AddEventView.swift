@@ -6,7 +6,6 @@ struct AddEventView: View {
     @ObservedObject private var keyboard = KeyboardResponder()
     @ObservedObject var draftEvent: UserEvent
 
-    @EnvironmentObject var manager: LocationManager
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 

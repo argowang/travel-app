@@ -46,6 +46,8 @@ class UserEvent: NSObject, ObservableObject {
         parentTrip = trip
         super.init()
 
+        manager.continueUpdating()
+
         let georeader = CLGeocoder()
         if let lastLocation = manager.lastLocation {
             georeader.reverseGeocodeLocation(lastLocation) { places, err in
@@ -56,6 +58,8 @@ class UserEvent: NSObject, ObservableObject {
                 self.place.name = places?.first?.locality ?? ""
                 self.place.coordinate = lastLocation.coordinate
             }
+
+            manager.stopUpdating()
         }
     }
 
