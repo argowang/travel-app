@@ -35,6 +35,7 @@
 		B86E31A223A08A6100B31FE2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A123A08A6000B31FE2 /* Place.swift */; };
 		B86E31A423A2088400B31FE2 /* KeyBoardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A323A2088300B31FE2 /* KeyBoardResponder.swift */; };
 		B86E31A623A3635D00B31FE2 /* UserEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A523A3635C00B31FE2 /* UserEvent.swift */; };
+		B88D2A5123A6B42500AC3CB6 /* AddEventSelectTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */; };
 		B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */; };
 		B8AEB6A02388FA57003E100E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69F2388FA57003E100E /* MapView.swift */; };
 		B8DA964D237FC34600BC1801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA964C237FC34600BC1801 /* AppDelegate.swift */; };
@@ -76,6 +77,7 @@
 		B86E31A123A08A6000B31FE2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		B86E31A323A2088300B31FE2 /* KeyBoardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardResponder.swift; sourceTree = "<group>"; };
 		B86E31A523A3635C00B31FE2 /* UserEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEvent.swift; sourceTree = "<group>"; };
+		B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventSelectTypeView.swift; sourceTree = "<group>"; };
 		B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCurrentLocationView.swift; sourceTree = "<group>"; };
 		B8AEB69F2388FA57003E100E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		B8DA9649237FC34600BC1801 /* tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 				1571D4FD238FA15D00FC33E9 /* AddEventView.swift */,
 				15114DDE2395B48D003863FD /* EventCardListView.swift */,
 				15114DE02395B4AC003863FD /* EventCardView.swift */,
+				B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */,
 			);
 			path = "Event Views";
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				B86E31A623A3635D00B31FE2 /* UserEvent.swift in Sources */,
 				1524655623A5686B0086CAA1 /* ImagePicker.swift in Sources */,
 				B8ED925A23806BDB00025623 /* tracker.xcdatamodeld in Sources */,
+				B88D2A5123A6B42500AC3CB6 /* AddEventSelectTypeView.swift in Sources */,
 				4481FC0D23A1D4220092DD97 /* AddTripView.swift in Sources */,
 				B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */,
 				B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */,

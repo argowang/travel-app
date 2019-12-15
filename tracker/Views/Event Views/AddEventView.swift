@@ -111,9 +111,9 @@ struct AddEventView: View {
             }
         }, label: { Text("Save") }).disabled(isSaveAllowed(draftEvent)))
     }
-    
+
     // Add custom validation logic here
-    func isSaveAllowed(_ event: UserEvent) -> Bool {
+    func isSaveAllowed(_: UserEvent) -> Bool {
         return draftEvent.title == ""
     }
 }
