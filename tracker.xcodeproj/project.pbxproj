@@ -36,6 +36,7 @@
 		B86E31A423A2088400B31FE2 /* KeyBoardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A323A2088300B31FE2 /* KeyBoardResponder.swift */; };
 		B86E31A623A3635D00B31FE2 /* UserEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A523A3635C00B31FE2 /* UserEvent.swift */; };
 		B88D2A5123A6B42500AC3CB6 /* AddEventSelectTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */; };
+		B88D2A5323A6B90100AC3CB6 /* EventTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */; };
 		B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */; };
 		B8AEB6A02388FA57003E100E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69F2388FA57003E100E /* MapView.swift */; };
 		B8DA964D237FC34600BC1801 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DA964C237FC34600BC1801 /* AppDelegate.swift */; };
@@ -78,6 +79,7 @@
 		B86E31A323A2088300B31FE2 /* KeyBoardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardResponder.swift; sourceTree = "<group>"; };
 		B86E31A523A3635C00B31FE2 /* UserEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEvent.swift; sourceTree = "<group>"; };
 		B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventSelectTypeView.swift; sourceTree = "<group>"; };
+		B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeButtonView.swift; sourceTree = "<group>"; };
 		B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCurrentLocationView.swift; sourceTree = "<group>"; };
 		B8AEB69F2388FA57003E100E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		B8DA9649237FC34600BC1801 /* tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 				15114DDE2395B48D003863FD /* EventCardListView.swift */,
 				15114DE02395B4AC003863FD /* EventCardView.swift */,
 				B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */,
+				B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */,
 			);
 			path = "Event Views";
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */,
 				B86E31A0239E051E00B31FE2 /* EventType.swift in Sources */,
 				B86E31A623A3635D00B31FE2 /* UserEvent.swift in Sources */,
+				B88D2A5323A6B90100AC3CB6 /* EventTypeButtonView.swift in Sources */,
 				1524655623A5686B0086CAA1 /* ImagePicker.swift in Sources */,
 				B8ED925A23806BDB00025623 /* tracker.xcdatamodeld in Sources */,
 				B88D2A5123A6B42500AC3CB6 /* AddEventSelectTypeView.swift in Sources */,

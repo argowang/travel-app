@@ -9,10 +9,12 @@
 import Foundation
 import SwiftUI
 
-enum EventType: String {
+enum EventType: String, CaseIterable {
     case general
     case food
     case transportation
+
+    static let allValues = [food, transportation, general]
 
     init(rawValue: String) {
         switch rawValue {

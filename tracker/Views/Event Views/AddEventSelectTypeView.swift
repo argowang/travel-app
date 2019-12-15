@@ -13,6 +13,11 @@ struct AddEventSelectTypeView: View {
     @Binding var navigateToAddEventView: Bool
     @Binding var eventType: EventType
 
+    private func buttonAction() {
+        navigateToAddEventView = true
+        display = false
+    }
+
     var body: some View {
         Group {
             if display {
@@ -27,40 +32,8 @@ struct AddEventSelectTypeView: View {
                         }.padding(.vertical)
 
                         HStack(spacing: 20) {
-                            VStack {
-                                Button(action: {
-                                    self.navigateToAddEventView = true
-                                    self.eventType = .food
-                                    self.display = false
-
-                                }) {
-                                    EventType.food.getImage().resizable().frame(width: 60, height: 60)
-                                    Text(EventType.food.rawValue).font(.subheadline)
-                                }.buttonStyle(PlainButtonStyle())
-                            }
-
-                            VStack {
-                                Button(action: {
-                                    self.navigateToAddEventView = true
-                                    self.eventType = .transportation
-                                    self.display = false
-
-                                }) {
-                                    EventType.transportation.getImage().resizable().frame(width: 60, height: 60)
-                                    Text(EventType.transportation.rawValue).font(.subheadline)
-                                }.buttonStyle(PlainButtonStyle())
-                            }
-
-                            VStack {
-                                Button(action: {
-                                    self.navigateToAddEventView = true
-                                    self.eventType = .general
-                                    self.display = false
-
-                                }) {
-                                    EventType.general.getImage().resizable().frame(width: 60, height: 60)
-                                    Text(EventType.general.rawValue).font(.subheadline)
-                                }.buttonStyle(PlainButtonStyle())
+                            ForEach(EventType.allValues, id: \.self) { type in
+                                EventTypeButtonView(typeBinding: self.$eventType, type: type, action: self.buttonAction)
                             }
                         }
 
