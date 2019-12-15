@@ -35,7 +35,7 @@ struct AddEventView: View {
                         }
                     }) {
                         HStack {
-                            TextField("Enter event title", text: $draftEvent.title)
+                            TextFieldWithDelete("Enter event title", text: $draftEvent.title)
                         }
                     }
 
@@ -45,7 +45,7 @@ struct AddEventView: View {
                     }
                     Section(header: Text("💰 Price:")) {
                         HStack {
-                            TextField("Enter price here", text: $draftEvent.price)
+                            TextFieldWithDelete("Enter price here", text: $draftEvent.price)
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -64,7 +64,7 @@ struct AddEventView: View {
 
                     Section(header: Text("Description")) {
                         HStack {
-                            TextField("Enter your description here", text: $draftEvent.eventDescription)
+                            TextFieldWithDelete("Enter your description here", text: $draftEvent.eventDescription)
                         }
                     }
                 }
