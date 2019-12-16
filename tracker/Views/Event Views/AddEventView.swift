@@ -163,8 +163,7 @@ struct locationRow: View {
             Text("Location:")
             NavigationLink(destination: SetCurrentLocationView(place: self.place, draftPlace: Place(self.place)).environmentObject(PlaceFinder())) {
                 Text("\(self.place.name)")
-            }
-            Text("    ")
+            } 
             Spacer()
         }
     }
