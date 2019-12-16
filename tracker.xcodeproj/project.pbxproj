@@ -21,6 +21,7 @@
 		1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FD238FA15D00FC33E9 /* AddEventView.swift */; };
 		15A4839423A6D0D5008AF9DF /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4839323A6D0D5008AF9DF /* SwipeView.swift */; };
 		15A4839623A702A4008AF9DF /* AddEventViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4839523A702A4008AF9DF /* AddEventViewV2.swift */; };
+		15A4839A23A74909008AF9DF /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4839923A74909008AF9DF /* MultilineTextView.swift */; };
 		15EAB7A4239F3742000A4730 /* LocationAirplaneIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EAB7A3239F3742000A4730 /* LocationAirplaneIcon.swift */; };
 		4481FC0D23A1D4220092DD97 /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC0C23A1D4220092DD97 /* AddTripView.swift */; };
 		4481FC0F23A1D4360092DD97 /* TripCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC0E23A1D4360092DD97 /* TripCardView.swift */; };
@@ -67,6 +68,7 @@
 		1571D4FD238FA15D00FC33E9 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		15A4839323A6D0D5008AF9DF /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 		15A4839523A702A4008AF9DF /* AddEventViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewV2.swift; sourceTree = "<group>"; };
+		15A4839923A74909008AF9DF /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		15EAB7A3239F3742000A4730 /* LocationAirplaneIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAirplaneIcon.swift; sourceTree = "<group>"; };
 		4481FC0C23A1D4220092DD97 /* AddTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripView.swift; sourceTree = "<group>"; };
 		4481FC0E23A1D4360092DD97 /* TripCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCardView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				B81702AF23A586CE002A28AD /* FloatingAddButtonView.swift */,
 				1524655523A5686B0086CAA1 /* ImagePicker.swift */,
 				B8EB5D2623A68CEB003ECB73 /* TextFieldWithDelete.swift */,
+				15A4839923A74909008AF9DF /* MultilineTextView.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				15114DE923962794003863FD /* EventCard.swift in Sources */,
 				15A4839623A702A4008AF9DF /* AddEventViewV2.swift in Sources */,
 				B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */,
+				15A4839A23A74909008AF9DF /* MultilineTextView.swift in Sources */,
 				4481FC0F23A1D4360092DD97 /* TripCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

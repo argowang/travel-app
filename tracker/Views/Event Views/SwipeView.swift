@@ -33,37 +33,39 @@ struct SwipeView: View {
                         locationRow(place: self.draftEvent.place)
                             .frame(width: geometry.size.width)
                     }
-                    VStack {
-                        datePicker(selectedDate: self.$draftEvent.dateForDate)
-                        timePicker(selectedTime: self.$draftEvent.dateForTime)
-                    }
-                    .frame(width: geometry.size.width)
 
-                    HStack {
-                        TextFieldWithDelete("Enter price here", text: self.$draftEvent.price)
-                            .foregroundColor(.secondary)
+                    VStack(alignment: .leading) {
                         HStack {
+                            Text("💰 Price:")
+                                .padding()
+                            TextFieldWithDelete("Enter price here", text: self.$draftEvent.price)
+                                .foregroundColor(.secondary)
+                        }
+                        HStack {
+                            Text("👍 Rating:").padding()
                             StarRatingView(rating: self.$draftEvent.rating)
                         }
                         if self.draftEvent.type == .transportation {
-                            Section(header: Text("Transportation")) {
-                                VStack(alignment: .leading) {
-                                    transporatationMethodsSelectionRow(transportationMethod: self.$draftEvent.transportation)
-                                }
+                            VStack(alignment: .leading) {
+                                Text("Transportation")
+                                transporatationMethodsSelectionRow(transportationMethod: self.$draftEvent.transportation)
                             }
+                            .padding()
                         }
                     }
                     .frame(width: geometry.size.width)
 
                     HStack {
-                        TextFieldWithDelete("Enter your description here", text: self.$draftEvent.eventDescription)
+                        Text("Enter your description here: ")
+                        MultilineTextView(text: self.$draftEvent.eventDescription).padding()
                     }
                     .frame(width: geometry.size.width)
                 }
             }
             .content.offset(x: self.offset)
-            .frame(width: geometry.size.width, alignment: .leading)
-            .gesture(
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: Alignment.topLeading)
+            .background(Color.white.opacity(0.01))
+            .simultaneousGesture(
                 DragGesture()
                     .onChanged { value in
                         self.offset = value.translation.width - geometry.size.width * CGFloat(self.index)
@@ -79,17 +81,5 @@ struct SwipeView: View {
                     }
             )
         }
-    }
-}
-
-struct UserView: View {
-    var body: some View {
-        ZStack(alignment: .leading) {
-            Image(systemName: "pencil")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-        }
-        .shadow(radius: 12.0)
-        .cornerRadius(12.0)
     }
 }

@@ -57,7 +57,8 @@ struct AddEventViewV2: View {
             } catch {
                 print(error)
             }
-        }, label: { Text("Save") }).disabled(isSaveAllowed(draftEvent)))
+        }, label: { Text("Save") }) // .disabled(isSaveAllowed(draftEvent))
+        )
     }
 
     // Add custom validation logic here

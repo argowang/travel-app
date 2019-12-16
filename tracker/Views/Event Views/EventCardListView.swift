@@ -38,7 +38,7 @@ struct EventCardListView: View {
                 ForEach(self.trip.eventArray, id: \.uuid) { card in
                     ZStack {
                         NavigationLink(destination:
-                            AddEventView(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected) {
+                            AddEventViewV2(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected) {
                             Text("Work Around")
                         }.hidden()
 
@@ -82,7 +82,7 @@ struct EventCardListView: View {
 
             FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
             // https://forums.developer.apple.com/thread/124757
-            NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive) {
+            NavigationLink(destination: AddEventViewV2(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive) {
                 Text("Work Around")
             }.hidden()
 
