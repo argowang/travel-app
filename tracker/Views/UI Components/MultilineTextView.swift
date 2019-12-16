@@ -26,22 +26,4 @@ struct MultilineTextViewWithOverlayColor: View {
                     .opacity(0.1)
             )
     }
-}
-
-struct MultilineTextView: UIViewRepresentable {
-    @Binding var text: String
-
-    func makeUIView(context _: Context) -> UITextView {
-        let view = UITextView()
-        view.isScrollEnabled = true
-        view.isEditable = true
-        view.isUserInteractionEnabled = true
-        return view
-    }
-
-    func updateUIView(_ uiView: UITextView, context _: Context) {
-        uiView.text = text
-        print("text")
-        print(text)
-    }
-}
+} 
