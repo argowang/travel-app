@@ -22,6 +22,7 @@
 		15A4839423A6D0D5008AF9DF /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4839323A6D0D5008AF9DF /* SwipeView.swift */; };
 		15A4839623A702A4008AF9DF /* AddEventViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4839523A702A4008AF9DF /* AddEventViewV2.swift */; };
 		15A4839A23A74909008AF9DF /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4839923A74909008AF9DF /* MultilineTextView.swift */; };
+		15A4839D23A83937008AF9DF /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = 15A4839C23A83937008AF9DF /* TextView */; };
 		15EAB7A4239F3742000A4730 /* LocationAirplaneIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EAB7A3239F3742000A4730 /* LocationAirplaneIcon.swift */; };
 		4481FC0D23A1D4220092DD97 /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC0C23A1D4220092DD97 /* AddTripView.swift */; };
 		4481FC0F23A1D4360092DD97 /* TripCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC0E23A1D4360092DD97 /* TripCardView.swift */; };
@@ -109,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15A4839D23A83937008AF9DF /* TextView in Frameworks */,
 				1524655C23A6C6000086CAA1 /* Pages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +276,7 @@
 			name = tracker;
 			packageProductDependencies = (
 				1524655B23A6C6000086CAA1 /* Pages */,
+				15A4839C23A83937008AF9DF /* TextView */,
 			);
 			productName = tracker;
 			productReference = B8DA9649237FC34600BC1801 /* tracker.app */;
@@ -305,6 +308,7 @@
 			mainGroup = B8DA9640237FC34600BC1801;
 			packageReferences = (
 				1524655A23A6C6000086CAA1 /* XCRemoteSwiftPackageReference "Pages" */,
+				15A4839B23A83937008AF9DF /* XCRemoteSwiftPackageReference "TextView" */,
 			);
 			productRefGroup = B8DA964A237FC34600BC1801 /* Products */;
 			projectDirPath = "";
@@ -586,6 +590,14 @@
 				minimumVersion = 0.1.3;
 			};
 		};
+		15A4839B23A83937008AF9DF /* XCRemoteSwiftPackageReference "TextView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kenmueller/TextView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -593,6 +605,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1524655A23A6C6000086CAA1 /* XCRemoteSwiftPackageReference "Pages" */;
 			productName = Pages;
+		};
+		15A4839C23A83937008AF9DF /* TextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15A4839B23A83937008AF9DF /* XCRemoteSwiftPackageReference "TextView" */;
+			productName = TextView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

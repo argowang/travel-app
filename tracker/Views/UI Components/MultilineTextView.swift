@@ -8,6 +8,26 @@
 
 import Combine
 import SwiftUI
+import TextView
+
+struct MultilineTextViewWithOverlayColor: View {
+    @Binding var text: String
+    @State var isEditing = false
+    var color = Color.gray
+    var lineWidth = 1.5
+    var cornerRadius = 10
+
+    var body: some View {
+        TextView(text: $text, isEditing: $isEditing)
+            .frame(height: 70)
+            .overlay(
+                RoundedRectangle(cornerRadius: CGFloat(cornerRadius))
+                    .stroke(color, lineWidth: CGFloat(lineWidth))
+                    .opacity(0.1)
+            )
+    }
+}
+
 struct MultilineTextView: UIViewRepresentable {
     @Binding var text: String
 
@@ -21,5 +41,7 @@ struct MultilineTextView: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context _: Context) {
         uiView.text = text
+        print("text")
+        print(text)
     }
 }

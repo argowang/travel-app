@@ -57,8 +57,10 @@ struct SwipeView: View {
 
                     HStack {
                         Text("Enter your description here: ")
-                        MultilineTextView(text: self.$draftEvent.eventDescription).padding()
+                        MultilineTextViewWithOverlayColor(text: self.$string)
+                            .frame(height: 100)
                     }
+                    .padding()
                     .frame(width: geometry.size.width)
                 }
             }
