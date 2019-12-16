@@ -27,16 +27,16 @@ struct TripListView: View {
                 ForEach(self.tripCards) { card in
                     ZStack {
                         NavigationLink(destination: LazyView(EventCardListView(trip: card)), tag: card.uuid, selection: self.$selected) {
-                            Text("Work Around")
-
-                        }.hidden()
-
-                        TripCardView(title: card.title ?? "title place holder",
-                                     dateString: self.dateFormatter.string(from: card.start ?? Date()),
-                                     image: UIImage(data: card.image!, scale: 1.0))
-                            .onTapGesture {
-                                self.selected = card.uuid
+                            TripCardView(title: card.title ?? "title place holder",
+                                         dateString: self.dateFormatter.string(from: card.start ?? Date()),
+                                         image: UIImage(data: card.image!, scale: 1.0))
+                                .onTapGesture {
+                                    self.selected = card.uuid
                             }
+
+                        }
+
+                        
                     }
                     .buttonStyle(PlainButtonStyle())
                     .contextMenu {

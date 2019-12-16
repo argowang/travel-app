@@ -80,12 +80,13 @@ struct EventCardListView: View {
                 }
             }
 
-            FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
+//            FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
 
+            FloatingAddButtonView(destinationView: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)))
             // https://forums.developer.apple.com/thread/124757
-            NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive) {
-                Text("Work Around")
-            }.hidden()
+//            NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive) {
+//                Text("Work Around")
+//            }.hidden()
 
             AddEventSelectTypeView(display: $showingModal, navigateToAddEventView: $addEventActive, eventType: $eventType)
         }

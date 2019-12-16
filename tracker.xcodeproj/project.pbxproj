@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,6 +45,7 @@
 		B8DA9656237FC34900BC1801 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8DA9655237FC34900BC1801 /* Assets.xcassets */; };
 		B8DA9659237FC34900BC1801 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8DA9658237FC34900BC1801 /* Preview Assets.xcassets */; };
 		B8DA965C237FC34900BC1801 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8DA965A237FC34900BC1801 /* LaunchScreen.storyboard */; };
+		B8EA9BF823A6FE2C00C87560 /* Pages in Frameworks */ = {isa = PBXBuildFile; productRef = B8EA9BF723A6FE2C00C87560 /* Pages */; };
 		B8EB5D2723A68CEB003ECB73 /* TextFieldWithDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EB5D2623A68CEB003ECB73 /* TextFieldWithDelete.swift */; };
 		B8ED925A23806BDB00025623 /* tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8DA9650237FC34600BC1801 /* tracker.xcdatamodeld */; };
 		B8ED926D238083C500025623 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ED926C238083C400025623 /* LocationManager.swift */; };
@@ -100,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8EA9BF823A6FE2C00C87560 /* Pages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +260,9 @@
 			dependencies = (
 			);
 			name = tracker;
+			packageProductDependencies = (
+				B8EA9BF723A6FE2C00C87560 /* Pages */,
+			);
 			productName = tracker;
 			productReference = B8DA9649237FC34600BC1801 /* tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -286,6 +291,9 @@
 				Base,
 			);
 			mainGroup = B8DA9640237FC34600BC1801;
+			packageReferences = (
+				B8EA9BF623A6FE2C00C87560 /* XCRemoteSwiftPackageReference "Pages" */,
+			);
 			productRefGroup = B8DA964A237FC34600BC1801 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -552,6 +560,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B8EA9BF623A6FE2C00C87560 /* XCRemoteSwiftPackageReference "Pages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nachonavarro/Pages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B8EA9BF723A6FE2C00C87560 /* Pages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B8EA9BF623A6FE2C00C87560 /* XCRemoteSwiftPackageReference "Pages" */;
+			productName = Pages;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B8DA9650237FC34600BC1801 /* tracker.xcdatamodeld */ = {

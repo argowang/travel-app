@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Pages",
+        "repositoryURL": "https://github.com/nachonavarro/Pages",
+        "state": {
+          "branch": null,
+          "revision": "8e4755a627092784326af996f15f77c05b31a76d",
+          "version": "0.1.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

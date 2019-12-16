@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             TripListView()
-                .navigationBarTitle("Your Trip")
+                .navigationBarTitle(Text("Your Trip"))
         }
     }
 }
