@@ -35,6 +35,7 @@
 		B86E31A223A08A6100B31FE2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A123A08A6000B31FE2 /* Place.swift */; };
 		B86E31A423A2088400B31FE2 /* KeyBoardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A323A2088300B31FE2 /* KeyBoardResponder.swift */; };
 		B86E31A623A3635D00B31FE2 /* UserEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A523A3635C00B31FE2 /* UserEvent.swift */; };
+		B88BB1B823A715DE00E1995C /* CancelButtonWithDismissAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88BB1B723A715DE00E1995C /* CancelButtonWithDismissAlert.swift */; };
 		B88D2A5123A6B42500AC3CB6 /* AddEventSelectTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */; };
 		B88D2A5323A6B90100AC3CB6 /* EventTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */; };
 		B8AEB69C2388F45C003E100E /* SetCurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */; };
@@ -78,6 +79,7 @@
 		B86E31A123A08A6000B31FE2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		B86E31A323A2088300B31FE2 /* KeyBoardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardResponder.swift; sourceTree = "<group>"; };
 		B86E31A523A3635C00B31FE2 /* UserEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEvent.swift; sourceTree = "<group>"; };
+		B88BB1B723A715DE00E1995C /* CancelButtonWithDismissAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButtonWithDismissAlert.swift; sourceTree = "<group>"; };
 		B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventSelectTypeView.swift; sourceTree = "<group>"; };
 		B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeButtonView.swift; sourceTree = "<group>"; };
 		B8AEB69B2388F45C003E100E /* SetCurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCurrentLocationView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				B81702AF23A586CE002A28AD /* FloatingAddButtonView.swift */,
 				1524655523A5686B0086CAA1 /* ImagePicker.swift */,
 				B8EB5D2623A68CEB003ECB73 /* TextFieldWithDelete.swift */,
+				B88BB1B723A715DE00E1995C /* CancelButtonWithDismissAlert.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */,
 				B86E31A223A08A6100B31FE2 /* Place.swift in Sources */,
 				15114DE923962794003863FD /* EventCard.swift in Sources */,
+				B88BB1B823A715DE00E1995C /* CancelButtonWithDismissAlert.swift in Sources */,
 				B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */,
 				4481FC0F23A1D4360092DD97 /* TripCardView.swift in Sources */,
 			);

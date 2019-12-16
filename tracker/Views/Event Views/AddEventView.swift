@@ -11,6 +11,10 @@ struct AddEventView: View {
 
     let animation = Animation.easeInOut(duration: 1.0)
 
+    private func dismiss() {
+        mode.wrappedValue.dismiss()
+    }
+
     var body: some View {
         VStack {
             if draftEvent.type == .transportation {
@@ -73,41 +77,42 @@ struct AddEventView: View {
                 .animation(.easeOut(duration: 0.16))
         }
         .navigationBarTitle(Text("\(draftEvent.type.rawValue)"))
-        .navigationBarItems(trailing: Button(action: {
-            var cardToSave: EventCard!
-            if self.draftEvent.event != nil {
-                cardToSave = self.draftEvent.event
-            } else {
-                cardToSave = EventCard(context: self.managedObjectContext)
-                cardToSave.uuid = UUID()
-                self.draftEvent.parentTrip.addToEvents(cardToSave)
-            }
+        .navigationBarItems(leading: CancelButtonWithDismissAlert(dismiss),
+                            trailing: Button(action: {
+                                var cardToSave: EventCard!
+                                if self.draftEvent.event != nil {
+                                    cardToSave = self.draftEvent.event
+                                } else {
+                                    cardToSave = EventCard(context: self.managedObjectContext)
+                                    cardToSave.uuid = UUID()
+                                    self.draftEvent.parentTrip.addToEvents(cardToSave)
+                                }
 
-            cardToSave.placeName = self.draftEvent.place.name
-            cardToSave.latitude = self.draftEvent.place.coordinate?.latitude ?? 0
-            cardToSave.longitude = self.draftEvent.place.coordinate?.longitude ?? 0
+                                cardToSave.placeName = self.draftEvent.place.name
+                                cardToSave.latitude = self.draftEvent.place.coordinate?.latitude ?? 0
+                                cardToSave.longitude = self.draftEvent.place.coordinate?.longitude ?? 0
 
-            if self.draftEvent.type == .transportation {
-                cardToSave.originName = self.draftEvent.origin.name
-                cardToSave.originLatitude = self.draftEvent.origin.coordinate?.latitude ?? 0
-                cardToSave.originLongitude = self.draftEvent.origin.coordinate?.longitude ?? 0
-                cardToSave.transportation = self.draftEvent.transportation
-            }
+                                if self.draftEvent.type == .transportation {
+                                    cardToSave.originName = self.draftEvent.origin.name
+                                    cardToSave.originLatitude = self.draftEvent.origin.coordinate?.latitude ?? 0
+                                    cardToSave.originLongitude = self.draftEvent.origin.coordinate?.longitude ?? 0
+                                    cardToSave.transportation = self.draftEvent.transportation
+                                }
 
-            cardToSave.title = self.draftEvent.title
+                                cardToSave.title = self.draftEvent.title
 
-            cardToSave.start = self.draftEvent.calculatedDate
-            cardToSave.type = self.draftEvent.type.rawValue
-            cardToSave.rating = Int16(self.draftEvent.rating)
-            cardToSave.price = self.draftEvent.price
-            cardToSave.eventDescription = self.draftEvent.eventDescription
+                                cardToSave.start = self.draftEvent.calculatedDate
+                                cardToSave.type = self.draftEvent.type.rawValue
+                                cardToSave.rating = Int16(self.draftEvent.rating)
+                                cardToSave.price = self.draftEvent.price
+                                cardToSave.eventDescription = self.draftEvent.eventDescription
 
-            do {
-                try self.managedObjectContext.save()
-                self.mode.wrappedValue.dismiss()
-            } catch {
-                print(error)
-            }
+                                do {
+                                    try self.managedObjectContext.save()
+                                    self.mode.wrappedValue.dismiss()
+                                } catch {
+                                    print(error)
+                                }
         }, label: { Text("Save") }).disabled(isSaveAllowed(draftEvent)))
     }
 
