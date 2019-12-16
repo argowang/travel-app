@@ -22,6 +22,10 @@ struct SetCurrentLocationView: View {
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
+    private func dismiss() {
+        mode.wrappedValue.dismiss()
+    }
+
     var body: some View {
         ZStack(alignment: Alignment.top) {
             MapView(nearByPlaces: $nearByPlaces, place: draftPlace)
@@ -33,7 +37,9 @@ struct SetCurrentLocationView: View {
                 SearchBarView(cardPosition: self.$cardPosition, nearByPlaces: self.$nearByPlaces, place: self.draftPlace).environmentObject(self.placeFinder).padding(.bottom, 5)
             }
         }.edgesIgnoringSafeArea(.vertical)
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: Button(action: dismiss) {
+                Text("Cancel")
+            }, trailing: Button(action: {
                 self.place.name = self.draftPlace.name
                 self.place.coordinate = self.draftPlace.coordinate
                 self.mode.wrappedValue.dismiss()
