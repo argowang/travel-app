@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,12 +12,15 @@
 		15114DE12395B4AC003863FD /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE02395B4AC003863FD /* EventCardView.swift */; };
 		15114DE923962794003863FD /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15114DE623960905003863FD /* EventCard.swift */; };
 		1524655623A5686B0086CAA1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524655523A5686B0086CAA1 /* ImagePicker.swift */; };
+		1524655C23A6C6000086CAA1 /* Pages in Frameworks */ = {isa = PBXBuildFile; productRef = 1524655B23A6C6000086CAA1 /* Pages */; };
 		154D6F072390509700169C25 /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F062390509700169C25 /* TripCard.swift */; };
 		154D6F09239066EA00169C25 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154D6F08239066EA00169C25 /* EventInfoView.swift */; };
 		1552FAD6238B344300060E05 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAD5238B344300060E05 /* CardDetailView.swift */; };
 		1552FAE4238BA94800060E05 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1552FAE3238BA94800060E05 /* CardListView.swift */; };
 		1571D4FC238F977D00FC33E9 /* AddTripCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */; };
 		1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571D4FD238FA15D00FC33E9 /* AddEventView.swift */; };
+		15A4839423A6D0D5008AF9DF /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4839323A6D0D5008AF9DF /* SwipeView.swift */; };
+		15A4839623A702A4008AF9DF /* AddEventViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4839523A702A4008AF9DF /* AddEventViewV2.swift */; };
 		15EAB7A4239F3742000A4730 /* LocationAirplaneIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EAB7A3239F3742000A4730 /* LocationAirplaneIcon.swift */; };
 		4481FC0D23A1D4220092DD97 /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC0C23A1D4220092DD97 /* AddTripView.swift */; };
 		4481FC0F23A1D4360092DD97 /* TripCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC0E23A1D4360092DD97 /* TripCardView.swift */; };
@@ -62,6 +65,8 @@
 		1552FAE3238BA94800060E05 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		1571D4FB238F977D00FC33E9 /* AddTripCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripCardView.swift; sourceTree = "<group>"; };
 		1571D4FD238FA15D00FC33E9 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
+		15A4839323A6D0D5008AF9DF /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
+		15A4839523A702A4008AF9DF /* AddEventViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewV2.swift; sourceTree = "<group>"; };
 		15EAB7A3239F3742000A4730 /* LocationAirplaneIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAirplaneIcon.swift; sourceTree = "<group>"; };
 		4481FC0C23A1D4220092DD97 /* AddTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripView.swift; sourceTree = "<group>"; };
 		4481FC0E23A1D4360092DD97 /* TripCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCardView.swift; sourceTree = "<group>"; };
@@ -100,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1524655C23A6C6000086CAA1 /* Pages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +157,8 @@
 				15114DE02395B4AC003863FD /* EventCardView.swift */,
 				B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */,
 				B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */,
+				15A4839323A6D0D5008AF9DF /* SwipeView.swift */,
+				15A4839523A702A4008AF9DF /* AddEventViewV2.swift */,
 			);
 			path = "Event Views";
 			sourceTree = "<group>";
@@ -258,6 +266,9 @@
 			dependencies = (
 			);
 			name = tracker;
+			packageProductDependencies = (
+				1524655B23A6C6000086CAA1 /* Pages */,
+			);
 			productName = tracker;
 			productReference = B8DA9649237FC34600BC1801 /* tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -286,6 +297,9 @@
 				Base,
 			);
 			mainGroup = B8DA9640237FC34600BC1801;
+			packageReferences = (
+				1524655A23A6C6000086CAA1 /* XCRemoteSwiftPackageReference "Pages" */,
+			);
 			productRefGroup = B8DA964A237FC34600BC1801 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -322,6 +336,7 @@
 				B88D2A5123A6B42500AC3CB6 /* AddEventSelectTypeView.swift in Sources */,
 				4481FC0D23A1D4220092DD97 /* AddTripView.swift in Sources */,
 				B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */,
+				15A4839423A6D0D5008AF9DF /* SwipeView.swift in Sources */,
 				B86E3171238B30AC00B31FE2 /* HandleView.swift in Sources */,
 				B8EB5D2723A68CEB003ECB73 /* TextFieldWithDelete.swift in Sources */,
 				B8DA964D237FC34600BC1801 /* AppDelegate.swift in Sources */,
@@ -349,6 +364,7 @@
 				B8AEB6A02388FA57003E100E /* MapView.swift in Sources */,
 				B86E31A223A08A6100B31FE2 /* Place.swift in Sources */,
 				15114DE923962794003863FD /* EventCard.swift in Sources */,
+				15A4839623A702A4008AF9DF /* AddEventViewV2.swift in Sources */,
 				B86E319C2396254D00B31FE2 /* EventCard.swift in Sources */,
 				4481FC0F23A1D4360092DD97 /* TripCardView.swift in Sources */,
 			);
@@ -489,7 +505,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"tracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 9Q368PTXL6;
+				DEVELOPMENT_TEAM = 42P5QSY99F;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "Views/Legacy/*";
 				INFOPLIST_FILE = tracker/Info.plist;
@@ -498,7 +514,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = junyi.tracker;
+				PRODUCT_BUNDLE_IDENTIFIER = bzhu.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -513,7 +529,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"tracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 9Q368PTXL6;
+				DEVELOPMENT_TEAM = 42P5QSY99F;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "Views/Legacy/*";
 				INFOPLIST_FILE = tracker/Info.plist;
@@ -522,7 +538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = junyi.tracker;
+				PRODUCT_BUNDLE_IDENTIFIER = bzhu.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -552,6 +568,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1524655A23A6C6000086CAA1 /* XCRemoteSwiftPackageReference "Pages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nachonavarro/Pages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1524655B23A6C6000086CAA1 /* Pages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1524655A23A6C6000086CAA1 /* XCRemoteSwiftPackageReference "Pages" */;
+			productName = Pages;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B8DA9650237FC34600BC1801 /* tracker.xcdatamodeld */ = {
