@@ -15,25 +15,19 @@ struct TripCardView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    Image(uiImage: self.image!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    Text(self.dateString)
-                        .font(.headline)
-                        .foregroundColor(.secondary)
-                    Text(self.title)
-                        .font(.title)
-                        .fontWeight(.black)
-                        .foregroundColor(.primary)
-                        .lineLimit(3)
-                }
-                .layoutPriority(100)
-
-                Spacer()
+            VStack(alignment: .leading) {
+                Image(uiImage: self.image!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                // .cornerRadius(10)
+                Text(self.title)
+                    .font(.title)
+                    .fontWeight(.black)
+                    .foregroundColor(.primary)
+                    .lineLimit(3)
+                    .padding()
             }
-            .padding()
+            .layoutPriority(100)
         }
         .cornerRadius(10)
         .overlay(
