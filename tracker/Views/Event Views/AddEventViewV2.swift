@@ -20,63 +20,7 @@ struct AddEventViewV2: View {
     @State var string: String = ""
     var body: some View {
         VStack {
-            SwipeView()
-            if draftEvent.type == .transportation {
-                transportationLocationRow(origin: draftEvent.origin, destination: draftEvent.place)
-            } else {
-                locationRow(place: draftEvent.place)
-            }
-            VStack {
-                Form {
-                    Section(header: HStack {
-                        Text("Title:")
-                        Spacer()
-                        Button(action: {
-                            if self.draftEvent.type == .transportation {
-                                self.draftEvent.title = "From \(self.draftEvent.origin.name) to \(self.draftEvent.place.name)"
-                            } else {
-                                self.draftEvent.title = self.draftEvent.place.name
-                            }
-                        }) {
-                            Text("Sync with location")
-                        }
-                    }) {
-                        HStack {
-                            TextFieldWithDelete("Enter event title", text: $draftEvent.title)
-                        }
-                    }
-
-                    Section {
-                        datePicker(selectedDate: $draftEvent.dateForDate)
-                        timePicker(selectedTime: $draftEvent.dateForTime)
-                    }
-                    Section(header: Text("💰 Price:")) {
-                        HStack {
-                            TextFieldWithDelete("Enter price here", text: $draftEvent.price)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    Section(header: Text("👍 Rating:")) {
-                        HStack {
-                            StarRatingView(rating: $draftEvent.rating)
-                        }
-                    }
-                    if draftEvent.type == .transportation {
-                        Section(header: Text("Transportation")) {
-                            VStack(alignment: .leading) {
-                                transporatationMethodsSelectionRow(transportationMethod: $draftEvent.transportation)
-                            }
-                        }
-                    }
-
-                    Section(header: Text("Description")) {
-                        HStack {
-                            TextFieldWithDelete("Enter your description here", text: $draftEvent.eventDescription)
-                        }
-                    }
-                }
-                .listStyle(GroupedListStyle())
-            }
+            SwipeView(draftEvent: self.draftEvent)
         }
         .navigationBarTitle(Text("\(draftEvent.type.rawValue)"))
         .navigationBarItems(trailing: Button(action: {

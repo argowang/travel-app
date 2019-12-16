@@ -9,6 +9,12 @@
 import Foundation
 import SwiftUI
 struct SwipeView: View {
+    @ObservedObject private var keyboard = KeyboardResponder()
+    @ObservedObject var draftEvent: UserEvent
+
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+
     @State private var offset: CGFloat = 0
     @State private var index = 0
 
@@ -20,17 +26,39 @@ struct SwipeView: View {
         GeometryReader { geometry in
             ScrollView(.horizontal, showsIndicators: true) {
                 HStack(spacing: self.spacing) {
-                    // ForEach(self.users) { user in
-                    UserView()
-                        .frame(width: geometry.size.width)
-                    UserView()
-                        .frame(width: geometry.size.width)
+                    if self.draftEvent.type == .transportation {
+                        transportationLocationRow(origin: self.draftEvent.origin, destination: self.draftEvent.place)
+                            .frame(width: geometry.size.width)
+                    } else {
+                        locationRow(place: self.draftEvent.place)
+                            .frame(width: geometry.size.width)
+                    }
                     VStack {
-                        TextFieldWithDelete("Enter price here", text: self.$string)
-                            .foregroundColor(.secondary)
+                        datePicker(selectedDate: self.$draftEvent.dateForDate)
+                        timePicker(selectedTime: self.$draftEvent.dateForTime)
                     }
                     .frame(width: geometry.size.width)
-//                    }
+
+                    HStack {
+                        TextFieldWithDelete("Enter price here", text: self.$draftEvent.price)
+                            .foregroundColor(.secondary)
+                        HStack {
+                            StarRatingView(rating: self.$draftEvent.rating)
+                        }
+                        if self.draftEvent.type == .transportation {
+                            Section(header: Text("Transportation")) {
+                                VStack(alignment: .leading) {
+                                    transporatationMethodsSelectionRow(transportationMethod: self.$draftEvent.transportation)
+                                }
+                            }
+                        }
+                    }
+                    .frame(width: geometry.size.width)
+
+                    HStack {
+                        TextFieldWithDelete("Enter your description here", text: self.$draftEvent.eventDescription)
+                    }
+                    .frame(width: geometry.size.width)
                 }
             }
             .content.offset(x: self.offset)
@@ -60,8 +88,6 @@ struct UserView: View {
             Image(systemName: "pencil")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-//            AvatarView(image: userModel.image)
-//            NameView(name: userModel.name, age: userModel.age, hobby: userModel.hobby)
         }
         .shadow(radius: 12.0)
         .cornerRadius(12.0)
