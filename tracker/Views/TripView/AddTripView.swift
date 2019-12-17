@@ -8,11 +8,14 @@
 
 import CoreData
 import SwiftUI
+import TextView
 
 struct AddTripView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     @State var title = ""
+    @State var isEditing = false
 
     @State var showImagePicker: Bool = false
     @State var uiImage: UIImage? = nil
@@ -23,7 +26,8 @@ struct AddTripView: View {
                 .frame(height: 20)
             HStack {
                 Button(
-                    action: { self.presentationMode.wrappedValue.dismiss()
+                    action: {
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 ) {
                     Text("Dismiss")
@@ -92,15 +96,8 @@ struct AddTripView: View {
 
                 Spacer()
                     .frame(width: 20)
-
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.gray)
+                MultilineTextViewWithOverlayColor(text: $title)
                     .frame(height: 70)
-                    .opacity(0.1)
-                    .overlay(
-                        TextFieldWithDelete("Enter your trip name", text: $title)
-                            .padding()
-                    )
             }
             .padding()
 

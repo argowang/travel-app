@@ -8,18 +8,22 @@
 
 import Combine
 import SwiftUI
-struct MultilineTextView: UIViewRepresentable {
+import TextView
+
+struct MultilineTextViewWithOverlayColor: View {
     @Binding var text: String
+    @State var isEditing = false
+    var color = Color.gray
+    var lineWidth = 1.5
+    var cornerRadius = 10
 
-    func makeUIView(context _: Context) -> UITextView {
-        let view = UITextView()
-        view.isScrollEnabled = true
-        view.isEditable = true
-        view.isUserInteractionEnabled = true
-        return view
+    var body: some View {
+        TextView(text: $text, isEditing: $isEditing)
+            .frame(height: 70)
+            .overlay(
+                RoundedRectangle(cornerRadius: CGFloat(cornerRadius))
+                    .stroke(color, lineWidth: CGFloat(lineWidth))
+                    .opacity(0.1)
+            )
     }
-
-    func updateUIView(_ uiView: UITextView, context _: Context) {
-        uiView.text = text
-    }
-}
+} 
