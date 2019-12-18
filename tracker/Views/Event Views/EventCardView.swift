@@ -8,23 +8,21 @@
 import SwiftUI
 
 struct EventCardView: View {
-    var title: String
-    var type: EventType
-    var dateString: String
+    var eventCard: EventCard
 
     var body: some View {
         VStack {
             HStack {
-                type.getImage()
+                EventType(rawValue: self.eventCard.type).getImage()
                     .resizable()
                     .frame(width: 60, height: 60)
                     .padding()
 
                 VStack(alignment: .leading) {
-                    Text(self.dateString)
+                    Text(self.eventCard.formattedStartString)
                         .font(.headline)
                         .foregroundColor(.secondary)
-                    Text(self.title)
+                    Text(self.eventCard.title)
                         .font(.title)
                         .fontWeight(.black)
                         .foregroundColor(.primary)
@@ -46,10 +44,8 @@ struct EventCardView: View {
 }
 
 struct EventCardView_Previews: PreviewProvider {
-    static var title = ""
-    static var type = EventType.general
-    static var dateString = ""
+    static var card = EventCard()
     static var previews: some View {
-        EventCardView(title: title, type: type, dateString: dateString)
+        EventCardView(eventCard: card)
     }
 }

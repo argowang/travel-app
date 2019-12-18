@@ -21,12 +21,6 @@ struct EventCardListView: View {
 
     var didChange = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
 
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return formatter
-    }
-
     private func displayPopup() {
         showingModal = true
     }
@@ -42,11 +36,10 @@ struct EventCardListView: View {
                             Text("Work Around")
                         }.hidden()
 
-                        EventCardView(title: card.title, type: EventType(rawValue: card.type), dateString: self.dateFormatter.string(from: card.start))
+                        EventCardView(eventCard: card)
                             .onTapGesture {
                                 self.selected = card.uuid
                             }
-                            .background(RefreshView(refresh: self.refreshing))
                     }
                     .padding(.bottom, 5)
                     .contextMenu {

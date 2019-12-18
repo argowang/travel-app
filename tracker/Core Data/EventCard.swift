@@ -30,8 +30,18 @@ public class EventCard: NSManagedObject, Identifiable {
 }
 
 extension EventCard {
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy HH:mm"
+        return formatter
+    }
+
     public var wrappedRating: Int {
         Int(rating)
+    }
+
+    public var formattedStartString: String {
+        dateFormatter.string(from: start)
     }
 
     static func allEventCardsFetchRequest() -> NSFetchRequest<EventCard> {
