@@ -6,6 +6,7 @@
 //  Copyright © 2019 TechLead. All rights reserved.
 //
 
+import Pages
 import SwiftUI
 
 struct AddEventViewV2: View {
@@ -19,46 +20,10 @@ struct AddEventViewV2: View {
     @State var formPageIndex: Int = 0
     @State var string: String = ""
     var body: some View {
-        VStack {
-            SwipeView(draftEvent: self.draftEvent)
-        }
-        .navigationBarTitle(Text("\(draftEvent.type.rawValue)"))
-        .navigationBarItems(trailing: Button(action: {
-            var cardToSave: EventCard!
-            if self.draftEvent.event != nil {
-                cardToSave = self.draftEvent.event
-            } else {
-                cardToSave = EventCard(context: self.managedObjectContext)
-                cardToSave.uuid = UUID()
-                self.draftEvent.parentTrip.addToEvents(cardToSave)
-            }
-            cardToSave.placeName = self.draftEvent.place.name
-            cardToSave.latitude = self.draftEvent.place.coordinate?.latitude ?? 0
-            cardToSave.longitude = self.draftEvent.place.coordinate?.longitude ?? 0
-
-            if self.draftEvent.type == .transportation {
-                cardToSave.originName = self.draftEvent.origin.name
-                cardToSave.originLatitude = self.draftEvent.origin.coordinate?.latitude ?? 0
-                cardToSave.originLongitude = self.draftEvent.origin.coordinate?.longitude ?? 0
-                cardToSave.transportation = self.draftEvent.transportation
-            }
-
-            cardToSave.title = self.draftEvent.title
-
-            cardToSave.start = self.draftEvent.calculatedDate
-            cardToSave.type = self.draftEvent.type.rawValue
-            cardToSave.rating = Int16(self.draftEvent.rating)
-            cardToSave.price = self.draftEvent.price
-            cardToSave.eventDescription = self.draftEvent.eventDescription
-
-            do {
-                try self.managedObjectContext.save()
-                self.mode.wrappedValue.dismiss()
-            } catch {
-                print(error)
-            }
-        }, label: { Text("Save") }) // .disabled(isSaveAllowed(draftEvent))
-        )
+        Pages(currentPage: self.$formPageIndex, navigationOrientation: .vertical) {
+            Text("1")
+            TextFieldWithDelete("Draft", text: self.$string)
+        }.padding()
     }
 
     // Add custom validation logic here
