@@ -71,8 +71,8 @@ struct EventCardListView: View {
 
             FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
             // https://forums.developer.apple.com/thread/124757
-            
-            NavigationLink(destination: AddEventViewV2(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive, label: {EmptyView()})
+
+            NavigationLink(destination: AddEventViewV2(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive, label: { EmptyView() })
 
             AddEventSelectTypeView(display: $showingModal, navigateToAddEventView: $addEventActive, eventType: $eventType)
         }
