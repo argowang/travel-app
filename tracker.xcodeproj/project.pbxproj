@@ -517,7 +517,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"tracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 42P5QSY99F;
+				DEVELOPMENT_TEAM = 9Q368PTXL6;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "Views/Legacy/*";
 				INFOPLIST_FILE = tracker/Info.plist;
@@ -526,7 +526,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bzhu.tracker;
+				PRODUCT_BUNDLE_IDENTIFIER = junyi.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -541,7 +541,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"tracker/Preview Content\"";
-				DEVELOPMENT_TEAM = 42P5QSY99F;
+				DEVELOPMENT_TEAM = 9Q368PTXL6;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "Views/Legacy/*";
 				INFOPLIST_FILE = tracker/Info.plist;
@@ -550,7 +550,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = bzhu.tracker;
+				PRODUCT_BUNDLE_IDENTIFIER = junyi.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

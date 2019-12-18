@@ -18,7 +18,7 @@ struct TripCardView: View {
             VStack(alignment: .leading) {
                 Image(uiImage: self.image!)
                     .resizable()
-                    .aspectRatio(contentMode: .fit) 
+                    .aspectRatio(contentMode: .fit)
                 Text(self.title)
                     .font(.title)
                     .fontWeight(.black)
