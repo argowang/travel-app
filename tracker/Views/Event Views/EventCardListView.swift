@@ -17,6 +17,9 @@ struct EventCardListView: View {
     @State var addEventActive = false
     @State var eventType: EventType = .general
     @State var showingModal = false
+    @State var refreshing = false
+
+    var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
     private func displayPopup() {
         showingModal = true
@@ -24,13 +27,12 @@ struct EventCardListView: View {
 
     var body: some View {
         ZStack {
+            RefreshView(refresh: refreshing)
             ScrollView {
                 ForEach(self.trip.eventArray, id: \.uuid) { card in
-                    ZStack {
+                    VStack {
                         NavigationLink(destination:
-                            AddEventViewV2(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected) {
-                            Text("Work Around")
-                        }.hidden()
+                            AddEventViewV2(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected, label: { EmptyView() })
 
                         EventCardView(eventCard: card)
                             .onTapGesture {
@@ -63,13 +65,14 @@ struct EventCardListView: View {
                         }
                     }
                 }
+            }.onReceive(self.didSave) { _ in
+                self.refreshing.toggle()
             }
 
             FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
             // https://forums.developer.apple.com/thread/124757
-            NavigationLink(destination: AddEventViewV2(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive) {
-                Text("Work Around")
-            }.hidden()
+            
+            NavigationLink(destination: AddEventViewV2(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive, label: {EmptyView()})
 
             AddEventSelectTypeView(display: $showingModal, navigateToAddEventView: $addEventActive, eventType: $eventType)
         }

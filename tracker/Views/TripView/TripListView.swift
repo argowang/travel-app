@@ -19,33 +19,27 @@ struct TripListView: View {
         ZStack {
             ScrollView {
                 ForEach(self.tripCards) { card in
-                    ZStack {
-                        NavigationLink(destination: LazyView(EventCardListView(trip: card)), tag: card.uuid, selection: self.$selected) {
-                            Text("Work Around")
+                    NavigationLink(destination: LazyView(EventCardListView(trip: card)), tag: card.uuid, selection: self.$selected, label: { EmptyView() })
 
-                        }.hidden()
-
-                        TripCardView(tripCard: card)
-                            .onTapGesture {
-                                self.selected = card.uuid
-                            }
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .contextMenu {
-                        Button(action: {
-                            self.managedObjectContext.delete(card)
-                            do {
-                                try self.managedObjectContext.save()
-                            } catch {
-                                print(error)
-                            }
-                        }) {
-                            HStack {
-                                Text("Remove")
-                                Image(systemName: "trash.circle")
+                    TripCardView(tripCard: card)
+                        .onTapGesture {
+                            self.selected = card.uuid
+                        }
+                        .contextMenu {
+                            Button(action: {
+                                self.managedObjectContext.delete(card)
+                                do {
+                                    try self.managedObjectContext.save()
+                                } catch {
+                                    print(error)
+                                }
+                            }) {
+                                HStack {
+                                    Text("Remove")
+                                    Image(systemName: "trash.circle")
+                                }
                             }
                         }
-                    }
                 }
             }
             FloatingAddButtonView(destinationView: AddTripView().environment(\.managedObjectContext, self.managedObjectContext))
