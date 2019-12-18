@@ -12,7 +12,7 @@ import Foundation
 public class TripCard: NSManagedObject, Identifiable {
     @NSManaged public var uuid: UUID
     @NSManaged public var image: Data?
-    @NSManaged public var title: String?
+    @NSManaged public var title: String
     @NSManaged public var start: Date?
     @NSManaged public var end: Date?
 

@@ -10,12 +10,6 @@ import CoreData
 import SwiftUI
 
 struct TripListView: View {
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return formatter
-    }
-
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
     @State var showingDetail = false
@@ -31,9 +25,7 @@ struct TripListView: View {
 
                         }.hidden()
 
-                        TripCardView(title: card.title ?? "title place holder",
-                                     dateString: self.dateFormatter.string(from: card.start ?? Date()),
-                                     image: UIImage(data: card.image!, scale: 1.0))
+                        TripCardView(tripCard: card)
                             .onTapGesture {
                                 self.selected = card.uuid
                             }
