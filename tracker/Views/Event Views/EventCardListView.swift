@@ -13,13 +13,10 @@ struct EventCardListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var manager: LocationManager
     @ObservedObject var trip: TripCard
-    @State var refreshing = false
     @State var selected: UUID?
     @State var addEventActive = false
     @State var eventType: EventType = .general
     @State var showingModal = false
-
-    var didChange = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
 
     private func displayPopup() {
         showingModal = true
@@ -27,7 +24,6 @@ struct EventCardListView: View {
 
     var body: some View {
         ZStack {
-            RefreshView(refresh: refreshing)
             ScrollView {
                 ForEach(self.trip.eventArray, id: \.uuid) { card in
                     ZStack {
@@ -66,10 +62,6 @@ struct EventCardListView: View {
                             }
                         }
                     }
-                }
-                // temp fix, fetchrequest sometimes will not update, this is apple native bug
-                .onReceive(self.didChange) { _ in
-                    self.refreshing.toggle()
                 }
             }
 

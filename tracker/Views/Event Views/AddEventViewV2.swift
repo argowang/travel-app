@@ -22,7 +22,7 @@ struct AddEventViewV2: View {
         VStack {
             SwipeView(draftEvent: self.draftEvent)
         }
-        .navigationBarTitle(Text("\(draftEvent.type.rawValue)"))
+        .navigationBarTitle(Text("\(draftEvent.type.rawValue)"), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
             var cardToSave: EventCard!
             if self.draftEvent.event != nil {
