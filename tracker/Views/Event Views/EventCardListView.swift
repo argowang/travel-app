@@ -32,9 +32,9 @@ struct EventCardListView: View {
                 ForEach(self.trip.eventArray, id: \.uuid) { card in
                     VStack {
                         NavigationLink(destination:
-                            AddEventViewV2(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected, label: { EmptyView() })
+                            AddEventView(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected, label: { EmptyView() })
 
-                        EventCardView(eventCard: card)
+                        EventCardView(title: card.title, type: EventType(rawValue: card.type), dateString: card.formattedStartString)
                             .onTapGesture {
                                 self.selected = card.uuid
                             }
@@ -72,7 +72,7 @@ struct EventCardListView: View {
             FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
             // https://forums.developer.apple.com/thread/124757
 
-            NavigationLink(destination: AddEventViewV2(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive, label: { EmptyView() })
+            NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive, label: { EmptyView() })
 
             AddEventSelectTypeView(display: $showingModal, navigateToAddEventView: $addEventActive, eventType: $eventType)
         }
