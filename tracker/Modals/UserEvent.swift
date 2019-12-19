@@ -81,4 +81,45 @@ class UserEvent: NSObject, ObservableObject {
         parentTrip = trip
         event = card
     }
+
+    public func saveToContext(_ context: NSManagedObjectContext) -> Bool {
+        var cardToSave: EventCard!
+        if event != nil {
+            cardToSave = event
+        } else {
+            cardToSave = EventCard(context: context)
+            cardToSave.uuid = UUID()
+            parentTrip.addToEvents(cardToSave)
+        }
+
+        cardToSave.placeName = place.name
+        cardToSave.latitude = place.coordinate?.latitude ?? 0
+        cardToSave.longitude = place.coordinate?.longitude ?? 0
+
+        if type == .transportation {
+            cardToSave.originName = origin.name
+            cardToSave.originLatitude = origin.coordinate?.latitude ?? 0
+            cardToSave.originLongitude = origin.coordinate?.longitude ?? 0
+            cardToSave.transportation = transportation
+        }
+
+        cardToSave.title = title
+
+        cardToSave.start = calculatedDate
+        cardToSave.type = type.rawValue
+        cardToSave.rating = Int16(rating)
+        cardToSave.price = price
+        cardToSave.eventDescription = eventDescription
+
+        do {
+            try context.save()
+
+            print("save succeed")
+            return true
+
+        } catch {
+            print(error)
+            return false
+        }
+    }
 }

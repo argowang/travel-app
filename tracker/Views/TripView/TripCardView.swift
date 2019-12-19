@@ -9,38 +9,33 @@
 import SwiftUI
 
 struct TripCardView: View {
-    var title: String
-    var dateString: String
-    var image: UIImage?
+    var tripCard: TripCard
 
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
-                Image(uiImage: self.image!)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit) 
-                Text(self.title)
-                    .font(.title)
-                    .fontWeight(.black)
-                    .foregroundColor(.primary)
-                    .lineLimit(3)
-                    .padding()
-            }
-            .layoutPriority(100)
+        VStack(alignment: .leading) {
+            Image(uiImage: UIImage(data: self.tripCard.image!, scale: 1.0)!)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            Text(self.tripCard.title)
+                .font(.title)
+                .fontWeight(.black)
+                .foregroundColor(.primary)
+                .lineLimit(3)
+                .padding()
         }
+        .layoutPriority(100)
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 2.5)
         )
-        .padding([.top, .horizontal])
+        .padding()
     }
 }
 
 struct TripCardView_Previews: PreviewProvider {
-    static var title = ""
-    static var dateString = ""
+    static var tripCard = TripCard()
     static var previews: some View {
-        TripCardView(title: title, dateString: dateString)
+        TripCardView(tripCard: tripCard)
     }
 }

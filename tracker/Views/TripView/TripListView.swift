@@ -10,12 +10,6 @@ import CoreData
 import SwiftUI
 
 struct TripListView: View {
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return formatter
-    }
-
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: TripCard.allTripCardsFetchRequest()) var tripCards: FetchedResults<TripCard>
     @State var showingDetail = false
@@ -25,35 +19,27 @@ struct TripListView: View {
         ZStack {
             ScrollView {
                 ForEach(self.tripCards) { card in
-                    ZStack {
-                        NavigationLink(destination: LazyView(EventCardListView(trip: card)), tag: card.uuid, selection: self.$selected) {
-                            Text("Work Around")
+                    NavigationLink(destination: LazyView(EventCardListView(trip: card)), tag: card.uuid, selection: self.$selected, label: { EmptyView() })
 
-                        }.hidden()
-
-                        TripCardView(title: card.title ?? "title place holder",
-                                     dateString: self.dateFormatter.string(from: card.start ?? Date()),
-                                     image: UIImage(data: card.image!, scale: 1.0))
-                            .onTapGesture {
-                                self.selected = card.uuid
-                            }
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .contextMenu {
-                        Button(action: {
-                            self.managedObjectContext.delete(card)
-                            do {
-                                try self.managedObjectContext.save()
-                            } catch {
-                                print(error)
-                            }
-                        }) {
-                            HStack {
-                                Text("Remove")
-                                Image(systemName: "trash.circle")
+                    TripCardView(tripCard: card)
+                        .onTapGesture {
+                            self.selected = card.uuid
+                        }
+                        .contextMenu {
+                            Button(action: {
+                                self.managedObjectContext.delete(card)
+                                do {
+                                    try self.managedObjectContext.save()
+                                } catch {
+                                    print(error)
+                                }
+                            }) {
+                                HStack {
+                                    Text("Remove")
+                                    Image(systemName: "trash.circle")
+                                }
                             }
                         }
-                    }
                 }
             }
             FloatingAddButtonView(destinationView: AddTripView().environment(\.managedObjectContext, self.managedObjectContext))

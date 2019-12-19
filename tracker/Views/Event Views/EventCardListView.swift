@@ -13,19 +13,13 @@ struct EventCardListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var manager: LocationManager
     @ObservedObject var trip: TripCard
-    @State var refreshing = false
     @State var selected: UUID?
     @State var addEventActive = false
     @State var eventType: EventType = .general
     @State var showingModal = false
+    @State var refreshing = false
 
-    var didChange = NotificationCenter.default.publisher(for: .NSManagedObjectContextObjectsDidChange)
-
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return formatter
-    }
+    var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
     private func displayPopup() {
         showingModal = true
@@ -36,17 +30,14 @@ struct EventCardListView: View {
             RefreshView(refresh: refreshing)
             ScrollView {
                 ForEach(self.trip.eventArray, id: \.uuid) { card in
-                    ZStack {
+                    VStack {
                         NavigationLink(destination:
-                            AddEventViewV2(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected) {
-                            Text("Work Around")
-                        }.hidden()
+                            AddEventView(draftEvent: UserEvent(card, self.trip)), tag: card.uuid, selection: self.$selected, label: { EmptyView() })
 
-                        EventCardView(title: card.title, type: EventType(rawValue: card.type), dateString: self.dateFormatter.string(from: card.start))
+                        EventCardView(title: card.title, type: EventType(rawValue: card.type), dateString: card.formattedStartString)
                             .onTapGesture {
                                 self.selected = card.uuid
                             }
-                            .background(RefreshView(refresh: self.refreshing))
                     }
                     .padding(.bottom, 5)
                     .contextMenu {
@@ -74,17 +65,14 @@ struct EventCardListView: View {
                         }
                     }
                 }
-                // temp fix, fetchrequest sometimes will not update, this is apple native bug
-                .onReceive(self.didChange) { _ in
-                    self.refreshing.toggle()
-                }
+            }.onReceive(self.didSave) { _ in
+                self.refreshing.toggle()
             }
 
             FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
             // https://forums.developer.apple.com/thread/124757
-            NavigationLink(destination: AddEventViewV2(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive) {
-                Text("Work Around")
-            }.hidden()
+
+            NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive, label: { EmptyView() })
 
             AddEventSelectTypeView(display: $showingModal, navigateToAddEventView: $addEventActive, eventType: $eventType)
         }

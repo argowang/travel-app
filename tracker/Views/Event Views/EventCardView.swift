@@ -41,7 +41,8 @@ struct EventCardView: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 2.5)
         )
-        .padding([.top, .horizontal])
+        .padding(.horizontal)
+        .padding(.vertical, 5)
     }
 }
 
