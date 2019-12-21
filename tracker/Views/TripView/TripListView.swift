@@ -19,7 +19,7 @@ struct TripListView: View {
         ZStack {
             ScrollView {
                 ForEach(self.tripCards) { card in
-                    NavigationLink(destination: LazyView(EventCardListView(trip: card)), tag: card.uuid, selection: self.$selected, label: { EmptyView() })
+                    NavigationLink(destination: LazyView(EventCardListView().environmentObject(card)), tag: card.uuid, selection: self.$selected, label: { EmptyView() })
 
                     TripCardView(tripCard: card)
                         .onTapGesture {

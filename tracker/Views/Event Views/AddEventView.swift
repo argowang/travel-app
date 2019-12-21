@@ -9,8 +9,6 @@ struct AddEventView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
-    let animation = Animation.easeInOut(duration: 1.0)
-
     private func dismiss() {
         mode.wrappedValue.dismiss()
     }
@@ -80,7 +78,7 @@ struct AddEventView: View {
         .navigationBarItems(leading: CancelButtonWithDismissAlert(dismiss),
                             trailing: Button(action: {
                                 if self.draftEvent.saveToContext(self.managedObjectContext) {
-                                    self.mode.wrappedValue.dismiss()
+                                    self.dismiss()
                                 }
         }, label: { Text("Save") }).disabled(isSaveAllowed(draftEvent)))
     }

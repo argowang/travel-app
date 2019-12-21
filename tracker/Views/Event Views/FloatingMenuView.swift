@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct FloatingMenuView: View {
-    @ObservedObject var trip: TripCard
+    @EnvironmentObject var trip: TripCard
     @State var showMenuItem1 = false
     @State var showMenuItem2 = false
     @State var showMenuItem3 = false
@@ -21,13 +21,13 @@ struct FloatingMenuView: View {
                 VStack {
                     Spacer()
                     if showMenuItem1 {
-                        MenuItem(trip: self.trip, icon: .food)
+                        MenuItem(icon: .food)
                     }
                     if showMenuItem2 {
-                        MenuItem(trip: self.trip, icon: .transportation)
+                        MenuItem(icon: .transportation)
                     }
                     if showMenuItem3 {
-                        MenuItem(trip: self.trip, icon: .general)
+                        MenuItem(icon: .general)
                     }
                     Button(action: {
                         self.showMenu()
@@ -60,7 +60,7 @@ struct FloatingMenuView: View {
 
 struct MenuItem: View {
     @EnvironmentObject var manager: LocationManager
-    @ObservedObject var trip: TripCard
+    @EnvironmentObject var trip: TripCard
 
     var icon: EventType
 
