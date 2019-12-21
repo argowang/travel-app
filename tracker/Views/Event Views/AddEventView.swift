@@ -81,6 +81,7 @@ struct AddEventView: View {
                                     self.dismiss()
                                 }
         }, label: { Text("Save") }).disabled(isSaveAllowed(draftEvent)))
+        .resignKeyboardOnDragGesture()
     }
 
     // Add custom validation logic here
