@@ -12,18 +12,13 @@ import SwiftUI
 struct EventCardListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var manager: LocationManager
-    @ObservedObject var trip: TripCard
+    @EnvironmentObject var trip: TripCard
     @State var selected: UUID?
     @State var addEventActive = false
     @State var eventType: EventType = .general
-    @State var showingModal = false
     @State var refreshing = false
 
     var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
-
-    private func displayPopup() {
-        showingModal = true
-    }
 
     var body: some View {
         ZStack {
@@ -69,12 +64,10 @@ struct EventCardListView: View {
                 self.refreshing.toggle()
             }
 
-            FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
+            FloatingMenuView()
             // https://forums.developer.apple.com/thread/124757
 
             NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive, label: { EmptyView() })
-
-            AddEventSelectTypeView(display: $showingModal, navigateToAddEventView: $addEventActive, eventType: $eventType)
         }
     }
 }

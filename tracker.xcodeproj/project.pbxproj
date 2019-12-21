@@ -40,6 +40,7 @@
 		B86E31A223A08A6100B31FE2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A123A08A6000B31FE2 /* Place.swift */; };
 		B86E31A423A2088400B31FE2 /* KeyBoardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A323A2088300B31FE2 /* KeyBoardResponder.swift */; };
 		B86E31A623A3635D00B31FE2 /* UserEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A523A3635C00B31FE2 /* UserEvent.swift */; };
+		B875CE1E23ADD7440045F053 /* FloatingMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B875CE1D23ADD7440045F053 /* FloatingMenuView.swift */; };
 		B88BB1B823A715DE00E1995C /* CancelButtonWithDismissAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88BB1B723A715DE00E1995C /* CancelButtonWithDismissAlert.swift */; };
 		B88D2A5123A6B42500AC3CB6 /* AddEventSelectTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */; };
 		B88D2A5323A6B90100AC3CB6 /* EventTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */; };
@@ -87,6 +88,7 @@
 		B86E31A123A08A6000B31FE2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		B86E31A323A2088300B31FE2 /* KeyBoardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardResponder.swift; sourceTree = "<group>"; };
 		B86E31A523A3635C00B31FE2 /* UserEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEvent.swift; sourceTree = "<group>"; };
+		B875CE1D23ADD7440045F053 /* FloatingMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingMenuView.swift; sourceTree = "<group>"; };
 		B88BB1B723A715DE00E1995C /* CancelButtonWithDismissAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButtonWithDismissAlert.swift; sourceTree = "<group>"; };
 		B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventSelectTypeView.swift; sourceTree = "<group>"; };
 		B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeButtonView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				15114DDE2395B48D003863FD /* EventCardListView.swift */,
 				15114DE02395B4AC003863FD /* EventCardView.swift */,
 				B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */,
+				B875CE1D23ADD7440045F053 /* FloatingMenuView.swift */,
 				B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */,
 				15A4839323A6D0D5008AF9DF /* SwipeView.swift */,
 				15A4839523A702A4008AF9DF /* AddEventViewV2.swift */,
@@ -365,6 +368,7 @@
 				B81702B023A586CE002A28AD /* FloatingAddButtonView.swift in Sources */,
 				1552FAE4238BA94800060E05 /* CardListView.swift in Sources */,
 				B86E31A423A2088400B31FE2 /* KeyBoardResponder.swift in Sources */,
+				B875CE1E23ADD7440045F053 /* FloatingMenuView.swift in Sources */,
 				1571D4FE238FA15D00FC33E9 /* AddEventView.swift in Sources */,
 				B86E316F238B308F00B31FE2 /* SlideOverCardView.swift in Sources */,
 				15114DE12395B4AC003863FD /* EventCardView.swift in Sources */,
