@@ -69,12 +69,10 @@ struct EventCardListView: View {
                 self.refreshing.toggle()
             }
 
-            FloatingAddButtonView<EmptyView>(extraAction: displayPopup)
+            FloatingMenuView(trip: trip)
             // https://forums.developer.apple.com/thread/124757
 
             NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive, label: { EmptyView() })
-
-            AddEventSelectTypeView(display: $showingModal, navigateToAddEventView: $addEventActive, eventType: $eventType)
         }
     }
 }
