@@ -20,11 +20,11 @@ struct SlideOverCard<Content: View>: View {
             .onEnded(onDragEnded)
 
         return VStack {
-            HandleView()
+            HandleView().padding(.top, 30)
             self.content().frame(maxHeight: UIScreen.main.bounds.height - position.rawValue - 60)
             Spacer()
         }
-        .frame(height: UIScreen.main.bounds.height)
+        .frame(height: UIScreen.main.bounds.height - 30)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: UIScreen.main.bounds.height)
         .background(Color(UIColor.systemBackground))
         .cornerRadius(10.0)
@@ -68,7 +68,7 @@ struct SlideOverCard<Content: View>: View {
 enum CardPosition: CGFloat {
     case top = 150
     case middle = 500
-    case bottom = 780
+    case bottom = 750
 }
 
 enum DragState {

@@ -9,72 +9,85 @@ struct AddEventView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
+    @State var present: Bool = false
     private func dismiss() {
         mode.wrappedValue.dismiss()
     }
 
     var body: some View {
         VStack {
-            if draftEvent.type == .transportation {
-                transportationLocationRow(origin: draftEvent.origin, destination: draftEvent.place)
+            if self.present {
+                SetCurrentLocationView(place: draftEvent.place, draftPlace: Place(draftEvent.place), showMap: self.$present).environmentObject(PlaceFinder())
+                    .transition(.move(edge: .bottom))
             } else {
-                locationRow(place: draftEvent.place)
-            }
-            VStack {
-                Form {
-                    Section(header: HStack {
-                        Text("Title:")
-                        Spacer()
-                        Button(action: {
-                            if self.draftEvent.type == .transportation {
-                                self.draftEvent.title = "From \(self.draftEvent.origin.name) to \(self.draftEvent.place.name)"
-                            } else {
-                                self.draftEvent.title = self.draftEvent.place.name
+                VStack {
+                    Form {
+//                    Section(header: Text("Location:")) {
+//                        if draftEvent.type == .transportation {
+//                            transportationLocationRow(origin: draftEvent.origin, destination: draftEvent.place)
+//                        } else {
+//                            locationRow(place: draftEvent.place)
+//                        }
+//                    }
+                        Section {
+                            Toggle(isOn: self.$present.animation(.easeIn(duration: 0.16))) {
+                                Text("show map")
+                            }
+                        }
+
+                        Section(header: HStack {
+                            Text("Title:")
+                            Spacer()
+                            Button(action: {
+                                if self.draftEvent.type == .transportation {
+                                    self.draftEvent.title = "From \(self.draftEvent.origin.name) to \(self.draftEvent.place.name)"
+                                } else {
+                                    self.draftEvent.title = self.draftEvent.place.name
+                                }
+                            }) {
+                                Text("Sync with location")
                             }
                         }) {
-                            Text("Sync with location")
+                            HStack {
+                                TextFieldWithDelete("Enter event title", text: $draftEvent.title)
+                            }
                         }
-                    }) {
-                        HStack {
-                            TextFieldWithDelete("Enter event title", text: $draftEvent.title)
-                        }
-                    }
 
-                    Section {
-                        datePicker(selectedDate: $draftEvent.dateForDate)
-                        timePicker(selectedTime: $draftEvent.dateForTime)
-                    }
-                    Section(header: Text("💰 Price:")) {
-                        HStack {
-                            TextFieldWithDelete("Enter price here", text: $draftEvent.price)
-                                .foregroundColor(.secondary)
+                        Section {
+                            datePicker(selectedDate: $draftEvent.dateForDate)
+                            timePicker(selectedTime: $draftEvent.dateForTime)
                         }
-                    }
-                    Section(header: Text("👍 Rating:")) {
-                        HStack {
-                            StarRatingView(rating: $draftEvent.rating)
+                        Section(header: Text("💰 Price:")) {
+                            HStack {
+                                TextFieldWithDelete("Enter price here", text: $draftEvent.price)
+                                    .foregroundColor(.secondary)
+                            }
                         }
-                    }
-                    if draftEvent.type == .transportation {
-                        Section(header: Text("Transportation")) {
-                            VStack(alignment: .leading) {
-                                transporatationMethodsSelectionRow(transportationMethod: $draftEvent.transportation)
+                        Section(header: Text("👍 Rating:")) {
+                            HStack {
+                                StarRatingView(rating: $draftEvent.rating)
+                            }
+                        }
+                        if draftEvent.type == .transportation {
+                            Section(header: Text("Transportation")) {
+                                VStack(alignment: .leading) {
+                                    transporatationMethodsSelectionRow(transportationMethod: $draftEvent.transportation)
+                                }
+                            }
+                        }
+
+                        Section(header: Text("Description")) {
+                            HStack {
+                                TextFieldWithDelete("Enter your description here", text: $draftEvent.eventDescription)
                             }
                         }
                     }
-
-                    Section(header: Text("Description")) {
-                        HStack {
-                            TextFieldWithDelete("Enter your description here", text: $draftEvent.eventDescription)
-                        }
-                    }
-                }
-                .listStyle(GroupedListStyle())
-            }.padding(.bottom, keyboard.currentHeight)
-                .edgesIgnoringSafeArea(.bottom)
-                .animation(.easeOut(duration: 0.16))
+                    .listStyle(GroupedListStyle())
+                }.padding(.bottom, keyboard.currentHeight)
+                    .edgesIgnoringSafeArea(.bottom)
+            }
         }
-        .navigationBarTitle(Text("\(draftEvent.type.rawValue)"))
+        .navigationBarTitle(Text("\(draftEvent.type.rawValue)"), displayMode: .inline)
         .navigationBarItems(leading: CancelButtonWithDismissAlert(dismiss),
                             trailing: Button(action: {
                                 if self.draftEvent.saveToContext(self.managedObjectContext) {
@@ -82,6 +95,7 @@ struct AddEventView: View {
                                 }
         }, label: { Text("Save") }).disabled(isSaveAllowed(draftEvent)))
         .resignKeyboardOnDragGesture()
+        .navigationBarHidden(self.present)
     }
 
     // Add custom validation logic here
@@ -129,15 +143,16 @@ struct timePicker: View {
 
 struct locationRow: View {
     @ObservedObject var place: Place
-
+    @State var present = false
     var body: some View {
-        HStack {
+        VStack {
             Image("location").resizable().frame(width: 50, height: 50).padding()
-            Text("Location:")
-            NavigationLink(destination: SetCurrentLocationView(place: self.place, draftPlace: Place(self.place)).environmentObject(PlaceFinder())) {
-                Text("\(self.place.name)")
+
+            Button(action: { self.present = true }) {
+                Text("Location")
             }
-            Spacer()
+
+            SetCurrentLocationView(place: self.place, draftPlace: Place(self.place), showMap: Binding.constant(true)).environmentObject(PlaceFinder())
         }
     }
 }
@@ -149,7 +164,7 @@ struct transportationLocationRow: View {
     var body: some View {
         HStack(alignment: .center) {
             VStack {
-                NavigationLink(destination: SetCurrentLocationView(place: self.origin, draftPlace: Place(self.origin)).environmentObject(PlaceFinder())) {
+                NavigationLink(destination: SetCurrentLocationView(place: self.origin, draftPlace: Place(self.origin), showMap: Binding.constant(true)).environmentObject(PlaceFinder())) {
                     Text("\(self.origin.name == "" ? "From" : self.origin.name)")
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
@@ -167,7 +182,7 @@ struct transportationLocationRow: View {
             }.frame(minWidth: 0, maxWidth: .infinity)
 
             VStack {
-                NavigationLink(destination: SetCurrentLocationView(place: self.destination, draftPlace: Place(self.destination)).environmentObject(PlaceFinder())) {
+                NavigationLink(destination: SetCurrentLocationView(place: self.destination, draftPlace: Place(self.destination), showMap: Binding.constant(true)).environmentObject(PlaceFinder())) {
                     Text("\(self.destination.name == "" ? "Destination" : self.destination.name)")
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
