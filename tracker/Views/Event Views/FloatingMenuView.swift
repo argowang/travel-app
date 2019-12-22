@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct FloatingMenuView: View {
+    @Binding var showMenu: Bool
     @EnvironmentObject var trip: TripCard
     @State var showMenuItem1 = false
     @State var showMenuItem2 = false
@@ -20,39 +21,20 @@ struct FloatingMenuView: View {
                 Spacer()
                 VStack {
                     Spacer()
-                    if showMenuItem1 {
-                        MenuItem(icon: .food)
+                    if showMenu {
+                        MenuItem(icon: .food).animation(Animation.easeInOut.delay(0.2))
+                        MenuItem(icon: .transportation).animation(Animation.easeInOut.delay(0.1))
+                        MenuItem(icon: .general).animation(Animation.easeInOut)
                     }
-                    if showMenuItem2 {
-                        MenuItem(icon: .transportation)
-                    }
-                    if showMenuItem3 {
-                        MenuItem(icon: .general)
-                    }
+
                     Button(action: {
-                        self.showMenu()
+                        self.showMenu = true
                     }) {
                         Image("plus")
                             .resizable()
                             .frame(width: 80, height: 80)
                     }.buttonStyle(PlainButtonStyle())
                 }
-            }
-        }
-    }
-
-    func showMenu() {
-        withAnimation {
-            self.showMenuItem3.toggle()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            withAnimation {
-                self.showMenuItem2.toggle()
-            }
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            withAnimation {
-                self.showMenuItem1.toggle()
             }
         }
     }
