@@ -9,29 +9,40 @@ struct AddEventView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
-    @State var present: Bool = false
+    // 0 representing no map
+    // 1 representing map for location
+    // 2 representing map for origin
+    @State var present: Int = 0
     private func dismiss() {
         mode.wrappedValue.dismiss()
     }
 
     var body: some View {
         VStack {
-            if self.present {
-                SetCurrentLocationView(place: draftEvent.place, draftPlace: Place(draftEvent.place), showMap: self.$present).environmentObject(PlaceFinder())
+            if self.present == 1 {
+                SetCurrentLocationView(place: draftEvent.place, draftPlace: draftEvent.place, showMap: self.$present).environmentObject(PlaceFinder())
+                    .transition(.move(edge: .bottom))
+            } else if self.present == 2 {
+                SetCurrentLocationView(place: draftEvent.origin, draftPlace: draftEvent.origin, showMap: self.$present).environmentObject(PlaceFinder())
                     .transition(.move(edge: .bottom))
             } else {
                 VStack {
                     Form {
-//                    Section(header: Text("Location:")) {
-//                        if draftEvent.type == .transportation {
-//                            transportationLocationRow(origin: draftEvent.origin, destination: draftEvent.place)
-//                        } else {
-//                            locationRow(place: draftEvent.place)
-//                        }
-//                    }
-                        Section {
-                            Toggle(isOn: self.$present.animation(.easeIn(duration: 0.16))) {
-                                Text("show map")
+                        if draftEvent.type == .transportation {
+                            Section(header: Text("From")) {
+                                Button(action: {
+                                    self.present = 2
+                                }) {
+                                    Text(draftEvent.origin.name)
+                                }
+                            }
+                        }
+
+                        Section(header: Text(draftEvent.type == .transportation ? "Destination" : "Location:")) {
+                            Button(action: {
+                                self.present = 1
+                            }) {
+                                Text(draftEvent.place.name)
                             }
                         }
 
@@ -95,7 +106,7 @@ struct AddEventView: View {
                                 }
         }, label: { Text("Save") }).disabled(isSaveAllowed(draftEvent)))
         .resignKeyboardOnDragGesture()
-        .navigationBarHidden(self.present)
+        .navigationBarHidden(self.present != 0)
     }
 
     // Add custom validation logic here
@@ -152,7 +163,7 @@ struct locationRow: View {
                 Text("Location")
             }
 
-            SetCurrentLocationView(place: self.place, draftPlace: Place(self.place), showMap: Binding.constant(true)).environmentObject(PlaceFinder())
+            SetCurrentLocationView(place: self.place, draftPlace: Place(self.place), showMap: Binding.constant(1)).environmentObject(PlaceFinder())
         }
     }
 }
@@ -164,7 +175,7 @@ struct transportationLocationRow: View {
     var body: some View {
         HStack(alignment: .center) {
             VStack {
-                NavigationLink(destination: SetCurrentLocationView(place: self.origin, draftPlace: Place(self.origin), showMap: Binding.constant(true)).environmentObject(PlaceFinder())) {
+                NavigationLink(destination: SetCurrentLocationView(place: self.origin, draftPlace: Place(self.origin), showMap: Binding.constant(2)).environmentObject(PlaceFinder())) {
                     Text("\(self.origin.name == "" ? "From" : self.origin.name)")
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
@@ -182,7 +193,7 @@ struct transportationLocationRow: View {
             }.frame(minWidth: 0, maxWidth: .infinity)
 
             VStack {
-                NavigationLink(destination: SetCurrentLocationView(place: self.destination, draftPlace: Place(self.destination), showMap: Binding.constant(true)).environmentObject(PlaceFinder())) {
+                NavigationLink(destination: SetCurrentLocationView(place: self.destination, draftPlace: Place(self.destination), showMap: Binding.constant(1)).environmentObject(PlaceFinder())) {
                     Text("\(self.destination.name == "" ? "Destination" : self.destination.name)")
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
