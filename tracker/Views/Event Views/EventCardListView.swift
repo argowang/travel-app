@@ -18,6 +18,8 @@ struct EventCardListView: View {
     @State var eventType: EventType = .general
     @State var refreshing = false
 
+    @State var showMenu = false
+
     var didSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
 
     var body: some View {
@@ -62,9 +64,12 @@ struct EventCardListView: View {
                 }
             }.onReceive(self.didSave) { _ in
                 self.refreshing.toggle()
-            }
+            }.simultaneousGesture(TapGesture().onEnded {
+                self.showMenu = false
+            })
+                .simultaneousGesture(DragGesture().onChanged { _ in self.showMenu = false })
 
-            FloatingMenuView()
+            FloatingMenuView(showMenu: self.$showMenu)
             // https://forums.developer.apple.com/thread/124757
 
             NavigationLink(destination: AddEventView(draftEvent: UserEvent(self.eventType, trip, self.manager)), isActive: self.$addEventActive, label: { EmptyView() })
