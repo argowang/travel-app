@@ -41,6 +41,7 @@
 		B86E31A423A2088400B31FE2 /* KeyBoardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A323A2088300B31FE2 /* KeyBoardResponder.swift */; };
 		B86E31A623A3635D00B31FE2 /* UserEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31A523A3635C00B31FE2 /* UserEvent.swift */; };
 		B875CE1E23ADD7440045F053 /* FloatingMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B875CE1D23ADD7440045F053 /* FloatingMenuView.swift */; };
+		B875CE2323AE15D80045F053 /* BetterSheet in Frameworks */ = {isa = PBXBuildFile; productRef = B875CE2223AE15D80045F053 /* BetterSheet */; };
 		B88BB1B823A715DE00E1995C /* CancelButtonWithDismissAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88BB1B723A715DE00E1995C /* CancelButtonWithDismissAlert.swift */; };
 		B88D2A5123A6B42500AC3CB6 /* AddEventSelectTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88D2A5023A6B42500AC3CB6 /* AddEventSelectTypeView.swift */; };
 		B88D2A5323A6B90100AC3CB6 /* EventTypeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88D2A5223A6B90100AC3CB6 /* EventTypeButtonView.swift */; };
@@ -114,6 +115,7 @@
 			files = (
 				15A4839D23A83937008AF9DF /* TextView in Frameworks */,
 				1524655C23A6C6000086CAA1 /* Pages in Frameworks */,
+				B875CE2323AE15D80045F053 /* BetterSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +282,7 @@
 			packageProductDependencies = (
 				1524655B23A6C6000086CAA1 /* Pages */,
 				15A4839C23A83937008AF9DF /* TextView */,
+				B875CE2223AE15D80045F053 /* BetterSheet */,
 			);
 			productName = tracker;
 			productReference = B8DA9649237FC34600BC1801 /* tracker.app */;
@@ -312,6 +315,7 @@
 			packageReferences = (
 				1524655A23A6C6000086CAA1 /* XCRemoteSwiftPackageReference "Pages" */,
 				15A4839B23A83937008AF9DF /* XCRemoteSwiftPackageReference "TextView" */,
+				B875CE2123AE15D80045F053 /* XCRemoteSwiftPackageReference "BetterSheet" */,
 			);
 			productRefGroup = B8DA964A237FC34600BC1801 /* Products */;
 			projectDirPath = "";
@@ -602,6 +606,14 @@
 				minimumVersion = 1.1.0;
 			};
 		};
+		B875CE2123AE15D80045F053 /* XCRemoteSwiftPackageReference "BetterSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/egeniq/BetterSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -614,6 +626,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 15A4839B23A83937008AF9DF /* XCRemoteSwiftPackageReference "TextView" */;
 			productName = TextView;
+		};
+		B875CE2223AE15D80045F053 /* BetterSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B875CE2123AE15D80045F053 /* XCRemoteSwiftPackageReference "BetterSheet" */;
+			productName = BetterSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 

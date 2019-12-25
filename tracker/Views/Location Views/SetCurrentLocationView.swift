@@ -21,6 +21,7 @@ struct SetCurrentLocationView: View {
     @EnvironmentObject var manager: LocationManager
 
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Binding var showMap: Int
 
     private func dismiss() {
         mode.wrappedValue.dismiss()
@@ -32,24 +33,22 @@ struct SetCurrentLocationView: View {
                 .alert(isPresented: $alert) {
                     Alert(title: Text("Please Enable Location Access In Settings Pannel !!!"))
                 }.edgesIgnoringSafeArea(.vertical)
-
+            HStack {
+                Button(action: { self.showMap = 0 }) {
+                    Text("Cancel")
+                }
+                Spacer()
+                Button(action: {
+                    self.place.name = self.draftPlace.name
+                    self.place.coordinate = self.draftPlace.coordinate
+                    self.showMap = 0
+                }) {
+                    Text("Save")
+                }.edgesIgnoringSafeArea(.vertical)
+            }.padding()
             SlideOverCard(position: $cardPosition) {
                 SearchBarView(cardPosition: self.$cardPosition, nearByPlaces: self.$nearByPlaces, place: self.draftPlace).environmentObject(self.placeFinder).padding(.bottom, 5)
             }
-        }.edgesIgnoringSafeArea(.vertical)
-            .navigationBarItems(leading: Button(action: dismiss) {
-                Text("Cancel")
-            }, trailing: Button(action: {
-                self.place.name = self.draftPlace.name
-                self.place.coordinate = self.draftPlace.coordinate
-                self.mode.wrappedValue.dismiss()
-            }, label: { Text("Save") }))
-    }
-}
-
-struct SetCurrentLocationView_Previews: PreviewProvider {
-    @State static var place = Place("Aruba", nil)
-    static var previews: some View {
-        SetCurrentLocationView(place: self.place, draftPlace: Place(self.place)).environmentObject(PlaceFinder())
+        }
     }
 }

@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "BetterSheet",
+        "repositoryURL": "https://github.com/egeniq/BetterSheet",
+        "state": {
+          "branch": null,
+          "revision": "3755b61311812e6751029f1bff47640f3779adc7",
+          "version": "1.0.0"
+        }
+      },
+      {
         "package": "Pages",
         "repositoryURL": "https://github.com/nachonavarro/Pages",
         "state": {
