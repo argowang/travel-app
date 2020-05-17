@@ -29,6 +29,7 @@
 		4481FC1123A1D44B0092DD97 /* TripInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC1023A1D44B0092DD97 /* TripInfoView.swift */; };
 		4481FC1323A1D45F0092DD97 /* TripListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4481FC1223A1D45F0092DD97 /* TripListView.swift */; };
 		B81702B023A586CE002A28AD /* FloatingAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81702AF23A586CE002A28AD /* FloatingAddButtonView.swift */; };
+		B863677F2470BDA7000B2CB8 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = B863677E2470BDA7000B2CB8 /* WaterfallGrid */; };
 		B86E31672389EE6C00B31FE2 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E31662389EE6C00B31FE2 /* ViewExtension.swift */; };
 		B86E316B2389EFE100B31FE2 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316A2389EFE100B31FE2 /* SearchBarView.swift */; };
 		B86E316D238A262400B31FE2 /* PlaceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E316C238A262400B31FE2 /* PlaceFinder.swift */; };
@@ -112,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B863677F2470BDA7000B2CB8 /* WaterfallGrid in Frameworks */,
 				15A4839D23A83937008AF9DF /* TextView in Frameworks */,
 				1524655C23A6C6000086CAA1 /* Pages in Frameworks */,
 			);
@@ -280,6 +282,7 @@
 			packageProductDependencies = (
 				1524655B23A6C6000086CAA1 /* Pages */,
 				15A4839C23A83937008AF9DF /* TextView */,
+				B863677E2470BDA7000B2CB8 /* WaterfallGrid */,
 			);
 			productName = tracker;
 			productReference = B8DA9649237FC34600BC1801 /* tracker.app */;
@@ -312,6 +315,7 @@
 			packageReferences = (
 				1524655A23A6C6000086CAA1 /* XCRemoteSwiftPackageReference "Pages" */,
 				15A4839B23A83937008AF9DF /* XCRemoteSwiftPackageReference "TextView" */,
+				B863677D2470BDA7000B2CB8 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 			);
 			productRefGroup = B8DA964A237FC34600BC1801 /* Products */;
 			projectDirPath = "";
@@ -602,6 +606,14 @@
 				minimumVersion = 1.1.0;
 			};
 		};
+		B863677D2470BDA7000B2CB8 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -614,6 +626,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 15A4839B23A83937008AF9DF /* XCRemoteSwiftPackageReference "TextView" */;
 			productName = TextView;
+		};
+		B863677E2470BDA7000B2CB8 /* WaterfallGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B863677D2470BDA7000B2CB8 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
+			productName = WaterfallGrid;
 		};
 /* End XCSwiftPackageProductDependency section */
 
