@@ -14,8 +14,8 @@ struct TripCardView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Image(uiImage: UIImage(data: self.tripCard.image!, scale: 1.0)!)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+                .clipped()
+                .frame(width: 180, height: 220)
             Text(self.tripCard.title)
                 .font(.title)
                 .fontWeight(.black)
@@ -29,7 +29,7 @@ struct TripCardView: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 2.5)
         )
-        .padding()
+        .padding(.bottom)
     }
 }
 
